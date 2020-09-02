@@ -1,0 +1,445 @@
+@import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
+:root {
+  --beeDark: #242424;
+  --beeYellow: #ecae01;
+  --littleBlack: #131313;
+}
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: "Monsterrat", "Jeju Gothic", serif;
+  font-weight: Medium;
+  font-size: 15px;
+  text-decoration: none;
+}
+
+body {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-image: url("images/black_knit_texture.jpg");
+}
+
+.box {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  float: left;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 120px;
+  /* overflow:scroll; */
+}
+
+#scrollLeftHorizon {
+  position: relative;
+  width: 8%;
+  left: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#scrollRightHorizon {
+  position: relative;
+  width: 8%;
+  right: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.scrollText {
+  font-size: 30px;
+  color: white;
+}
+.sortName {
+  width: 90%;
+  position: relative;
+  top: 20px;
+  left: 0;
+  color: white;
+  font-size: 40px;
+}
+#sortByLikeContainer {
+  position: relative;
+  width: 100%;
+  display: flex;
+  top: 50px;
+}
+#sortByLike {
+  position: relative;
+  width: 84%;
+  display: flex;
+  flex-direction: row;
+  overflow: scroll;
+}
+#moviesLike {
+  position: relative;
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  overflow: scroll;
+}
+.sortLikePartition {
+  position: relative;
+  width: 240px;
+  height: auto;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  margin-right: 30px;
+  /* visibility: hidden; */
+}
+input {
+  appearance: none;
+  outline: none;
+}
+
+#ReservationBtn {
+  position: absolute;
+  bottom: 0.5rem;
+  left: 10px;
+  width: 210px;
+  height: 50px;
+  color: black;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 5px;
+  font-size: 20px;
+  font-weight: bold;
+  visibility: hidden;
+}
+
+/* #sortByRating{
+    position: relative;
+    width:100%;
+    display: flex;
+    flex-direction: row;
+}
+.sortRatingPartition{
+    position: relative;
+    width:240px;
+    height: auto;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    margin:30px;
+} */
+
+.movietitle {
+  position: absolute;
+  top: 1rem;
+  width: 210px;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  visibility: hidden;
+}
+.movieGenre {
+  position: absolute;
+  top: 5rem;
+  width: 200px;
+  color: white;
+  font-size: 15px;
+  display: flex;
+  justify-content: flex-start;
+  font-weight: 100;
+  visibility: hidden;
+}
+.movieSummary {
+  position: absolute;
+  bottom: 5rem;
+  width: 210px;
+  color: white;
+  font-size: 15px;
+  display: flex;
+  justify-content: center;
+  visibility: hidden;
+}
+.gogo {
+  position: absolute;
+  bottom: 1rem;
+  width: 210px;
+  height: 40px;
+  color: white;
+  font-size: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  letter-spacing: 5px;
+  font-size: 20px;
+  border: 1px solid;
+  visibility: hidden;
+}
+.gogo:hover {
+  background-color: black;
+}
+.box:nth-child(even) {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("images/yellow_knit_texture.jpg");
+}
+.menuList {
+  cursor: pointer;
+  width: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+@media (min-width: 1300px) {
+  #container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+
+  #Topmenu {
+    position: fixed;
+    width: 100%;
+    height: 5.3rem;
+    background-color: var(--littleBlack);
+    display: grid;
+    grid-template-rows: minmax(1fr, 100%);
+    grid-template-columns: repeat(6, minmax(1fr, 100%));
+    grid-template-areas: "logo logo menu menu menu menu";
+    z-index: 2;
+  }
+
+  .menuList {
+    font-size: 1.2rem;
+  }
+
+  #logoImg {
+    position: relative;
+    grid-area: logo;
+    height: 100%;
+    text-align: center;
+    color: white;
+    letter-spacing: 1vw;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  #bee {
+    position: relative;
+    width: 3.46rem;
+    height: 3.26rem;
+    bottom: 5px;
+    cursor: pointer;
+  }
+  #logoText {
+    font-size: 3rem;
+    margin-left: 1.3rem;
+    color: white;
+  }
+  #menuWrapper {
+    grid-area: menu;
+    display: flex;
+  }
+  #navi {
+    display: none;
+  }
+}
+/* 중간 버전 */
+
+@media (max-width: 1300px) {
+  #container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+  #Topmenu {
+    position: fixed;
+    width: 100%;
+    height: 6rem;
+    background-color: var(--littleBlack);
+    display: grid;
+    grid-template-rows: repeat(2, minmax(1fr, 100%));
+    grid-template-columns: 100%;
+    grid-template-areas: "logo" "menu";
+    z-index: 2;
+  }
+
+  .menuList {
+    font-size: 1rem;
+  }
+  #logoImg {
+    grid-area: logo;
+    height: 100%;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #bee {
+    width: 2.6rem;
+    height: 2.4rem;
+    margin-right: 10px;
+  }
+
+  #logoText {
+    font-size: 2.2rem;
+    color: white;
+  }
+  #menuWrapper {
+    grid-area: menu;
+    display: flex;
+  }
+
+  #navi {
+    display: none;
+  }
+}
+
+/* 제일 작은 버전 */
+@media (max-width: 700px) {
+  #container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+
+  #navi {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: left;
+    left: -20rem;
+    top: 0;
+    width: 20rem;
+    height: 100%;
+    z-index: 10;
+    background-color: var(--beeDark);
+  }
+
+  #menuBtn {
+    position: absolute;
+    width: 2.66rem;
+    height: 2.66rem;
+    left: 21.33rem;
+    top: 1.33;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: black;
+    cursor: pointer;
+  }
+
+  .navilogo {
+    position: relative;
+    left: 0;
+    top: 0;
+    margin: 3.33rem;
+    cursor: pointer;
+    width: 100%;
+    display: flex;
+    margin-bottom: 2rem;
+    color: var(--beeYellow);
+    letter-spacing: 5px;
+  }
+
+  .navimenu {
+    position: relative;
+    left: 0;
+    top: 0;
+    margin-left: 3.33rem;
+    margin-bottom: 2rem;
+    cursor: pointer;
+    display: flex;
+    color: white;
+    letter-spacing: 3px;
+  }
+
+  .navimenu span {
+    font-size: 1.1rem;
+    padding: 5px 10px 10px 5px;
+    border-bottom: 2px var(--beeYellow) solid;
+  }
+
+  .navimenu span:hover {
+    color: var(--beeYellow);
+  }
+
+  #Topmenu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3.66rem;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    color: white;
+    z-index: 2;
+  }
+
+  #logoImg {
+    width: 100%;
+    height: 3.66rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--littleBlack);
+    font-size: min(max(2rem, 5vw), 1.33rem);
+    font-weight: bold;
+  }
+
+  #bee {
+    display: none;
+  }
+
+  #logoText {
+    font-size: 1.7rem;
+    color: white;
+  }
+
+  #menuWrapper {
+    position: absolute;
+    display: none;
+    width: 100%;
+    height: 2rem;
+    background-color: var(--littleBlack);
+  }
+  .Btncontainer {
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+    top: 0.46rem;
+    left: -0.3rem;
+  }
+
+  .bar1,
+  .bar2,
+  .bar3 {
+    width: 2.33rem;
+    height: 0.33rem;
+    background-color: var(--beeYellow);
+    margin: 6px 0;
+    transition: 0.2s;
+  }
+
+  .change .bar1 {
+    transform: rotate(-45deg) translate(-9px, 6px);
+  }
+  .change .bar2 {
+    opacity: 0;
+  }
+  .change .bar3 {
+    transform: rotate(45deg) translate(-8px, -8px);
+  }
+}
