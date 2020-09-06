@@ -8,6 +8,7 @@ $.ajax({
 }).done(function (event) {
   console.log(event.data);
   const movies = event.data.movies;
+
   for (i = 0; i < movies.length; i++) {
     const summary = movies[i].summary.slice(0, 140) + "...";
     $("#sortByLike").append("<div class=sortLikePartition id=LikePartition" + i + "></div>");
@@ -19,10 +20,17 @@ $.ajax({
     var newForm = $("<form></form>");
 
     newForm.attr("name", "newForm");
-    newForm.attr("method", "get");
-    newForm.attr("action", "getMovie.php");
+    newForm.attr("method", "post");
+    newForm.attr("action", "/getMovie.php");
     newForm.attr("target", "_blank");
-    newForm.append($("<input/>", { type: "hidden", name: "movieTitle", value: movies[i].title }));
+    newForm.append($("<input/>", { type: "hidden", name: "movieTitle", value: movies[i].title_long }));
+    newForm.append($("<input/>", { type: "hidden", name: "movieGenre", value: movies[i].genres }));
+    newForm.append($("<input/>", { type: "hidden", name: "movieSummary", value: movies[i].summary }));
+    newForm.append($("<input/>", { type: "hidden", name: "movieYear", value: movies[i].year }));
+    newForm.append($("<input/>", { type: "hidden", name: "movieRating", value: movies[i].rating }));
+    newForm.append($("<input/>", { type: "hidden", name: "movieRuntime", value: movies[i].runtime }));
+    newForm.append($("<input/>", { type: "hidden", name: "moviePoster", value: movies[i].medium_cover_image }));
+
     newForm.append($("<input/>", { type: "submit", name: "data2", value: "예매하기", id: "ReservationBtn" }));
 
     newForm.appendTo("#LikePartition" + i);

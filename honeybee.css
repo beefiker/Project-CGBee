@@ -97,6 +97,7 @@ body {
 input {
   appearance: none;
   outline: none;
+  cursor: pointer;
 }
 
 #ReservationBtn {
@@ -110,7 +111,7 @@ input {
   border: 1px solid black;
   border-radius: 5px;
   font-size: 20px;
-  font-weight: bold;
+  cursor: pointer;
   visibility: hidden;
 }
 
