@@ -5,13 +5,140 @@ $.ajax({
   method: "GET",
   url: "https://yts-proxy.now.sh/list_movies.json",
   data: { limit: 15, sort_by: "like_count" },
+
+  beforeSend: function () {
+    $(".sortName").hide();
+    $(".scrollLeft").hide();
+    $(".scrollRight").hide();
+    $("#sort-like-wrap").show();
+    $("#sort-rating-wrap").show();
+    let width = 450;
+    let height = 350;
+    let top = ($(window).height() - height) / 2 + $(window).scrollTop();
+    let left = ($(window).width() - width) / 2 + $(window).scrollLeft();
+
+    if ($("#load_image").length != 0) {
+      $("#load_image").css({
+        top: top + "px",
+        left: left + "px",
+      });
+      $("#load_image").show();
+    } else {
+      $("body").append(
+        '<div id="load_image" style="position:absolute; top:' +
+          top +
+          "px; left:" +
+          left +
+          "px; width:" +
+          width +
+          "px; height:" +
+          height +
+          'px; z-index:-1; margin:auto; padding:0; "><img src="/images/flask.gif" style="width:100%; height:100%;"></div>'
+      );
+    }
+  },
+  complete: function () {},
+  success: function () {
+    $.ajax({
+      method: "GET",
+      url: "https://yts-proxy.now.sh/list_movies.json",
+      data: { limit: 15, sort_by: "rating" },
+      beforeSend: function () {
+        $("#sort-like-wrap").hide();
+        $("#sort-rating-wrap").hide();
+        let width = 450;
+        let height = 350;
+        let top = ($(window).height() - height) / 2 + $(window).scrollTop();
+        let left = ($(window).width() - width) / 2 + $(window).scrollLeft();
+
+        if ($("#load_image").length != 0) {
+          $("#load_image").css({
+            top: top + "px",
+            left: left + "px",
+          });
+          $("#load_image").show();
+        } else {
+          $("body").append(
+            '<div id="load_image" style="position:absolute; top:' +
+              top +
+              "px; left:" +
+              left +
+              "px; width:" +
+              width +
+              "px; height:" +
+              height +
+              'px; z-index:-1; margin:auto; padding:0; "><img src="/images/flask.gif" style="width:100%; height:100%;"></div>'
+          );
+        }
+      },
+      complete: function () {
+        $("#load_image").fadeOut(500);
+        $("#sort-like-wrap").show();
+        $("#sort-rating-wrap").show();
+        $(".sortName").show();
+        $(".scrollLeft").show();
+        $(".scrollRight").show();
+        $("#load_image").remove();
+      },
+    }).done(function (event) {
+      console.log(event.data);
+      const movies = event.data.movies;
+
+      for (i = 0; i < movies.length; i++) {
+        const summary = movies[i].summary.slice(0, 140) + "...";
+        $("#sortByRating").append("<div class=sortPartition id=RatingPartition" + i + "></div>");
+        $("#RatingPartition" + i).append("<img src='" + movies[i].medium_cover_image + "'/>");
+        $("#RatingPartition" + i).append("<p class=movietitle>" + movies[i].title + "</p>");
+        $("#RatingPartition" + i).append(
+          "<p class=movieGenre>" + movies[i].genres[0] + ", " + movies[i].genres[1] + "</p>"
+        );
+        $("#RatingPartition" + i).append("<p class=movieSummary>" + summary + "</p>");
+
+        var newForm = $("<form></form>");
+
+        newForm.attr("name", "newForm");
+        newForm.attr("method", "post");
+        newForm.attr("action", "/getMovie.php");
+        newForm.attr("target", "_blank");
+        newForm.append($("<input/>", { type: "hidden", name: "movieTitle", value: movies[i].title_long }));
+        newForm.append($("<input/>", { type: "hidden", name: "movieGenre", value: movies[i].genres }));
+        newForm.append($("<input/>", { type: "hidden", name: "movieSummary", value: movies[i].summary }));
+        newForm.append($("<input/>", { type: "hidden", name: "movieYear", value: movies[i].year }));
+        newForm.append($("<input/>", { type: "hidden", name: "movieRating", value: movies[i].rating }));
+        newForm.append($("<input/>", { type: "hidden", name: "movieRuntime", value: movies[i].runtime }));
+        newForm.append($("<input/>", { type: "hidden", name: "moviePoster", value: movies[i].medium_cover_image }));
+
+        newForm.append($("<input/>", { type: "submit", name: "data2", value: "예매하기", id: "ReservationBtn" }));
+
+        newForm.appendTo("#RatingPartition" + i);
+
+        let thisPartition = $("#RatingPartition" + i);
+        thisPartition.hover(
+          () => {
+            thisPartition.children(".movietitle").css({ visibility: "visible" });
+            thisPartition.children(".movieGenre").css({ visibility: "visible" });
+            thisPartition.children(".movieSummary").css({ visibility: "visible" });
+            thisPartition.children("form").find("input").css({ visibility: "visible" });
+            thisPartition.children("img").animate({ opacity: "0.5" }, 100);
+          },
+          () => {
+            thisPartition.children("img").animate({ opacity: "1" }, 100);
+            thisPartition.children(".movietitle").css({ visibility: "hidden" });
+            thisPartition.children(".movieGenre").css({ visibility: "hidden" });
+            thisPartition.children(".movieSummary").css({ visibility: "hidden" });
+            thisPartition.children("form").find("input").css({ visibility: "hidden" });
+          }
+        );
+      }
+    });
+  },
 }).done(function (event) {
   console.log(event.data);
   const movies = event.data.movies;
 
   for (i = 0; i < movies.length; i++) {
     const summary = movies[i].summary.slice(0, 140) + "...";
-    $("#sortByLike").append("<div class=sortLikePartition id=LikePartition" + i + "></div>");
+    $("#sortByLike").append("<div class=sortPartition id=LikePartition" + i + "></div>");
     $("#LikePartition" + i).append("<img src='" + movies[i].medium_cover_image + "'/>");
     $("#LikePartition" + i).append("<p class=movietitle>" + movies[i].title + "</p>");
     $("#LikePartition" + i).append("<p class=movieGenre>" + movies[i].genres[0] + ", " + movies[i].genres[1] + "</p>");
@@ -55,7 +182,7 @@ $.ajax({
   }
 });
 
-$("#scrollRightHorizon").click(() => {
+$("#LikeRight").click(() => {
   let currentX = $("#sortByLike").scrollLeft();
   let val = 500;
   let i = currentX + val;
@@ -63,12 +190,28 @@ $("#scrollRightHorizon").click(() => {
     scrollLeft: i,
   });
 });
+$("#RatingRight").click(() => {
+  let currentX = $("#sortByRating").scrollLeft();
+  let val = 500;
+  let i = currentX + val;
+  $("#sortByRating").animate({
+    scrollLeft: i,
+  });
+});
 
-$("#scrollLeftHorizon").click(() => {
+$("#LikeLeft").click(() => {
   let currentX = $("#sortByLike").scrollLeft();
   let val = -500;
   let i = currentX + val;
   $("#sortByLike").animate({
+    scrollLeft: i,
+  });
+});
+$("#RatingLeft").click(() => {
+  let currentX = $("#sortByRating").scrollLeft();
+  let val = -500;
+  let i = currentX + val;
+  $("#sortByRating").animate({
     scrollLeft: i,
   });
 });

@@ -59,11 +59,21 @@
       </div>
 
       <div id="box1" class="box">
-        <p class="sortName">인기 순</p>
-        <div id="sortByLikeContainer">
-          <div id="scrollLeftHorizon"><strong class="scrollText"><</strong></div>
-          <div id="sortByLike"></div>
-          <div id="scrollRightHorizon"><strong class="scrollText">></strong></div>
+        <div id="sort-like-wrap" class="sortWrapper">
+          <p class="sortName">인기 순</p>
+          <div class="flexRowContainer">
+            <div class="scrollLeft" id="LikeLeft"><strong class="scrollText"><</strong></div>
+            <div id="sortByLike" class="movieDiv"></div>
+            <div class="scrollRight" id="LikeRight"><strong class="scrollText">></strong></div>
+          </div>
+        </div>
+        <div id="sort-rating-wrap" class="sortWrapper">
+          <p class="sortName">평점 순</p>
+          <div class="flexRowContainer">
+            <div class="scrollLeft" id="RatingLeft"><strong class="scrollText"><</strong></div>
+            <div id="sortByRating" class="movieDiv"></div>
+            <div class="scrollRight" id="RatingRight"><strong class="scrollText">></strong></div>
+          </div>
         </div>
         <!-- <p class="sortName">평점 순</p>
                 <div id="sortByRating"></div> -->
