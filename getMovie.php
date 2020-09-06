@@ -101,7 +101,7 @@
             <p> 러닝타임  : <?= round($runningtime / 60, 1) ?>시간 <?= $runningtime % 60 ?>분 </p>
             <p> 평점 : <?=$rating?></p><br><br>
             <p><?=$summary?> </p> <br><br>
-            <form name="reservForm" mothod="post" action="/asd/reservation.php"> 
+            <form name="reservForm" mothod="post" action="/CGBee/reservation.php"> 
 
             <input type="hidden" name="movieName" value= <?="$mtitle"?>>
                 <span> 상영관 </span>

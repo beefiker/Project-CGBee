@@ -29,7 +29,7 @@
                 // exit();
                 ?>
                 <script>
-                    let win = window.open("/asd/fail.php", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=200,left=500,width=400,height=550");
+                    let win = window.open("/CGBee/fail.php", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=200,left=500,width=400,height=550");
                     history.back();
                 </script>
                 <?php
