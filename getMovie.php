@@ -79,6 +79,18 @@
         background-color: black;
     }
 </style>
+
+<script>
+    reservation = () =>{
+    let reservForm = document.reservForm;
+    let phNum = reservForm.ph.value;
+    if(phNum){
+        reservForm.submit();
+    }else{
+        alert("휴대전화는 필수항목입니다.");
+    }
+}
+</script>
 </head>
 <body>
     <div id="wrapper">
@@ -89,7 +101,7 @@
             <p> 러닝타임  : <?= round($runningtime / 60, 1) ?>시간 <?= $runningtime % 60 ?>분 </p>
             <p> 평점 : <?=$rating?></p><br><br>
             <p><?=$summary?> </p> <br><br>
-            <form mothod="post" action="reservation.php"> 
+            <form name="reservForm" mothod="post" action="reservation.php"> 
 
             <input type="hidden" name="movieName" value= <?="$mtitle"?>>
                 <span> 상영관 </span>
@@ -110,7 +122,9 @@
                     <option value="5">5명</option>
                     <option value="6">6명</option>
                 </select><br><br>
-                <input id="ReservationBtn" type="submit" value="예매하기">
+                <span>휴대전화* </span>
+                <input type="text" name="ph" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> <br><br>
+                <input id="ReservationBtn" type="button" onclick="reservation()" value="예매하기">
             </form>
         </div>
     </div>
