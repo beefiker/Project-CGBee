@@ -106,11 +106,11 @@
             <input type="hidden" name="movieName" value= <?="$mtitle"?>>
                 <span> 상영관 </span>
                 <select id="theater" name="theater">
-                    <option value="gangnam">강남</option>
-                    <option value="seocho">서초</option>
-                    <option value="yongsan">용산</option>
-                    <option value="songpa">송파</option>
-                    <option value="seongnam">성남</option>
+                    <option value="Gangnam">강남</option>
+                    <option value="Seocho">서초</option>
+                    <option value="Yongsan">용산</option>
+                    <option value="Songpa">송파</option>
+                    <option value="Seongnam">성남</option>
                 </select><br><br>
                 <span> 상영일자 </span><input id="movieDate" name="date" type="date"><br><br>
                 <span> 인원 수 </span>

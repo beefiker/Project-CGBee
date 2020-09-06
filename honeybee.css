@@ -162,24 +162,6 @@ input {
   justify-content: center;
   visibility: hidden;
 }
-.gogo {
-  position: absolute;
-  bottom: 1rem;
-  width: 210px;
-  height: 40px;
-  color: white;
-  font-size: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  letter-spacing: 5px;
-  font-size: 20px;
-  border: 1px solid;
-  visibility: hidden;
-}
-.gogo:hover {
-  background-color: black;
-}
 .box:nth-child(even) {
   background-repeat: no-repeat;
   background-size: cover;

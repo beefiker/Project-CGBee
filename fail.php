@@ -1,6 +1,7 @@
 <?php
     session_start();
     $date = $_SESSION['date'];
+    $theater = $_SESSION['theater'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +20,7 @@
         background-color:#131313;
         color:white;
     }
-        table, h1{  position:relative;
+        table, h1, h2{  position:relative;
                 text-align:center;
                 display:flex;
                 justify-content: center;
@@ -38,7 +39,7 @@
         let b = a.slice(0,7);
     </script>
     <h1>실패사유 : 이미 예약된 날짜</h1>
-
+    <h2><?=$theater?> 상영관</h2>
     <table>
     <tr>
         <th class="date"> 예약 불가능한 날짜 </th>

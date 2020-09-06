@@ -35,37 +35,42 @@ $.ajax({
 
     newForm.appendTo("#LikePartition" + i);
 
-    // $("#sortByLike").append("<div id=scrollHorizon>ㅁ</div>");
+    let thisPartition = $("#LikePartition" + i);
+    thisPartition.hover(
+      () => {
+        thisPartition.children(".movietitle").css({ visibility: "visible" });
+        thisPartition.children(".movieGenre").css({ visibility: "visible" });
+        thisPartition.children(".movieSummary").css({ visibility: "visible" });
+        thisPartition.children("form").find("input").css({ visibility: "visible" });
+        thisPartition.children("img").animate({ opacity: "0.5" }, 100);
+      },
+      () => {
+        thisPartition.children("img").animate({ opacity: "1" }, 100);
+        thisPartition.children(".movietitle").css({ visibility: "hidden" });
+        thisPartition.children(".movieGenre").css({ visibility: "hidden" });
+        thisPartition.children(".movieSummary").css({ visibility: "hidden" });
+        thisPartition.children("form").find("input").css({ visibility: "hidden" });
+      }
+    );
   }
-
-  $("#LikePartition0").hover(
-    () => {
-      $("#LikePartition0 > .movietitle").css({ visibility: "visible" });
-      $("#LikePartition0 > .movieGenre").css({ visibility: "visible" });
-      $("#LikePartition0 > .movieSummary").css({ visibility: "visible" });
-      $("#LikePartition0 > form > input").css({ visibility: "visible" });
-      $("#LikePartition0 > img").animate({ opacity: "0.5" }, 300);
-    },
-    () => {
-      $("#LikePartition0 > img").animate({ opacity: "1" }, 300);
-      $("#LikePartition0 > .movietitle").css({ visibility: "hidden" });
-      $("#LikePartition0 > .movieGenre").css({ visibility: "hidden" });
-      $("#LikePartition0 > .movieSummary").css({ visibility: "hidden" });
-      $("#LikePartition0 > form > input").css({ visibility: "hidden" });
-      $("#LikePartition0 > .gogo").css({ visibility: "hidden" });
-    }
-  );
 });
 
-let count = 0;
-$("#scrollLeftHorizon").click(() => {
-  count++;
-  let val = -300;
-  let i = count * val;
+$("#scrollRightHorizon").click(() => {
+  let currentX = $("#sortByLike").scrollLeft();
+  let val = 500;
+  let i = currentX + val;
   $("#sortByLike").animate({
-    left: i,
+    scrollLeft: i,
   });
-  if (i == -3600) alert("Done");
+});
+
+$("#scrollLeftHorizon").click(() => {
+  let currentX = $("#sortByLike").scrollLeft();
+  let val = -500;
+  let i = currentX + val;
+  $("#sortByLike").animate({
+    scrollLeft: i,
+  });
 });
 
 // * 크기를 되돌렸을 때 생기는 오류 대비

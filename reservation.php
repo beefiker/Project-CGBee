@@ -18,6 +18,7 @@
     $headcount = $_REQUEST["headcount"];
 
     $_SESSION['date'] = substr($movieDate,0,7);
+    $_SESSION['theater'] = $theater;
 
     try {
         require("db_connect.php");        
