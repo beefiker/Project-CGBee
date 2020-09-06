@@ -98,7 +98,7 @@ $.ajax({
 
         newForm.attr("name", "newForm");
         newForm.attr("method", "post");
-        newForm.attr("action", "/getMovie.php");
+        newForm.attr("action", "/asd/getMovie.php");
         newForm.attr("target", "_blank");
         newForm.append($("<input/>", { type: "hidden", name: "movieTitle", value: movies[i].title_long }));
         newForm.append($("<input/>", { type: "hidden", name: "movieGenre", value: movies[i].genres }));
@@ -148,7 +148,7 @@ $.ajax({
 
     newForm.attr("name", "newForm");
     newForm.attr("method", "post");
-    newForm.attr("action", "/getMovie.php");
+    newForm.attr("action", "/asd/getMovie.php");
     newForm.attr("target", "_blank");
     newForm.append($("<input/>", { type: "hidden", name: "movieTitle", value: movies[i].title_long }));
     newForm.append($("<input/>", { type: "hidden", name: "movieGenre", value: movies[i].genres }));

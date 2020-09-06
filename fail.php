@@ -48,7 +48,8 @@
     <?php
         try {
             require("db_connect.php");        
-            $query = $db->query("select title, reservation_date from reservation where reservation_date like '$date%' order by reservation_date");
+            $query = $db->query("select title, reservation_date from reservation where reservation_date like '$date%' and theater = '$theater' order by reservation_date");
+            // $query = $db->query("select title, reservation_date from reservation where theater = $theater");
     
             while ($row = $query->fetch(PDO::FETCH_ASSOC)) { 
                 ?>
