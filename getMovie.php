@@ -1,5 +1,6 @@
 
 <?php
+    session_start();
 
     $mtitle= $_REQUEST["movieTitle"];
     $genre = $_REQUEST["movieGenre"];
@@ -9,6 +10,7 @@
     $runningtime = $_REQUEST["movieRuntime"];
     $poster = $_REQUEST["moviePoster"];
     
+    $_SESSION['poster'] = $poster;
 ?>
 
 <!DOCTYPE html>
@@ -17,6 +19,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css" />
+    <script src="http://code.jquery.com/jquery-1.7.min.js"></script>
+    <script
+      src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
+      integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="
+      crossorigin="anonymous"
+    ></script>
     <title>Document</title>
 
 <style>
@@ -98,7 +106,7 @@
         <div id="movieInfo">
             <div><strong id="mTitle"><?=$mtitle?></strong></div>
             <p> 장르 : <?=$genre?> </p><br>
-            <p> 러닝타임  : <?= round($runningtime / 60, 1) ?>시간 <?= $runningtime % 60 ?>분 </p>
+            <p> 러닝타임  : <?= round($runningtime / 60) ?>시간 <?= $runningtime % 60 ?>분 </p>
             <p> 평점 : <?=$rating?></p><br><br>
             <p><?=$summary?> </p> <br><br>
             <form name="reservForm" mothod="post" action="/CGBee/reservation.php"> 

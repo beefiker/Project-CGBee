@@ -6,7 +6,7 @@ $.ajax({
   url: "https://yts-proxy.now.sh/list_movies.json",
   data: { limit: 15, sort_by: "like_count" },
 
-  beforeSend: function () {
+  beforeSend: () => {
     $(".sortName").hide();
     $(".scrollLeft").hide();
     $(".scrollRight").hide();
@@ -37,13 +37,12 @@ $.ajax({
       );
     }
   },
-  complete: function () {},
   success: function () {
     $.ajax({
       method: "GET",
       url: "https://yts-proxy.now.sh/list_movies.json",
       data: { limit: 15, sort_by: "rating" },
-      beforeSend: function () {
+      beforeSend: () => {
         $("#sort-like-wrap").hide();
         $("#sort-rating-wrap").hide();
         let width = 450;
@@ -67,11 +66,11 @@ $.ajax({
               width +
               "px; height:" +
               height +
-              'px; z-index:-1; margin:auto; padding:0; "><img src="flask.gif" style="width:100%; height:100%;"></div>'
+              'px; z-index:-1; margin:auto; padding:0;"><img src="flask.gif" style="width:100%; height:100%;"></div>'
           );
         }
       },
-      complete: function () {
+      complete: () => {
         $("#load_image").fadeOut(500);
         $("#sort-like-wrap").show();
         $("#sort-rating-wrap").show();
@@ -80,7 +79,7 @@ $.ajax({
         $(".scrollRight").show();
         $("#load_image").remove();
       },
-    }).done(function (event) {
+    }).done((event) => {
       console.log(event.data);
       const movies = event.data.movies;
 
@@ -132,7 +131,7 @@ $.ajax({
       }
     });
   },
-}).done(function (event) {
+}).done((event) => {
   console.log(event.data);
   const movies = event.data.movies;
 
@@ -217,7 +216,7 @@ $("#RatingLeft").click(() => {
 });
 
 // * 크기를 되돌렸을 때 생기는 오류 대비
-$(window).resize(function () {
+$(window).resize(() => {
   if (CurrentMenuValue == 1) {
     if ($(window).width() >= 800) {
       $("#navi").animate({ left: "-300px" }, 200);
