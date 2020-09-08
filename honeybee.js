@@ -5,13 +5,8 @@ $.ajax({
   method: "GET",
   url: "https://yts-proxy.now.sh/list_movies.json",
   data: { limit: 15, sort_by: "like_count" },
-
   beforeSend: () => {
-    $(".sortName").hide();
-    $(".scrollLeft").hide();
-    $(".scrollRight").hide();
-    $("#sort-like-wrap").show();
-    $("#sort-rating-wrap").show();
+    $(".needsLoad").hide();
     let width = 450;
     let height = 350;
     let top = ($(window).height() - height) / 2 + $(window).scrollTop();
@@ -43,8 +38,7 @@ $.ajax({
       url: "https://yts-proxy.now.sh/list_movies.json",
       data: { limit: 15, sort_by: "rating" },
       beforeSend: () => {
-        $("#sort-like-wrap").hide();
-        $("#sort-rating-wrap").hide();
+        $(".needsLoad").hide();
         let width = 450;
         let height = 350;
         let top = ($(window).height() - height) / 2 + $(window).scrollTop();
@@ -72,11 +66,7 @@ $.ajax({
       },
       complete: () => {
         $("#load_image").fadeOut(500);
-        $("#sort-like-wrap").show();
-        $("#sort-rating-wrap").show();
-        $(".sortName").show();
-        $(".scrollLeft").show();
-        $(".scrollRight").show();
+        $(".needsLoad").show();
         $("#load_image").remove();
       },
     }).done((event) => {
