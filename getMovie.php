@@ -10,7 +10,10 @@
     $runningtime = $_REQUEST["movieRuntime"];
     $poster = $_REQUEST["moviePoster"];
     
+    
+    $_SESSION['title'] = $mtitle;
     $_SESSION['poster'] = $poster;
+    
 ?>
 
 <!DOCTYPE html>
@@ -95,7 +98,7 @@
     if(phNum){
         reservForm.submit();
     }else{
-        alert("휴대전화는 필수항목입니다.");
+        alert("휴대전화는 필수항목");
     }
 }
 </script>
@@ -109,36 +112,38 @@
             <p> 러닝타임  : <?= round($runningtime / 60) ?>시간 <?= $runningtime % 60 ?>분 </p>
             <p> 평점 : <?=$rating?></p><br><br>
             <p><?=$summary?> </p> <br><br>
-            <form name="reservForm" mothod="post" action="/CGBee/reservation.php"> 
-
-            <input type="hidden" name="movieName" value= <?="$mtitle"?>>
+            <form name="reservForm" mothod="post" action="/CGBee/setSeat.php"> 
                 <span> 상영관 </span>
                 <select id="theater" name="theater">
-                    <option value="Gangnam">강남</option>
-                    <option value="Seocho">서초</option>
-                    <option value="Yongsan">용산</option>
-                    <option value="Songpa">송파</option>
-                    <option value="Seongnam">성남</option>
+                    <option value="1">강남</option>
+                    <option value="2">서초</option>
+                    <option value="3">용산</option>
+                    <option value="4">송파</option>
+                    <option value="5">성남</option>
                 </select><br><br>
-                <span> 상영일자 </span><input id="movieDate" name="date" type="date"><br><br>
-                <span> 인원 수 </span>
-                <select id="headcount" name="headcount">
-                    <option value="1">1명</option>
-                    <option value="2">2명</option>
-                    <option value="3">3명</option>
-                    <option value="4">4명</option>
-                    <option value="5">5명</option>
-                    <option value="6">6명</option>
-                </select><br><br>
+                <span> 상영일자 </span><input id="movieDate" name="date" type="date"><br>
+                   
+                <!-- <?php
+
+                    for($i = 1; $i<= 30; $i++) { 
+                        echo "<label><input type=checkbox name=seat[] value='A{$i}'> </label>";
+                        if($i%5==0 && $i%10!=0) echo "&nbsp";
+                        if($i%10==0 && $i%21!=0) echo "<br>";
+                    }
+                    echo "<br>";
+                ?> -->
+
+                <br>
                 <span>휴대전화* </span>
                 <input type="text" name="ph" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> <br><br>
-                <input id="ReservationBtn" type="button" onclick="reservation()" value="예매하기">
+                <input id="ReservationBtn" type="button" onclick="reservation()" value="좌석 선택">
             </form>
         </div>
     </div>
 
     <script>
         document.getElementById('movieDate').value=new Date().toISOString().slice(0, 10);
+
     </script>
 </body>
 </html>

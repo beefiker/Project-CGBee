@@ -10,16 +10,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        *{
-            font-size:15px;
+        @import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: "Monsterrat", "Jeju Gothic", serif;
+  font-weight: Medium;
+  font-size: 15px;
+  text-decoration: none;
+}
+
+        .alignCenter{
+            position:absolute;
+            width:100%;
+            height:100%;
+            display:flex;
+            flex-direction:column;
+            justify-content: center;
+            align-items: center;
         }
         h1{
             font-size:25px;
         }
-    body{
-        background-color:#131313;
-        color:white;
-    }
+        body{
+            background-color:#131313;
+            color:white;
+        }
         table, h1, h2{  position:relative;
                 text-align:center;
                 display:flex;
@@ -38,7 +55,8 @@
         let a = "<?=$date?>";
         let b = a.slice(0,7);
     </script>
-    <h1>실패사유 : 이미 예약된 날짜</h1>
+    <div class="alignCenter">
+    <h1>실패사유 : 이미 예약된 날짜</h1><br>
     <h2><?=$theater?> 상영관</h2>
     <table>
     <tr>
@@ -66,6 +84,7 @@
     ?>
 
     </table>
+    </div>
 
 </body>
 </html>
