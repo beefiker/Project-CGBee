@@ -121,7 +121,16 @@
                     <option value="4">송파</option>
                     <option value="5">성남</option>
                 </select><br><br>
-                <span> 상영일자 </span><input id="movieDate" name="date" type="date"><br>
+                <span> 상영일자 </span><input id="movieDate" name="date" type="date">
+                <select id="movieHour" name="hour">
+                    <option value="09:00">09:00</option>
+                    <option value="12:00">12:00</option>
+                    <option value="15:00">15:00</option>
+                    <option value="18:00">18:00</option>
+                    <option value="21:00">21:00</option>
+                    <option value="24:00">24:00</option>
+                </select>
+                <br>
                    
                 <!-- <?php
 

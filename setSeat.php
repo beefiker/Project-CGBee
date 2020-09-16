@@ -12,8 +12,10 @@
     $_SESSION['theater'] = $theater;
 
     $movieDate = $_REQUEST["date"];
+    $movieHour = $_REQUEST["hour"];
     // $_SESSION['date'] = substr($movieDate,0,7);
     $_SESSION['date'] = $movieDate;
+    $_SESSION['hour'] = $movieHour;
 
     $headcount = $_REQUEST["headcount"];
     $_SESSION['headcount'] = $headcount;
@@ -163,7 +165,7 @@
             <?php
                 try {
                     require("db_connect.php");        
-                    $query = $db->query("select * from reservation r, screening sc, seat s where sc.screening_sn = s.screening_sn and r.reservation_sn = s.reservation_sn and sc.screening_date = '$movieDate' and s.theater_sn = '$theater' and s.title = '$title'");
+                    $query = $db->query("select * from reservation r, screening sc, seat s where sc.screening_sn = s.screening_sn and r.reservation_sn = s.reservation_sn and sc.screening_date = '$movieDate' and sc.reservation_hour ='$movieHour' and s.theater_sn = '$theater' and s.title = '$title'");
 
                     while ($row = $query->fetch(PDO::FETCH_ASSOC)) { 
                         
@@ -185,7 +187,7 @@
 
     <script>
     reservation = () =>{
-        // ! 동작하지않음.  수정필요 
+        // ! 동작하지않음.  수정필요
     let checkArray = new Array();
     $('input:checkbox[name='seat[]']:checked').each(function() { // 체크된 체크박스의 value 값을 가지고 온다.
             checkArray.push(this.value);

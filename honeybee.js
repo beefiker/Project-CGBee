@@ -122,7 +122,6 @@ $.ajax({
     });
   },
 }).done((event) => {
-  console.log(event.data);
   const movies = event.data.movies;
 
   for (i = 0; i < movies.length; i++) {
@@ -250,10 +249,6 @@ $("#gotoF, #naviF").click(() => {
   const CurrentBoxTop = $("#box6").offset().top;
   page.stop().animate({ scrollTop: CurrentBoxTop }, 800, "easeInExpo");
 });
-$("#gotoG, #naviG").click(() => {
-  const CurrentBoxTop = $("#box7").offset().top;
-  page.stop().animate({ scrollTop: CurrentBoxTop }, 800, "easeInExpo");
-});
 
 const CurrentColor = "#636e72";
 $("#gotoA").css({ color: CurrentColor });
@@ -270,7 +265,6 @@ setInterval(() => {
     const page4Y = $("#box4").offset();
     const page5Y = $("#box5").offset();
     const page6Y = $("#box6").offset();
-    const page7Y = $("#box7").offset();
 
     if (browserY < page2Y.top) {
       CurrentPageNum = 0;
@@ -314,12 +308,6 @@ setInterval(() => {
       $("#gotoF").css({ color: CurrentColor });
       $(".navimenu").css({ color: "white" });
       $("#naviF").css({ color: CurrentColor });
-    } else if (browserY >= page7Y.top) {
-      CurrentPageNum = 7;
-      $(".menuList").css({ color: "white" });
-      $("#gotoG").css({ color: CurrentColor });
-      $(".navimenu").css({ color: "white" });
-      $("#naviG").css({ color: CurrentColor });
     }
   });
 }, 200);
@@ -348,4 +336,8 @@ $("#menuBtn").click(() => {
       CurrentMenuValue = 0;
     });
   }
+});
+
+$("#ReservationDetails").click(() => {
+  let details = window.open("/CGBee/history.php", "PopupWin", "width=1000,height=600");
 });

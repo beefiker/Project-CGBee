@@ -51,7 +51,8 @@
     }
     img{
         position: relative;
-        width:30%;
+        width:200px;
+        height:300px;
 
     }
 </style>
@@ -64,6 +65,7 @@
     $theater = $_SESSION["theater"];
 
     $date = $_SESSION['date'];
+    $hour = $_SESSION['hour'];
 
     $seat = $_REQUEST['seat'];
     $headcount = count($seat);
@@ -81,15 +83,15 @@
         // TODO :: 밑에 주석 코드들 구현하기 
             
             // ! 겹치지않으면 예매 테이블에 데이터 추가
-            $db->exec("insert into reservation (phone, title, theater, reservation_date)
-            values ('$ph','$title', '$theater', '$date')");
+            $db->exec("insert into reservation (phone, title, theater, reservation_date, reservation_hour, seats)
+            values ('$ph','$title', '$theater', '$date','$hour','$seat')");
 
             // ? 가장 최근에 추가된 예매 테이블의 auto_increment 값 가져오기
             $_SESSION['r_sn'] = $db->lastInsertId();
 
             // ! 겹치지않으면 상영일자 테이블에 데이터 추가
-            $db->exec("insert into screening (theater_sn, screening_date)
-            values ('$theater', '$date')");
+            $db->exec("insert into screening (theater_sn, screening_date, reservation_hour)
+            values ('$theater', '$date','$hour')");
 
             // ? 가장 최근에 추가된 상영일자 테이블의 auto_increment 값 가져오기
             $_SESSION['sc_sn'] = $db->lastInsertId();
@@ -138,10 +140,10 @@
 
         <div id="wrapper">
         <h1> 예매가 완료되었따</h1> <br>
-
-        <h2> <span><?=$ph?></span>님의 예매내역</h2><br>
+        <h4> <span><?=$ph?></span>님의 예매내역</h4><br>
+        <h2><?=$title?></h2><br>
         <img src="<?=$poster?>" alt=""> <br>
-        <p><?=$title?></p><br>
+        
         <p> <span><?=$date?></span> 일 <span>
         <?php
         switch($theater){
@@ -157,15 +159,14 @@
                 echo "성남"; break;
         }
         ?></span> 상영관 </p> <br>
-        <p> 인원 <span> <?=$headcount?></span>명 </p> <br>
-        <p> 좌석 : 
-        
+        <p>
         <?php 
             foreach($seat as $val){
                 echo "$val ";
             }
-        ?> </p>
-
+        ?>/
+        <span> <?=$headcount?>명</span> 
+        </p>
         </div>
 </body>
 </html>
