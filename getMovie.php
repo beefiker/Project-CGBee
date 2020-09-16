@@ -48,6 +48,28 @@
     p{
         color:gray;
     }
+    input{
+        width:150px;
+        height:22px;
+        background:#131313;
+        padding:0 0 0 .5em;
+        color: white;
+        border: 1px solid #999;
+    }
+    select { 
+        width:100px;
+        padding: .2em .5em; /* 여백으로 높이 설정 */ 
+        font-family: inherit; /* 폰트 상속 */ 
+        background: url(images/selectIcon.png) no-repeat 100% 50%; /* 네이티브 화살표 대체 */ 
+        border: 1px solid #999; 
+        color:white;
+        border-radius: 0px; /* iOS 둥근모서리 제거 */ 
+        -webkit-appearance: none; /* 네이티브 외형 감추기 */
+        -moz-appearance: none; appearance: none; 
+        appearance: none;
+    }
+
+
     #wrapper{
         position: absolute;
         width:100%;
@@ -143,8 +165,8 @@
                 ?> -->
 
                 <br>
-                <span>휴대전화* </span>
-                <input type="text" name="ph" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> <br><br>
+                <span>휴대전화 </span>
+                <input type="text" name="ph" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" placeholder="Enter Your Mobile"> <br><br>
                 <input id="ReservationBtn" type="button" onclick="reservation()" value="좌석 선택">
             </form>
         </div>

@@ -28,7 +28,7 @@ $.ajax({
           width +
           "px; height:" +
           height +
-          'px; z-index:-1; margin:auto; padding:0; "><img src="flask.gif" style="width:100%; height:100%;"></div>'
+          'px; z-index:-1; margin:auto; padding:0; "><img src="images/flask.gif" style="width:100%; height:100%;"></div>'
       );
     }
   },
@@ -60,7 +60,7 @@ $.ajax({
               width +
               "px; height:" +
               height +
-              'px; z-index:-1; margin:auto; padding:0;"><img src="flask.gif" style="width:100%; height:100%;"></div>'
+              'px; z-index:-1; margin:auto; padding:0;"><img src="images/flask.gif" style="width:100%; height:100%;"></div>'
           );
         }
       },
@@ -170,38 +170,36 @@ $.ajax({
   }
 });
 
-$("#LikeRight").click(() => {
-  let currentX = $("#sortByLike").scrollLeft();
-  let val = 500;
+sliderLeft = (prop) => {
+  let currentX = $(prop).scrollLeft();
+  let val = -500;
   let i = currentX + val;
-  $("#sortByLike").animate({
+  $(prop).animate({
     scrollLeft: i,
   });
+};
+sliderRight = (prop) => {
+  let currentX = $(prop).scrollLeft();
+  let val = 500;
+  let i = currentX + val;
+  $(prop).animate({
+    scrollLeft: i,
+  });
+};
+
+$("#LikeRight").click(() => {
+  sliderRight("#sortByLike");
 });
 $("#RatingRight").click(() => {
-  let currentX = $("#sortByRating").scrollLeft();
-  let val = 500;
-  let i = currentX + val;
-  $("#sortByRating").animate({
-    scrollLeft: i,
-  });
+  sliderRight("#sortByRating");
 });
 
 $("#LikeLeft").click(() => {
-  let currentX = $("#sortByLike").scrollLeft();
-  let val = -500;
-  let i = currentX + val;
-  $("#sortByLike").animate({
-    scrollLeft: i,
-  });
+  sliderLeft("#sortByLike");
 });
+
 $("#RatingLeft").click(() => {
-  let currentX = $("#sortByRating").scrollLeft();
-  let val = -500;
-  let i = currentX + val;
-  $("#sortByRating").animate({
-    scrollLeft: i,
-  });
+  sliderLeft("#sortByRating");
 });
 
 // * 크기를 되돌렸을 때 생기는 오류 대비
@@ -225,29 +223,28 @@ logo.addEventListener("click", () => {
   window.scrollTo({ top: document.querySelector("#box1").offsetTop, behavior: "smooth" });
 });
 
-$("#gotoA, #naviA").click(() => {
-  const CurrentBoxTop = $("#box1").offset().top;
+animateToBox = (box) => {
+  const CurrentBoxTop = $(box).offset().top;
   page.stop().animate({ scrollTop: CurrentBoxTop }, 800, "easeInExpo");
+};
+
+$("#gotoA, #naviA").click(() => {
+  animateToBox("#box1");
 });
 $("#gotoB, #naviB").click(() => {
-  const CurrentBoxTop = $("#box2").offset().top;
-  page.stop().animate({ scrollTop: CurrentBoxTop }, 800, "easeInExpo");
+  animateToBox("#box2");
 });
 $("#gotoC, #naviC").click(() => {
-  const CurrentBoxTop = $("#box3").offset().top;
-  page.stop().animate({ scrollTop: CurrentBoxTop }, 800, "easeInExpo");
+  animateToBox("#box3");
 });
 $("#gotoD, #naviD").click(() => {
-  const CurrentBoxTop = $("#box4").offset().top;
-  page.stop().animate({ scrollTop: CurrentBoxTop }, 800, "easeInExpo");
+  animateToBox("#box4");
 });
 $("#gotoE, #naviE").click(() => {
-  const CurrentBoxTop = $("#box5").offset().top;
-  page.stop().animate({ scrollTop: CurrentBoxTop }, 800, "easeInExpo");
+  animateToBox("#box5");
 });
 $("#gotoF, #naviF").click(() => {
-  const CurrentBoxTop = $("#box6").offset().top;
-  page.stop().animate({ scrollTop: CurrentBoxTop }, 800, "easeInExpo");
+  animateToBox("#box6");
 });
 
 const CurrentColor = "#636e72";
@@ -266,53 +263,46 @@ setInterval(() => {
     const page5Y = $("#box5").offset();
     const page6Y = $("#box6").offset();
 
+    changeColorCss = (prop1, prop2) => {
+      $(".menuList").css({ color: "white" });
+      $(prop1).css({ color: CurrentColor });
+      $(".navimenu").css({ color: "white" });
+      $(prop2).css({ color: CurrentColor });
+    };
+
     if (browserY < page2Y.top) {
       CurrentPageNum = 0;
-      $(".menuList").css({ color: "white" });
-      $("#gotoA").css({ color: CurrentColor });
-      $(".navimenu").css({ color: "white" });
-      $("#naviA").css({ color: CurrentColor });
+      changeColorCss("#gotoA", "#naviA");
     } else if (browserY == page1Y.top && browserY < page2Y.top) {
       CurrentPageNum = 1;
-      $(".menuList").css({ color: "white" });
-      $("#gotoA").css({ color: CurrentColor });
-      $(".navimenu").css({ color: "white" });
-      $("#naviB").css({ color: CurrentColor });
+      changeColorCss("#gotoA", "#naviB");
     } else if ((browserY >= page2Y.top && browserY <= page3Y.top) || browserY == page2Y.top) {
       CurrentPageNum = 2;
-      $(".menuList").css({ color: "white" });
-      $("#gotoB").css({ color: CurrentColor });
-      $(".navimenu").css({ color: "white" });
-      $("#naviB").css({ color: CurrentColor });
+      changeColorCss("#gotoB", "#naviB");
     } else if ((browserY >= page3Y.top && browserY <= page4Y.top) || browserY == page3Y.top) {
       CurrentPageNum = 3;
-      $(".menuList").css({ color: "white" });
-      $("#gotoC").css({ color: CurrentColor });
-      $(".navimenu").css({ color: "white" });
-      $("#naviC").css({ color: CurrentColor });
+      changeColorCss("#gotoC", "#naviC");
     } else if ((browserY >= page4Y.top && browserY <= page5Y.top) || browserY == page4Y.top) {
       CurrentPageNum = 4;
-      $(".menuList").css({ color: "white" });
-      $("#gotoD").css({ color: CurrentColor });
-      $(".navimenu").css({ color: "white" });
-      $("#naviD").css({ color: CurrentColor });
+      changeColorCss("#gotoD", "#naviD");
     } else if ((browserY >= page5Y.top && browserY <= page6Y.top) || browserY == page5Y.top) {
       CurrentPageNum = 5;
-      $(".menuList").css({ color: "white" });
-      $("#gotoE").css({ color: CurrentColor });
-      $(".navimenu").css({ color: "white" });
-      $("#naviE").css({ color: CurrentColor });
+      changeColorCss("#gotoE", "#naviE");
     } else if ((browserY >= page6Y.top && browserY <= page7Y.top) || browserY == page6Y.top) {
       CurrentPageNum = 6;
-      $(".menuList").css({ color: "white" });
-      $("#gotoF").css({ color: CurrentColor });
-      $(".navimenu").css({ color: "white" });
-      $("#naviF").css({ color: CurrentColor });
+      changeColorCss("#gotoF", "#naviF");
     }
   });
 }, 200);
 
 let CurrentMenuValue = 0; // * 메뉴 숨겨있을 때 0, 클릭해서 나타냈을 때 1
+animateToBefore = () => {
+  $(".Btncontainer").removeClass("change");
+  $("#navi").animate({ left: "-300px" }, 200);
+  $("#Topmenu, #container").animate({ left: 0 }, 200);
+  CurrentMenuValue = 0;
+};
+
 $("#menuBtn").click(() => {
   switch (CurrentMenuValue) {
     case 0:
@@ -322,22 +312,19 @@ $("#menuBtn").click(() => {
       CurrentMenuValue = 1;
       break;
     case 1:
-      $(".Btncontainer").removeClass("change");
-      $("#navi").animate({ left: "-300px" }, 200);
-      $("#Topmenu, #container").animate({ left: 0 }, 200);
-      CurrentMenuValue = 0;
+      animateToBefore();
       break;
   }
   if (CurrentMenuValue == 1) {
     $(".box").click(() => {
-      $(".Btncontainer").removeClass("change");
-      $("#navi").animate({ left: "-300px" }, 200);
-      $("#Topmenu, #container").animate({ left: 0 }, 200);
-      CurrentMenuValue = 0;
+      animateToBefore();
     });
   }
 });
 
-$("#ReservationDetails").click(() => {
+openHistory = () => {
   let details = window.open("/CGBee/history.php", "PopupWin", "width=1000,height=600");
+};
+$("#ReservationDetails, #naviG").click(() => {
+  openHistory();
 });

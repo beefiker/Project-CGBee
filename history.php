@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://kit.fontawesome.com/7637a8f104.js" crossorigin="anonymous"></script>
     <style>
         @import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
         * {
@@ -18,8 +19,8 @@
 
         .alignCenter{
             position:absolute;
-            width:1000px;
-            height:600px;
+            width:100%;
+            height:100%;
             display:flex;
             flex-direction:column;
             justify-content: center;
@@ -52,39 +53,34 @@
         .seat { width: 150px;}
         .theater { width: 90px;}
 
+        input[type=text]{
+            width:175px;
+            height:25px;
+            background:#131313;
+            padding: 0 0 0 1em;
+            color: white;
+            border: 1px solid #999;
+            border-radius:3px;
+        }
+        input[type=submit]{
+            width:25px;
+            height:25px;
+            background:url(images/search.png) no-repeat 50% 50%;
+            background-size:25px;
+            color: white;
+            border: 1px solid #999;
+            border-radius:3px;
+        }
+
     </style>
 
-
-    <script>
-        search = () => {
-
-            <?php
-                // try {
-                //     require("db_connect.php");        
-
-                //     $query = $db->query("select * from reservation");
-                //     // $query = $db->query("select title, reservation_date from reservation where theater = $theater");
-                    
-                //     while ($row = $query->fetch(PDO::FETCH_ASSOC)) { 
-                //         echo $row["title"];
-                //     }
-            
-                    
-                // } catch (PDOException $e) {
-                //     exit($e->getMessage());
-                // }
-            ?>
-            alert(ph);
-        }
-    </script>
 </head>
 <body>
     <div class="alignCenter">
     <h1>예매내역 조회</h1><br>
-
     
     <form method="GET">
-    <input type="text" name="phone" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> <input type="submit" value="확인">
+    <input type="text" name="phone" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" placeholder="Enter Your Mobile"> <input type="submit" value=" ">
     </form>
     <table>
         <tr>
@@ -101,30 +97,30 @@
 
             $query = $db->query("select * from reservation where phone = '$ph'");
             
-            // $query = $db->query("select title, reservation_date from reservation where theater = $theater");
-            
             while ($row = $query->fetch(PDO::FETCH_ASSOC)) { 
-                // ?>
+                ?> 
                  <tr>
                      <td><?=$row["reservation_sn"]?></td>
                      <td><?=$row["title"]?></td>
-                     <td><?php
-                        switch($row["theater"]){
-                            case 1:
-                                echo "강남"; break;
-                            case 2:
-                                echo "서초"; break;
-                            case 3:
-                                echo "용산"; break;
-                            case 4:
-                                echo "송파"; break;
-                            case 5:
-                                echo "성남"; break;
-                        }
-                     
-                     ?></td>
+                     <td>
+                         <?php
+                            switch($row["theater"]){
+                                case 1:
+                                    echo "강남"; break;
+                                case 2:
+                                    echo "서초"; break;
+                                case 3:
+                                    echo "용산"; break;
+                                case 4:
+                                    echo "송파"; break;
+                                case 5:
+                                    echo "성남"; break;
+                            }
+                        ?>
+                     </td>
                      <td><?=$row["reservation_date"]," ",$row["reservation_hour"]?></td>
-                    <td><?php
+                    <td>
+                        <?php
                             try {
                                 $query1 = $db->query("select * from reservation r, screening sc, seat s where sc.screening_sn = s.screening_sn and r.reservation_sn = s.reservation_sn and 
                                 sc.screening_date = '$row[reservation_date]' and 
@@ -143,13 +139,9 @@
                             }
                         ?>
                      </td>
-                     
-
-                    
                  </tr>
                  <?php
             }
-    
             
         } catch (PDOException $e) {
             exit($e->getMessage());
