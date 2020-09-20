@@ -6,6 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/7637a8f104.js" crossorigin="anonymous"></script>
     <title>Document</title>
 
 <style>
@@ -30,24 +31,112 @@
     h2{
         font-size: 1.8rem;
     }
-    p, span{
-        font-size: 1.5rem;
-    }
     h2, p{
         color:white;
     }
     span{
         color:#f9c901;
     }
-    #wrapper{
-        position: absolute;
+    .bk{
+        color:#131313;
+    }
+    #container{
+        position:absolute;
         width:100%;
         height:100%;
         display:flex;
         flex-direction:column;
         justify-content: center;
         align-items: center;
-        color:white;
+    }
+    .progress{
+        position: relative;
+        width:100%;
+        height:120px;
+        background:#f9c901;
+        display:flex;
+        flex-direction:row;
+        justify-content: center;
+        align-items: center;
+    }
+    li{
+        float:left;
+        width:33.4%;
+        height:100%;
+        display:flex;
+        flex-direction:column;
+        justify-content: center;
+        align-items: center;
+    }
+    i{
+        margin:10px;
+    }
+
+    
+.progress > li {
+       width: 100%;
+       height: 100%;
+       border-radius: 0;
+       color: #131313 !important;
+       list-style: none;
+       font-size: 2rem;
+       background-color: #bbb;
+       position: relative;
+}
+
+.progress > li:last-child {
+       border-right: 0;
+}
+
+.progress > li.li_info {
+       background-color: #242424;
+}
+
+.progress > li.li_seat {
+       background-color: #242424;
+}
+
+.progress > li.li_receipt {
+       background-color: #ecae01;
+}
+
+.progress > li:not(.completed) {
+     padding-left: 20px;
+}
+
+.progress > li span {
+       position: relative;
+       top: 5px;
+    }
+
+.diagonal {
+     width: 0; 
+     height: 0; 
+     border-top: 60px solid transparent;
+     border-bottom: 60px solid transparent;
+     border-left: 20px solid #bbb;
+     top: 0; right: 0;
+     position: absolute;
+     transform: translateX(100%);
+     z-index: 1;
+}
+.li_info .diagonal {
+     border-left-color: #242424;
+}
+.li_seat .diagonal {
+     border-left-color: #242424;
+}
+.li_receipt .diagonal {
+     border-left-color: #ecae01;
+}
+    #wrapper{
+        position: relative;
+        width:100%;
+        height:70%;
+        display:flex;
+        flex-direction:column;
+        justify-content: center;
+        align-items: center;
     }
     img{
         position: relative;
@@ -82,53 +171,25 @@
 
         // TODO :: 밑에 주석 코드들 구현하기 
             
-            // ! 겹치지않으면 예매 테이블에 데이터 추가
-            $db->exec("insert into reservation (phone, title, theater, reservation_date, reservation_hour, seats)
-            values ('$ph','$title', '$theater', '$date','$hour','$seat')");
+        // ! 겹치지않으면 예매 테이블에 데이터 추가
+        $db->exec("insert into reservation (phone, title, theater, reservation_date, reservation_hour, seats)
+        values ('$ph','$title', '$theater', '$date','$hour','$seat')");
 
-            // ? 가장 최근에 추가된 예매 테이블의 auto_increment 값 가져오기
-            $_SESSION['r_sn'] = $db->lastInsertId();
+        // ? 가장 최근에 추가된 예매 테이블의 auto_increment 값 가져오기
+        $_SESSION['r_sn'] = $db->lastInsertId();
 
-            // ! 겹치지않으면 상영일자 테이블에 데이터 추가
-            $db->exec("insert into screening (theater_sn, screening_date, reservation_hour)
-            values ('$theater', '$date','$hour')");
+        // ! 겹치지않으면 상영일자 테이블에 데이터 추가
+        $db->exec("insert into screening (theater_sn, screening_date, reservation_hour)
+        values ('$theater', '$date','$hour')");
 
-            // ? 가장 최근에 추가된 상영일자 테이블의 auto_increment 값 가져오기
-            $_SESSION['sc_sn'] = $db->lastInsertId();
-            // $query = $db->query("select * from reservation where reservation_date = '$movieDate' and theater = '$theater'");
-            
-        // if ($row = $query->fetch(PDO::FETCH_ASSOC)) { 
-                 ?>
-                 <!-- <script>
-                    window.open("/CGBee/fail.php", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=200,left=500,width=400,height=550");
-                    history.back();
-                </script> -->
-
-                 <?php
-        //         // exit();
-        //         // header("Location:/CGBee/getMovie.php");
-        //         // exit();
-        //         header("Location:/CGBee/fail.php");
-        //         exit();
-                
-            
-        // }
-
-        // ! 일시적으로 주석처리
-        // $query = $db->query("select * from seat s, reservation r, screening sc where s.screening_sn = sc.screening_sn and r.reservation_sn = s.reservation_sn");
-
-        // if ($row = $query->fetch(PDO::FETCH_ASSOC)) { 
-        //         header("Location:/CGBee/fail.php");
-        //         exit();
-        // }
+        // ? 가장 최근에 추가된 상영일자 테이블의 auto_increment 값 가져오기
+        $_SESSION['sc_sn'] = $db->lastInsertId();
 
         foreach($seat as $value){
             // $db->exec("insert into seat(reservation_sn, theater_sn, seat_sn) values('$last_insert_id','$theater','$value') ");
             $db->exec("insert into seat (screening_sn, seat_sn, reservation_sn, theater_sn, title)
             values ('$_SESSION[sc_sn]', '$value', '$_SESSION[r_sn]','$theater', '$title')");
-    
-        }
-        
+        }  
 
     } catch (PDOException $e) {
         exit($e->getMessage());
@@ -137,10 +198,31 @@
 
 
 ?>
-
+<div id="container">
+<ul class="progress">
+       <li class="li_info">
+           <span>
+           <p class="bk"><i class="fas fa-keyboard fa-2x"></i></p>
+            <p class="bk">정보입력</p>
+           </span>
+           <div class="diagonal"></div>
+       </li>
+       <li class="li_seat">
+           <span>
+           <p class="bk"><i class="fas fa-couch fa-2x"></i></p>
+            <p class="bk">좌석선택</p>
+           </span>
+           <div class="diagonal"></div>
+       </li>
+       <li class="li_receipt">
+           <span>
+           <p class="bk">&nbsp;<i class="fas fa-receipt fa-2x"></i></p>
+           <p class="bk">예매완료</p>
+           </span>
+       </li>
+    </ul>
         <div id="wrapper">
-        <h1> 예매가 완료되었따</h1> <br>
-        <h4> <span><?=$ph?></span>님의 예매내역</h4><br>
+        <h2> <span><?=$ph?></span>님의 예매내역</h2><br>
         <h2><?=$title?></h2><br>
         <img src="<?=$poster?>" alt=""> <br>
         
@@ -167,6 +249,7 @@
         ?>/
         <span> <?=$headcount?>명</span> 
         </p>
+        </div>
         </div>
 </body>
 </html>

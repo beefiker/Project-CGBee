@@ -23,6 +23,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css" />
     <script src="http://code.jquery.com/jquery-1.7.min.js"></script>
+    <script src="https://kit.fontawesome.com/7637a8f104.js" crossorigin="anonymous"></script>
     <script
       src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
       integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="
@@ -45,9 +46,6 @@
     body{
         background-color:#131313;
     }
-    p{
-        color:gray;
-    }
     input{
         width:150px;
         height:22px;
@@ -68,12 +66,100 @@
         -moz-appearance: none; appearance: none; 
         appearance: none;
     }
-
-
-    #wrapper{
-        position: absolute;
+    #container{
+        position:absolute;
         width:100%;
         height:100%;
+        display:flex;
+        flex-direction:column;
+        justify-content: center;
+        align-items: center;
+    }
+    .progress{
+        position: relative;
+        width:100%;
+        height:120px;
+        background:#f9c901;
+        display:flex;
+        flex-direction:row;
+        justify-content: center;
+        align-items: center;
+    } 
+    li{
+        float:left;
+        width:33.4%;
+        height:100%;
+        display:flex;
+        flex-direction:column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    i{
+        margin:10px;
+    }
+
+    
+.progress > li {
+       width: 100%;
+       height: 100%;
+       border-radius: 0;
+       color: #131313;
+       list-style: none;
+       background-color: #bbb;
+       position: relative;
+}
+
+.progress > li:last-child {
+       border-right: 0;
+}
+
+.progress > li.li_info {
+       background-color: #ecae01;
+}
+
+.progress > li.li_seat {
+       background-color: #242424;
+}
+
+.progress > li.li_receipt {
+       background-color: #242424;
+}
+
+.progress > li:not(.completed) {
+     padding-left: 20px;
+}
+
+.progress > li span {
+       position: relative;
+       top: 5px;
+    }
+
+.diagonal {
+     width: 0; 
+     height: 0;
+     border-top: 60px solid transparent;
+     border-bottom: 60px solid transparent;
+     border-left: 20px solid #bbb;
+     top: 0; right: 0;
+     position: absolute;
+     transform: translateX(100%);
+     z-index: 1;
+}
+.li_info .diagonal {
+     border-left-color: #ecae01;
+}
+.li_seat .diagonal {
+     border-left-color: #242424;
+}
+.li_receipt .diagonal {
+     border-left-color: #242424;
+}
+
+    #wrapper{
+        position: relative;
+        width:100%;
+        height:70%;
         background-color:#131313;
         display:flex;
         justify-content: center;
@@ -82,8 +168,7 @@
     }
     img{
         position: relative;
-        width:40%;
-
+        width:300px;
     }
     #mTitle{
         font-size:2rem;
@@ -111,6 +196,7 @@
     #ReservationBtn:hover{
         background-color: black;
     }
+
 </style>
 
 <script>
@@ -126,6 +212,36 @@
 </script>
 </head>
 <body>
+<div id="container">
+    <!-- <div id="progress">
+        <ul>
+            <li class="prog" id="li_Info"><i class="fas fa-keyboard fa-2x"></i> 정보입력</li>
+            <li class="prog" id="li_Seat"><i class="fas fa-couch fa-2x"></i>좌석선택</li>
+            <li class="prog" id="li_Receipt"><i class="fas fa-receipt fa-2x"></i>예매완료</li>
+        </ul>
+    </div> -->
+    <ul class="progress">
+       <li class="li_info">
+           <span>
+           <p><i class="fas fa-keyboard fa-2x"></i></p>
+            <p>정보입력</p>
+           </span>
+           <div class="diagonal"></div>
+       </li>
+       <li class="li_seat">
+           <span>
+           <p><i class="fas fa-couch fa-2x"></i></p>
+            <p>좌석선택</p>
+           </span>
+           <div class="diagonal"></div>
+       </li>
+       <li class="li_receipt">
+           <span>
+           <p>&nbsp;<i class="fas fa-receipt fa-2x"></i></p>
+           <p>예매완료</p>
+           </span>
+       </li>
+    </ul>
     <div id="wrapper">
         <img src="<?=$poster?>" alt="moviePoster"/>
         <div id="movieInfo">
@@ -135,7 +251,7 @@
             <p> 평점 : <?=$rating?></p><br><br>
             <p><?=$summary?> </p> <br><br>
             <form name="reservForm" mothod="post" action="/CGBee/setSeat.php"> 
-                <span> 상영관 </span>
+                <span> 상&nbsp;영&nbsp;관&nbsp; </span>
                 <select id="theater" name="theater">
                     <option value="1">강남</option>
                     <option value="2">서초</option>
@@ -171,7 +287,7 @@
             </form>
         </div>
     </div>
-
+</div>
     <script>
         document.getElementById('movieDate').value=new Date().toISOString().slice(0, 10);
 
