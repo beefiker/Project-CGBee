@@ -144,6 +144,9 @@
         height:300px;
 
     }
+    #ph_txt{
+        font-size:2rem;
+    }
 </style>
 
 </head>
@@ -171,22 +174,21 @@
 
         // TODO :: 밑에 주석 코드들 구현하기 
             
-        // ! 겹치지않으면 예매 테이블에 데이터 추가
+        // ! 예매 테이블에 레코드 추가
         $db->exec("insert into reservation (phone, title, theater, reservation_date, reservation_hour, seats)
         values ('$ph','$title', '$theater', '$date','$hour','$seat')");
 
-        // ? 가장 최근에 추가된 예매 테이블의 auto_increment 값 가져오기
+        // ? 가장 최근에 insert한 예매 레코드의 auto_increment 값
         $_SESSION['r_sn'] = $db->lastInsertId();
 
-        // ! 겹치지않으면 상영일자 테이블에 데이터 추가
+        // ! 상영일자 테이블에 레코드 추가
         $db->exec("insert into screening (theater_sn, screening_date, reservation_hour)
         values ('$theater', '$date','$hour')");
 
-        // ? 가장 최근에 추가된 상영일자 테이블의 auto_increment 값 가져오기
+        // ? 가장 최근에 insert한 상영일자 레코드의 auto_increment 값
         $_SESSION['sc_sn'] = $db->lastInsertId();
 
         foreach($seat as $value){
-            // $db->exec("insert into seat(reservation_sn, theater_sn, seat_sn) values('$last_insert_id','$theater','$value') ");
             $db->exec("insert into seat (screening_sn, seat_sn, reservation_sn, theater_sn, title)
             values ('$_SESSION[sc_sn]', '$value', '$_SESSION[r_sn]','$theater', '$title')");
         }  
@@ -195,8 +197,6 @@
         exit($e->getMessage());
     }
     
-
-
 ?>
 <div id="container">
 <ul class="progress">
@@ -222,11 +222,13 @@
        </li>
     </ul>
         <div id="wrapper">
-        <h2> <span><?=$ph?></span>님의 예매내역</h2><br>
+        <h2> <span id="ph_txt"><?=$ph?></span>님의 예매내역</h2><br>
         <h2><?=$title?></h2><br>
         <img src="<?=$poster?>" alt=""> <br>
         
-        <p> <span><?=$date?></span> 일 <span>
+        <p> <span><?=$date?></span> 일 
+        <span><?=$hour?></span></p><br>
+        <p><span>
         <?php
         switch($theater){
             case 1:
@@ -251,5 +253,19 @@
         </p>
         </div>
         </div>
+        <?php
+$url = "https://yts-proxy.now.sh/list_movies.json";
+$ch = curl_init();
+
+curl_setopt($ch, CURLOPT_URL, $url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+$response = curl_exec($ch);
+if(!$response){
+  exit(curl_errno($ch) + " : " + curl_error($ch));
+}
+echo $response;
+curl_close($ch)
+?>
 </body>
 </html>

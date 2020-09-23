@@ -174,12 +174,11 @@
 
     #ReservationBtn{
         position:relative;
-        width: 70%;
+        width: 100%;
         height: 50px;
-        left:15%;
-        color: white;
-        background-color: #131313;
-        border: 1px solid white;
+        color: #242424;
+        background-color: #f9c901;
+        border: 1px solid #f9c901;
         border-radius: 5px;
         font-size: 20px;
         cursor: pointer;
@@ -250,17 +249,30 @@
             <p class="screen">Screen</p>
             <form name="reservForm" mothod="post" action="/CGBee/reservation.php"> 
             <br>
-
             <?php
+                try {
+                    require("db_connect.php");
+                    $query = $db->query("select * from theater where theater_sn = $theater");
+                
+                    if($row = $query->fetch(PDO::FETCH_ASSOC)) {    
+                        $seatCount = $row[seat_amount];
+                    }
+                    
+                    for($i = 1; $i<= $seatCount; $i++) { 
+                        echo "<label><input type=checkbox name=seat[] onclick=ischecked() value='A{$i}'> </label>";
+                        if($i%10==3 || $i%10==7 ) echo "&nbsp&nbsp&nbsp";
+                        if($i%10==0) echo "<br>";
+                        if($i%60==0) echo "<br>";
+                    }
 
-        for($i = 1; $i<= 30; $i++) { 
-            echo "<label><input id=seats type=checkbox name=seat[] onclick='ischecked()' value='A{$i}'> </label>";
-
-            if($i%10==3 || $i%10==7 ) echo "&nbsp&nbsp&nbsp";
-            if($i%10==0 && $i%21!=0) echo "<br>";
-        }
-            ?>
-                <br><input id="ReservationBtn" type="button" onclick="reservation()" value="좌석선택">
+                } catch (PDOException $e) {
+                    exit($e->getMessage());
+                }
+                
+            ?> 
+            
+            
+                <input id="ReservationBtn" type="button" onclick="reservation()" value="좌석선택">
             </form>
             <?php
                 try {

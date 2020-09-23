@@ -95,7 +95,7 @@
         try {
             require("db_connect.php");    
 
-            $query = $db->query("select * from reservation where phone = '$ph'");
+            $query = $db->query("select * from reservation where phone = '$ph' order by reservation_date, reservation_hour");
             
             while ($row = $query->fetch(PDO::FETCH_ASSOC)) { 
                 ?> 

@@ -13,7 +13,7 @@
     
     $_SESSION['title'] = $mtitle;
     $_SESSION['poster'] = $poster;
-    
+
 ?>
 
 <!DOCTYPE html>
@@ -57,12 +57,12 @@
     select { 
         width:100px;
         padding: .2em .5em; /* 여백으로 높이 설정 */ 
-        font-family: inherit; /* 폰트 상속 */ 
+        font-family: inherit; 
         background: url(images/selectIcon.png) no-repeat 100% 50%; /* 네이티브 화살표 대체 */ 
         border: 1px solid #999; 
         color:white;
-        border-radius: 0px; /* iOS 둥근모서리 제거 */ 
-        -webkit-appearance: none; /* 네이티브 외형 감추기 */
+        border-radius: 0px; 
+        -webkit-appearance: none; 
         -moz-appearance: none; appearance: none; 
         appearance: none;
     }
@@ -175,7 +175,6 @@
     }
     #movieInfo{
         position:relative;
-        /* background-color:red; */
         width:45%;
         padding : 2rem;
         display:flex;
@@ -213,13 +212,6 @@
 </head>
 <body>
 <div id="container">
-    <!-- <div id="progress">
-        <ul>
-            <li class="prog" id="li_Info"><i class="fas fa-keyboard fa-2x"></i> 정보입력</li>
-            <li class="prog" id="li_Seat"><i class="fas fa-couch fa-2x"></i>좌석선택</li>
-            <li class="prog" id="li_Receipt"><i class="fas fa-receipt fa-2x"></i>예매완료</li>
-        </ul>
-    </div> -->
     <ul class="progress">
        <li class="li_info">
            <span>
@@ -253,32 +245,37 @@
             <form name="reservForm" mothod="post" action="/CGBee/setSeat.php"> 
                 <span> 상&nbsp;영&nbsp;관&nbsp; </span>
                 <select id="theater" name="theater">
-                    <option value="1">강남</option>
-                    <option value="2">서초</option>
-                    <option value="3">용산</option>
-                    <option value="4">송파</option>
-                    <option value="5">성남</option>
+                    <?php
+                    try {
+                        require("db_connect.php");
+                  
+                        $query = $db->query("select * from theater");
+                  
+                        while($row = $query->fetch(PDO::FETCH_ASSOC)) {    
+                            echo "<option value=$row[theater_sn]>",$row[theater_name],"</option>";
+                        }
+                      } catch (PDOException $e) {
+                        exit($e->getMessage());
+                      }
+                    ?>
                 </select><br><br>
                 <span> 상영일자 </span><input id="movieDate" name="date" type="date">
                 <select id="movieHour" name="hour">
-                    <option value="09:00">09:00</option>
-                    <option value="12:00">12:00</option>
-                    <option value="15:00">15:00</option>
-                    <option value="18:00">18:00</option>
-                    <option value="21:00">21:00</option>
-                    <option value="24:00">24:00</option>
+                    <?php
+                    try {
+                        require("db_connect.php");
+                  
+                        $query = $db->query("select * from schedule");
+                  
+                        while($row = $query->fetch(PDO::FETCH_ASSOC)) {    
+                            echo "<option value=$row[timezone]>",$row[timezone],"</option>";
+                        }
+                      } catch (PDOException $e) {
+                        exit($e->getMessage());
+                      }
+                    ?>
                 </select>
                 <br>
-                   
-                <!-- <?php
-
-                    for($i = 1; $i<= 30; $i++) { 
-                        echo "<label><input type=checkbox name=seat[] value='A{$i}'> </label>";
-                        if($i%5==0 && $i%10!=0) echo "&nbsp";
-                        if($i%10==0 && $i%21!=0) echo "<br>";
-                    }
-                    echo "<br>";
-                ?> -->
 
                 <br>
                 <span>휴대전화 </span>
