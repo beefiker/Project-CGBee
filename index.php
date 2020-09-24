@@ -1,3 +1,94 @@
+<?php
+//db에 영화정보 넣기
+$url_rating = "https://yts-proxy.now.sh/list_movies.json?sort_by=rating&limit=15";
+$url_like = "https://yts-proxy.now.sh/list_movies.json?sort_by=like_count&limit=15";
+//  Initiate curl session
+$handle = curl_init();
+// Will return the response, if false it prints the response
+curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
+// Set the url
+curl_setopt($handle, CURLOPT_URL,$url_rating);
+// Execute the session and store the contents in $result
+$result_rating=curl_exec($handle);
+// Closing the session
+$result_rating = file_get_contents($url_rating);
+
+curl_setopt($handle, CURLOPT_URL,$url_like);
+// Execute the session and store the contents in $result
+$result_like=curl_exec($handle);
+// Closing the session
+$result_like = file_get_contents($url_like);
+
+$data_rating = json_decode($result_rating);
+// var_dump($data);
+$list_rating = $data_rating->data->movies;
+$data_like = json_decode($result_like);
+// var_dump($data);
+$list_like = $data_like->data->movies;
+// echo $list[0]->id;
+
+for($i=0; $i<count($list_rating); $i++){
+
+    $id = $list_rating[$i]->id;
+    $title = $list_rating[$i]->title_english;
+    $replace_title = str_replace("'"," ", $title);
+    $year = $list_rating[$i]->year;
+    $rating = $list_rating[$i]->rating;
+    $runningtime = $list_rating[$i]->runtime;
+    // $genres = $list[$i]->genres;
+    $summary = substr($list_rating[$i]->summary,0,140);
+    $cut_summary = str_replace("'","",$summary);
+    $language = $list_rating[$i]->language;
+    $imgsrc = $list_rating[$i]->background_image;
+    $uploaded_date = $list_rating[$i]->date_uploaded;
+    
+    try {
+      require("db_connect.php");
+
+      $query = $db->query("select * from movie where id=$id");
+
+      if (!($row = $query->fetch(PDO::FETCH_ASSOC))) {    
+        $db->exec("insert into movie(id, title, year, rating, runningtime, country, imgsrc, uploaded_date)
+        values ($id, '$replace_title', '$year', '$rating',$runningtime,'$language','$imgsrc','$uploaded_date')");
+      }
+    } catch (PDOException $e) {
+      exit($e->getMessage());
+    }
+}
+
+for($i=0; $i<count($list_like); $i++){
+
+  $id = $list_like[$i]->id;
+  $title = $list_like[$i]->title_english;
+  $replace_title = str_replace("'"," ", $title);
+  $year = $list_like[$i]->year;
+  $rating = $list_like[$i]->rating;
+  $runningtime = $list_like[$i]->runtime;
+  // $genres = $list[$i]->genres;
+  $summary = substr($list_like[$i]->summary,0,140);
+  $cut_summary = str_replace("'","",$summary);
+  $language = $list_like[$i]->language;
+  $imgsrc = $list_like[$i]->background_image;
+  $uploaded_date = $list_like[$i]->date_uploaded;
+  
+  try {
+    require("db_connect.php");
+
+    $query = $db->query("select * from movie where id=$id");
+
+    if (!($row = $query->fetch(PDO::FETCH_ASSOC))) {    
+      $db->exec("insert into movie(id, title, year, rating, runningtime, country,  imgsrc, uploaded_date)
+      values ($id, '$replace_title', '$year', '$rating',$runningtime,'$language','$imgsrc','$uploaded_date')");
+    }
+  } catch (PDOException $e) {
+    exit($e->getMessage());
+  }
+}
+
+curl_close($handle);
+
+?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -88,95 +179,6 @@
 
   </body>
   <script type="text/javascript" src="honeybee.js"></script>
-  <?php
-//db에 영화정보 넣기
-$url_rating = "https://yts-proxy.now.sh/list_movies.json?sort_by=rating&limit=15";
-$url_like = "https://yts-proxy.now.sh/list_movies.json?sort_by=like_count&limit=15";
-//  Initiate curl session
-$handle = curl_init();
-// Will return the response, if false it prints the response
-curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
-// Set the url
-curl_setopt($handle, CURLOPT_URL,$url_rating);
-// Execute the session and store the contents in $result
-$result_rating=curl_exec($handle);
-// Closing the session
-$result_rating = file_get_contents($url_rating);
 
-curl_setopt($handle, CURLOPT_URL,$url_like);
-// Execute the session and store the contents in $result
-$result_like=curl_exec($handle);
-// Closing the session
-$result_like = file_get_contents($url_like);
-
-$data_rating = json_decode($result_rating);
-// var_dump($data);
-$list_rating = $data_rating->data->movies;
-$data_like = json_decode($result_like);
-// var_dump($data);
-$list_like = $data_like->data->movies;
-// echo $list[0]->id;
-
-for($i=0; $i<count($list_rating); $i++){
-
-    $id = $list_rating[$i]->id;
-    $title = $list_rating[$i]->title_english;
-    $replace_title = str_replace("'"," ", $title);
-    $year = $list_rating[$i]->year;
-    $rating = $list_rating[$i]->rating;
-    $runningtime = $list_rating[$i]->runtime;
-    // $genres = $list[$i]->genres;
-    $summary = substr($list_rating[$i]->summary,0,140);
-    $cut_summary = str_replace("'","",$summary);
-    $language = $list_rating[$i]->language;
-    $imgsrc = $list_rating[$i]->background_image;
-    $uploaded_date = $list_rating[$i]->date_uploaded;
-    
-    try {
-      require("db_connect.php");
-
-      $query = $db->query("select * from movie where id=$id");
-
-      if (!($row = $query->fetch(PDO::FETCH_ASSOC))) {    
-        $db->exec("insert into movie(id, title, year, rating, runningtime, country, imgsrc, uploaded_date)
-        values ($id, '$replace_title', '$year', '$rating',$runningtime,'$language','$imgsrc','$uploaded_date')");
-      }
-    } catch (PDOException $e) {
-      exit($e->getMessage());
-    }
-}
-
-for($i=0; $i<count($list_like); $i++){
-
-  $id = $list_like[$i]->id;
-  $title = $list_like[$i]->title_english;
-  $replace_title = str_replace("'"," ", $title);
-  $year = $list_like[$i]->year;
-  $rating = $list_like[$i]->rating;
-  $runningtime = $list_like[$i]->runtime;
-  // $genres = $list[$i]->genres;
-  $summary = substr($list_like[$i]->summary,0,140);
-  $cut_summary = str_replace("'","",$summary);
-  $language = $list_like[$i]->language;
-  $imgsrc = $list_like[$i]->background_image;
-  $uploaded_date = $list_like[$i]->date_uploaded;
-  
-  try {
-    require("db_connect.php");
-
-    $query = $db->query("select * from movie where id=$id");
-
-    if (!($row = $query->fetch(PDO::FETCH_ASSOC))) {    
-      $db->exec("insert into movie(id, title, year, rating, runningtime, country,  imgsrc, uploaded_date)
-      values ($id, '$replace_title', '$year', '$rating',$runningtime,'$language','$imgsrc','$uploaded_date')");
-    }
-  } catch (PDOException $e) {
-    exit($e->getMessage());
-  }
-}
-
-curl_close($handle);
-
-?>
 
 </html>

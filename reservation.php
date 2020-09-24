@@ -171,7 +171,6 @@
     try {
         require("db_connect.php");
             
-
         // TODO :: 밑에 주석 코드들 구현하기 
             
         // ! 예매 테이블에 레코드 추가
