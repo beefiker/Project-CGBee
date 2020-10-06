@@ -7,6 +7,7 @@ $.ajax({
   data: { limit: 15, sort_by: "like_count" },
   beforeSend: () => {
     $(".needsLoad").hide();
+
     let width = 450;
     let height = 350;
     let top = ($(window).height() - height) / 2 + $(window).scrollTop();
@@ -76,6 +77,7 @@ $.ajax({
       for (i = 0; i < movies.length; i++) {
         const summary = movies[i].summary.slice(0, 140) + "...";
         $("#sortByRating").append("<div class=sortPartition id=RatingPartition" + i + "></div>");
+
         $("#RatingPartition" + i).append("<img src='" + movies[i].medium_cover_image + "'/>");
         $("#RatingPartition" + i).append("<p class=movietitle>" + movies[i].title + "</p>");
         $("#RatingPartition" + i).append(
@@ -123,6 +125,51 @@ $.ajax({
   },
 }).done((event) => {
   const movies = event.data.movies;
+  let rand = Math.floor(Math.random() * 15);
+  const summary = movies[rand].summary.slice(0, 140) + "...";
+  $("#randomMovie").append("<div class=sortPartition id=randomPartition></div>");
+  $("#randomPartition").append("<img src='" + movies[rand].medium_cover_image + "'/>");
+  $("#randomPartition").append("<p class=movietitle>" + movies[rand].title + "</p>");
+  $("#randomPartition").append(
+    "<p class=movieGenre>" + movies[rand].genres[0] + ", " + movies[rand].genres[1] + "</p>"
+  );
+  $("#randomPartition").append("<p class=movieSummary>" + summary + "</p>");
+
+  var newForm = $("<form></form>");
+
+  newForm.attr("name", "newForm");
+  newForm.attr("method", "post");
+  newForm.attr("action", "/CGBee/getMovie.php");
+  newForm.attr("target", "_blank");
+  newForm.append($("<input/>", { type: "hidden", name: "movieTitle", value: movies[rand].title_long }));
+  newForm.append($("<input/>", { type: "hidden", name: "movieGenre", value: movies[rand].genres }));
+  newForm.append($("<input/>", { type: "hidden", name: "movieSummary", value: movies[rand].summary }));
+  newForm.append($("<input/>", { type: "hidden", name: "movieYear", value: movies[rand].year }));
+  newForm.append($("<input/>", { type: "hidden", name: "movieRating", value: movies[rand].rating }));
+  newForm.append($("<input/>", { type: "hidden", name: "movieRuntime", value: movies[rand].runtime }));
+  newForm.append($("<input/>", { type: "hidden", name: "moviePoster", value: movies[rand].medium_cover_image }));
+
+  newForm.append($("<input/>", { type: "submit", name: "data2", value: "예매하기", id: "ReservationBtn" }));
+
+  newForm.appendTo("#randomPartition");
+
+  let randPartition = $("#randomPartition");
+  randPartition.hover(
+    () => {
+      randPartition.children(".movietitle").css({ visibility: "visible" });
+      randPartition.children(".movieGenre").css({ visibility: "visible" });
+      randPartition.children(".movieSummary").css({ visibility: "visible" });
+      randPartition.children("form").find("input").css({ visibility: "visible" });
+      randPartition.children("img").animate({ opacity: "0.5" }, 100);
+    },
+    () => {
+      randPartition.children("img").animate({ opacity: "1" }, 100);
+      randPartition.children(".movietitle").css({ visibility: "hidden" });
+      randPartition.children(".movieGenre").css({ visibility: "hidden" });
+      randPartition.children(".movieSummary").css({ visibility: "hidden" });
+      randPartition.children("form").find("input").css({ visibility: "hidden" });
+    }
+  );
 
   for (i = 0; i < movies.length; i++) {
     const summary = movies[i].summary.slice(0, 140) + "...";
@@ -243,57 +290,54 @@ $("#gotoD, #naviD").click(() => {
 $("#gotoE, #naviE").click(() => {
   animateToBox("#box5");
 });
-$("#gotoF, #naviF").click(() => {
-  animateToBox("#box6");
-});
-
-const CurrentColor = "#636e72";
-$("#gotoA").css({ color: CurrentColor });
-$("#naviA").css({ color: CurrentColor });
 
 // ! 셋인터벌로 브라우저 속도 조절
-setInterval(() => {
-  $(window).scroll(() => {
-    let browserY = $(document).scrollTop() + 350;
-    let CurrentPageNum = 0;
-    const page1Y = $("#box1").offset();
-    const page2Y = $("#box2").offset();
-    const page3Y = $("#box3").offset();
-    const page4Y = $("#box4").offset();
-    const page5Y = $("#box5").offset();
-    const page6Y = $("#box6").offset();
+// const CurrentColor = "#636e72";
+// $("#gotoA").css({ color: CurrentColor });
+// $("#naviA").css({ color: CurrentColor });
 
-    changeColorCss = (prop1, prop2) => {
-      $(".menuList").css({ color: "white" });
-      $(prop1).css({ color: CurrentColor });
-      $(".navimenu").css({ color: "white" });
-      $(prop2).css({ color: CurrentColor });
-    };
+// setInterval(() => {
+//   $(window).scroll(() => {
+//     let browserY = $(document).scrollTop() + 350;
+//     let CurrentPageNum = 0;
+//     const page1Y = $("#box1").offset();
+//     const page2Y = $("#box2").offset();
+//     const page3Y = $("#box3").offset();
+//     const page4Y = $("#box4").offset();
+//     const page5Y = $("#box5").offset();
+//     const page6Y = $("#box6").offset();
 
-    if (browserY < page2Y.top) {
-      CurrentPageNum = 0;
-      changeColorCss("#gotoA", "#naviA");
-    } else if (browserY == page1Y.top && browserY < page2Y.top) {
-      CurrentPageNum = 1;
-      changeColorCss("#gotoA", "#naviB");
-    } else if ((browserY >= page2Y.top && browserY <= page3Y.top) || browserY == page2Y.top) {
-      CurrentPageNum = 2;
-      changeColorCss("#gotoB", "#naviB");
-    } else if ((browserY >= page3Y.top && browserY <= page4Y.top) || browserY == page3Y.top) {
-      CurrentPageNum = 3;
-      changeColorCss("#gotoC", "#naviC");
-    } else if ((browserY >= page4Y.top && browserY <= page5Y.top) || browserY == page4Y.top) {
-      CurrentPageNum = 4;
-      changeColorCss("#gotoD", "#naviD");
-    } else if ((browserY >= page5Y.top && browserY <= page6Y.top) || browserY == page5Y.top) {
-      CurrentPageNum = 5;
-      changeColorCss("#gotoE", "#naviE");
-    } else if ((browserY >= page6Y.top && browserY <= page7Y.top) || browserY == page6Y.top) {
-      CurrentPageNum = 6;
-      changeColorCss("#gotoF", "#naviF");
-    }
-  });
-}, 200);
+//     changeColorCss = (prop1, prop2) => {
+//       $(".menuList").css({ color: "white" });
+//       $(prop1).css({ color: CurrentColor });
+//       $(".navimenu").css({ color: "white" });
+//       $(prop2).css({ color: CurrentColor });
+//     };
+
+//     if (browserY < page2Y.top) {
+//       CurrentPageNum = 0;
+//       changeColorCss("#gotoA", "#naviA");
+//     } else if (browserY == page1Y.top && browserY < page2Y.top) {
+//       CurrentPageNum = 1;
+//       changeColorCss("#gotoA", "#naviB");
+//     } else if ((browserY >= page2Y.top && browserY <= page3Y.top) || browserY == page2Y.top) {
+//       CurrentPageNum = 2;
+//       changeColorCss("#gotoB", "#naviB");
+//     } else if (browserY > page2Y.top || browserY == page3Y.top) {
+//       CurrentPageNum = 3;
+//       changeColorCss("#gotoC", "#naviC");
+//     } else if ((browserY >= page4Y.top && browserY <= page5Y.top) || browserY == page4Y.top) {
+//       CurrentPageNum = 4;
+//       changeColorCss("#gotoD", "#naviD");
+//     } else if ((browserY >= page5Y.top && browserY <= page6Y.top) || browserY == page5Y.top) {
+//       CurrentPageNum = 5;
+//       changeColorCss("#gotoE", "#naviE");
+//     } else if ((browserY >= page6Y.top && browserY <= page7Y.top) || browserY == page6Y.top) {
+//       CurrentPageNum = 6;
+//       changeColorCss("#gotoF", "#naviF");
+//     }
+//   });
+// }, 200);
 
 let CurrentMenuValue = 0; // * 메뉴 숨겨있을 때 0, 클릭해서 나타냈을 때 1
 animateToBefore = () => {

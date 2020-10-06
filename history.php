@@ -95,7 +95,7 @@
         try {
             require("db_connect.php");    
 
-            $query = $db->query("select * from reservation where phone = '$ph' order by reservation_date, reservation_hour");
+            $query = $db->query("select * from reservation r, theater t where r.theater = t.theater_sn and r.phone = '$ph' order by r.reservation_date, r.reservation_hour");
             
             while ($row = $query->fetch(PDO::FETCH_ASSOC)) { 
                 ?> 
@@ -103,19 +103,7 @@
                      <td><?=$row["reservation_sn"]?></td>
                      <td><?=$row["title"]?></td>
                      <td>
-                         <?php
-                            switch($row["theater"]){
-                                case 1:
-                                    echo "강남"; break;
-                                case 2:
-                                    echo "서초"; break;
-                                case 3:
-                                    echo "용산"; break;
-                                case 4:
-                                    echo "송파"; break;
-                                case 5:
-                                    echo "성남"; break;
-                            }
+                         <?=$row["theater_name"]
                         ?>
                      </td>
                      <td><?=$row["reservation_date"]," ",$row["reservation_hour"]?></td>

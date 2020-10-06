@@ -20,17 +20,25 @@ body {
   background-attachment: fixed;
   background-color: #191f26;
 }
-
 .box {
   width: 100%;
-  height: 2000px;
   display: flex;
-  float: left;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  padding-top: 110px;
+}
+
+#box1,
+#box2,
+#box3 {
+  height: 500px;
+  padding-top: 100px;
   /* overflow:scroll; */
+}
+#box4,
+#box5 {
+  padding-top: 200px;
+  min-height: 300px;
 }
 
 .scrollLeft,
@@ -51,6 +59,7 @@ body {
   width: 85%;
   color: white;
   font-size: 50px;
+  margin-bottom: 20px;
 }
 .sortWrapper {
   position: relative;
@@ -65,7 +74,7 @@ body {
   width: 100%;
   display: flex;
   top: 0.5rem;
-  margin-bottom: 90px;
+  /* margin-bottom: 90px; */
 }
 .movieDiv {
   position: relative;
@@ -138,7 +147,7 @@ input {
 
 .menuList {
   cursor: pointer;
-  width: 20%;
+  width: 33.3%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -149,6 +158,44 @@ input {
 }
 #sortByRating {
   overflow-x: scroll;
+}
+#boardlist {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  float: left;
+  /* background-color: red; */
+}
+.randomWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.randomName {
+  width: 100%;
+  color: white;
+  font-size: 50px;
+  margin-bottom: 20px;
+}
+#theaterUL {
+  width: 90%;
+  padding: 10px;
+}
+#theaterUL > li {
+  display: flex;
+  flex-direction: column;
+  float: left;
+  text-align: center;
+  margin-right: 30px;
+  color: #636e71;
+}
+
+.theaterimg {
+  width: 200px;
+  height: 150px;
 }
 @media (min-width: 1300px) {
   #container {
