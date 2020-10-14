@@ -1,7 +1,7 @@
 
 <?php
     session_start();
-
+    $id = $_REQUEST["movieId"];
     $mtitle= $_REQUEST["movieTitle"];
     $genre = $_REQUEST["movieGenre"];
     $summary = $_REQUEST["movieSummary"];
@@ -278,7 +278,7 @@
                 <br>
 
                 <br>
-                <span>휴대전화 </span>
+                <span>휴대전화</span> 
                 <input type="text" name="ph" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" placeholder="Enter Your Mobile"> <br><br>
                 <input id="ReservationBtn" type="button" onclick="reservation()" value="좌석 선택">
             </form>

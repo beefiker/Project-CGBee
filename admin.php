@@ -1,5 +1,6 @@
 <?php
     session_start();
+    $today = date("Y-m-d");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -63,6 +64,13 @@
         justify-content:center;
         align-items:center;
     }
+    .modifyEvent{
+        width:100%;
+        display:flex;
+        /* flex-direction:column; */
+        justify-content:center;
+        align-items:center;
+    }
     #submitBtn{
         all:unset;
         width:80%;
@@ -72,18 +80,60 @@
         justify-content:center;
         align-items:center;
     }
-    form{
+    .forms{
         width:40%;
         padding:5%;
+    }
+    .eventItems {
+        position: relative;
+        width:500px;
+        min-height: 100px;
+        float:left;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+    }
+    #boardlist {
+        width: 100%;
+    }
+    .eventImg{
+        width:75px;
+        height:75px;
+        margin-right:30px;
+    }
+    
+    .a{
+        background-color:none;
+        border:2px solid white;
+        border-radius:0px 10px 0 0;
+        color:white;
+        width:300px;
+        height:75px;
+        display:flex;
+        align-items:center;
+    }
+
+    .contents{
+        position:relative;
+        width:280px;
+        min-height:10px;
+        border:2px solid white;
+        background-color:white;
+        word-break:break-all;
+        padding:10px;
+        margin-bottom:50px;
+        color:black;
+        text-align:left;
     }
 </style>
 
 </head>
 <body>
-<div id="container">
-    <div class="menu-box">
-        <ul>
-        <?php
+    <div id="container">
+        <div>
+            <ul>
+            <?php
                 try {
                     require("db_connect.php");
 
@@ -101,56 +151,91 @@
                     exit($e->getMessage());
                 }
             ?>
-        </ul>
-    </div>
-    
-    <div class="modifyTheater">
-            <form mothod="post" action="/CGBee/addTheater.php">
-               <span> 극장 이름 : </span><input type="text" name="theaterName"> <br><br>
-               <span> 극장 이미지 : </span> <input type="file" name="theaterImg"> <br><br>
-               <span> 좌석 수 : </span> <input type="text" name="theaterSeats"> <br><br>
+            </ul>
+        </div>
+        
+        <div class="modifyTheater">
+            <form mothod="post" action="/CGBee/addTheater.php" class="forms">
+                <span> 극장 이름 : </span><input type="text" name="theaterName"> <br><br>
+                <span> 극장 이미지 : </span> <input type="file" name="theaterImg"> <br><br>
+                <span> 좌석 수 : </span> <input type="text" name="theaterSeats"> <br><br>
                 <input type="submit" value="추가" id="submitBtn">
             </form>
 
             <form mothod="post" action="/CGBee/delTheater.php">
-            <span> 삭제할 극장 </span>
-            <select id="theater" name="theater">
+                <span> 삭제할 극장 </span>
+                <select id="theater" name="theater">
                     <?php
-                    try {
-                        require("db_connect.php");
-                  
-                        $query = $db->query("select * from theater");
-                  
-                        while($row = $query->fetch(PDO::FETCH_ASSOC)) {    
-                            echo "<option value=$row[theater_sn]>",$row[theater_name],"</option>";
+                        try {
+                            require("db_connect.php");
+                        
+                            $query = $db->query("select * from theater");
+                        
+                            while($row = $query->fetch(PDO::FETCH_ASSOC)) {    
+                                echo "<option value=$row[theater_sn]>",$row[theater_name],"</option>";
+                            }
+                        } catch (PDOException $e) {
+                            exit($e->getMessage());
                         }
-                      } catch (PDOException $e) {
-                        exit($e->getMessage());
-                      }
                     ?>
                 </select><br>
-               <br>
+                <br>
                 <input type="submit" value="삭제" id="submitBtn">
             </form>
+        </div>
+        <div class="modifyEvent">
+
+            <form mothod="post" action="/CGBee/addEvent.php" class="forms">
+                <input type="hidden" name="date" value="<?=$today?>">
+                <p> 제목 </p>
+                <input type="text" name="title"><br><br>
+                
+                <p> 내용 </p>
+                <textarea id="textarea" name="contents" rows="5" cols="50">
+                </textarea>
+                <br>
+                <input type="file" name="img"><br><br>
+                    <input type="submit" value="추가" id="submitBtn">
+            </form>
+        
+        </div>
+        <div>
+            <ul>
+            <?php
+                try {
+                    require("db_connect.php");
+
+                    $query = $db->query("select * from board");
+                    
+                    while ($row = $query->fetch(PDO::FETCH_ASSOC)) {    
+                    $id = $row["id"];
+                    $title = $row["title"];
+                    $contents = $row["contents"];
+                    $write_date = $row["write_date"];
+                    $eventImg = $row["eventImg"];
+
+                    echo    "<li class='eventItems'>",
+                                "<div class='a'>",
+                                    "<img class='eventImg' src='$eventImg'>","<p>$title</p>",
+                                    "<form mothod='post' action='/CGBee/delEvent.php'>",
+                                        "<input type='hidden' name='eventId' value='$id'>",
+                                        "<input type='submit' value='⛔️'>", 
+                                    "</form>",
+                                "</div>",
+                                "<p class='contents'>", $contents ,"</p>",
+                                
+                            "</li>";
+
+                    }
+                } catch (PDOException $e) {
+                    exit($e->getMessage());
+                }
+            ?>
+            </ul>
+        </div>
     </div>
-    <div class="modifyEvent">
-                <?php
-                    try {
-                        require("db_connect.php");
-                  
-                        $query = $db->query("select * from board");
-                  
-                        while($row = $query->fetch(PDO::FETCH_ASSOC)) {   
-                            $title = $row[title];
-                            $contents = $row[contents];
-                            echo "<p> $title, $contents</p>";
-                        }
-                      } catch (PDOException $e) {
-                        exit($e->getMessage());
-                      }
-                ?>
-    </div>
-</div>
 </body>
 </html>
     
+    // ! 상영관 별 영화목록 및 시간대 구현 
+    // ! 

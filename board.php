@@ -26,18 +26,22 @@
         margin-right:30px;
     }
     .a{
-        background-color:red;
+        background-color:none;
+        border:2px solid white;
+        border-radius:0px 10px 0 0;
+        color:white;
         width:400px;
         height:75px;
         display:flex;
-        /* justify-content:center; */
         align-items:center;
     }
     .contents{
         position:relative;
         width:380px;
         min-height:10px;
-        background-color:blue;
+        border:2px solid white;
+        border-radius:0 0 0 10px;
+        background-color:white;
         word-break:break-all;
         padding:10px;
         margin-bottom:100px;

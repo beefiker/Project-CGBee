@@ -26,7 +26,6 @@ $list_rating = $data_rating->data->movies;
 $data_like = json_decode($result_like);
 // var_dump($data);
 $list_like = $data_like->data->movies;
-// echo $list[0]->id;
 
 for($i=0; $i<count($list_rating); $i++){
 
@@ -36,13 +35,15 @@ for($i=0; $i<count($list_rating); $i++){
     $year = $list_rating[$i]->year;
     $rating = $list_rating[$i]->rating;
     $runningtime = $list_rating[$i]->runtime;
-    // $genres = $list[$i]->genres;
-    // $genreArray = "";
-    // for($i = 0; $i < count($genres); $i++) $genreArray .= $genres[$i]+", ";
-    $summary = substr($list_rating[$i]->summary,0,140);
+    if(!$list_rating[$i]->genres[1]){
+      $genres = $list_rating[$i]->genres[0];
+    }else{
+      $genres = $list_rating[$i]->genres[0].", ".$list_rating[$i]->genres[1];
+    }
+    $summary = substr($list_like[$i]->summary,0,140) . "...";
     $cut_summary = str_replace("'","",$summary);
     $language = $list_rating[$i]->language;
-    $imgsrc = $list_rating[$i]->background_image;
+    $imgsrc = $list_rating[$i]->medium_cover_image;
     $uploaded_date = $list_rating[$i]->date_uploaded;
     
     try {
@@ -51,8 +52,8 @@ for($i=0; $i<count($list_rating); $i++){
       $query = $db->query("select * from movie where id=$id");
 
       if (!($row = $query->fetch(PDO::FETCH_ASSOC))) {    
-        $db->exec("insert into movie(id, title, year, rating, runningtime, country, imgsrc, uploaded_date)
-        values ($id, '$replace_title', '$year', '$rating',$runningtime,'$language','$imgsrc','$uploaded_date')");
+        $db->exec("insert into movie(id, title, year, rating, runningtime, genres, country, summary, imgsrc, uploaded_date)
+      values ($id, '$replace_title', '$year', '$rating',$runningtime,'$genres','$language','$cut_summary','$imgsrc','$uploaded_date')");
       }
     } catch (PDOException $e) {
       exit($e->getMessage());
@@ -67,13 +68,15 @@ for($i=0; $i<count($list_like); $i++){
   $year = $list_like[$i]->year;
   $rating = $list_like[$i]->rating;
   $runningtime = $list_like[$i]->runtime;
-  // $genres = $list[$i]->genres;
-  // $genreArray;
-  // for($i = 0; $i < count($genres); $i++) $genreArray .= $genres[$i]+", ";
-  $summary = substr($list_like[$i]->summary,0,140);
+  if(!$list_like[$i]->genres[1]){
+    $genres = $list_like[$i]->genres[0];
+  }else{
+    $genres = $list_like[$i]->genres[0].", ".$list_like[$i]->genres[1];
+  }
+  $summary = substr($list_like[$i]->summary,0,140) . "...";
   $cut_summary = str_replace("'","",$summary);
   $language = $list_like[$i]->language;
-  $imgsrc = $list_like[$i]->background_image;
+  $imgsrc = $list_like[$i]->medium_cover_image;
   $uploaded_date = $list_like[$i]->date_uploaded;
   
   try {
@@ -82,8 +85,8 @@ for($i=0; $i<count($list_like); $i++){
     $query = $db->query("select * from movie where id=$id");
 
     if (!($row = $query->fetch(PDO::FETCH_ASSOC))) {    
-      $db->exec("insert into movie(id, title, year, rating, runningtime, country, imgsrc, uploaded_date)
-      values ($id, '$replace_title', '$year', '$rating',$runningtime,'$language','$imgsrc','$uploaded_date')");
+      $db->exec("insert into movie(id, title, year, rating, runningtime, genres, country, summary, imgsrc, uploaded_date)
+      values ($id, '$replace_title', '$year', '$rating',$runningtime,'$genres','$language','$cut_summary','$imgsrc','$uploaded_date')");
     }
   } catch (PDOException $e) {
     exit($e->getMessage());
@@ -91,7 +94,6 @@ for($i=0; $i<count($list_like); $i++){
 }
 
 curl_close($handle); -->
-
 
 <!DOCTYPE html>
 <html>
@@ -128,7 +130,7 @@ curl_close($handle); -->
             <li id="logoTag" class="navilogo">
               <a id="logoText" href="#">CGBee</a>
             </li>
-            <li id="naviA" class="navimenu"><span>인기순</span></li>
+            <li id="naviA" class="navimenu"><span>최신순</span></li>
             <li id="naviB" class="navimenu"><span>평점순</span></li>
             <li id="naviC" class="navimenu"><span>추천영화</span></li>
             <li id="naviD" class="navimenu"><span>극장</span></li>
@@ -146,7 +148,7 @@ curl_close($handle); -->
           <a id="logoText" href="#">CGBee</a>
         </div>
         <ul id="menuWrapper">
-          <li id="gotoA" class="menuList">인기순</li>
+          <li id="gotoA" class="menuList">최신순</li>
           <li id="gotoB" class="menuList">평점순</li>
           <li id="gotoC" class="menuList">추천영화</li>
           <li id="gotoD" class="menuList">극장</li>
@@ -158,10 +160,59 @@ curl_close($handle); -->
 
       <div id="box1" class="box">
         <div id="sort-like-wrap" class="sortWrapper needsLoad">
-          <p class="sortName needsLoad">인기 순</p>
+          <p class="sortName needsLoad">최신 순</p>
           <div class="flexRowContainer">
             <div class="scrollLeft needsLoad" id="LikeLeft"><strong class="scrollText"><</strong></div>
-            <div id="sortByLike" class="movieDiv"></div>
+            <div id="sortByLike" class="movieDiv">
+            <?php
+                try {
+                  require("db_connect.php");    
+      
+                  $query = $db->query("select * from movie order by year desc");
+                  $i = 0;
+                  while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
+                       $partition = "LikePartition". "$i";
+                       $id = "$row[id]";
+                       $title = $row[title];
+                       $year = $row[year];
+                       $rating = $row[rating];
+                       $runningtime = $row[runningtime];
+                       $country = $row[country];
+                       $genres = $row[genres];
+                       $summary = $row[summary];
+                       $img = $row[imgsrc];
+                       $uploaded_date = $row[uploaded_date];
+                      ?>
+                      <div class="sortPartition" id="<?=$partition?>">
+                        <img src="<?=$img?>" alt="">
+                        <p class=movietitle><?=$title?></p>
+                        <p class=movieGenre><?=$genres?></p>
+                        <p class=movieSummary><?=$summary?></p>
+                        <form method="post" action="/CGBee/getMovie.php" name="newForm" target="_blank">
+                          <input type="hidden" name="movieId" value="<?=$id?>">
+                          <input type="hidden" name="movieTitle" value="<?=$title?>">
+                          <input type="hidden" name="movieGenre" value="<?=$genres?>">
+                          <input type="hidden" name="movieSummary" value="<?=$summary?>">
+                          <input type="hidden" name="movieYear" value="<?=$year?>">
+                          <input type="hidden" name="movieRating" value="<?=$rating?>">
+                          <input type="hidden" name="movieRuntime" value="<?=$runningtime?>">
+                          <input type="hidden" name="moviePoster" value="<?=$img?>">
+                          <input type="submit" value="예매하기" name="data2" id="ReservationBtn">
+                        </form>
+                      </div>
+
+                      <?php
+
+                       $i++;
+                       if($i > 14) break;
+                  }
+                  
+                } catch (PDOException $e) {
+                  exit($e->getMessage());
+                }
+          
+              ?>
+            </div>
             <div class="scrollRight needsLoad" id="LikeRight"><strong class="scrollText">></strong></div>
           </div>
         </div>
@@ -173,7 +224,56 @@ curl_close($handle); -->
           <p class="sortName needsLoad">평점 순</p>
           <div class="flexRowContainer">
             <div class="scrollLeft" id="RatingLeft"><strong class="scrollText"><</strong></div>
-            <div id="sortByRating" class="movieDiv"></div>
+            <div id="sortByRating" class="movieDiv">
+            <?php
+                try {
+                  require("db_connect.php");    
+      
+                  $query = $db->query("select * from movie order by rating desc");
+                  $i = 0;
+                  while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
+                       $partition = "RatingPartition". "$i";
+                       $id = "$row[id]";
+                       $title = $row[title];
+                       $year = $row[year];
+                       $rating = $row[rating];
+                       $runningtime = $row[runningtime];
+                       $country = $row[country];
+                       $genres = $row[genres];
+                       $summary = $row[summary];
+                       $img = $row[imgsrc];
+                       $uploaded_date = $row[uploaded_date];
+                      ?>
+                      <div class="sortPartition" id="<?=$partition?>">
+                        <img src="<?=$img?>" alt="">
+                        <p class=movietitle><?=$title?></p>
+                        <p class=movieGenre><?=$genres?></p>
+                        <p class=movieSummary><?=$summary?></p>
+                        <form method="post" action="/CGBee/getMovie.php" name="newForm" target="_blank">
+                          <input type="hidden" name="movieId" value="<?=$id?>">
+                          <input type="hidden" name="movieTitle" value="<?=$title?>">
+                          <input type="hidden" name="movieGenre" value="<?=$genres?>">
+                          <input type="hidden" name="movieSummary" value="<?=$summary?>">
+                          <input type="hidden" name="movieYear" value="<?=$year?>">
+                          <input type="hidden" name="movieRating" value="<?=$rating?>">
+                          <input type="hidden" name="movieRuntime" value="<?=$runningtime?>">
+                          <input type="hidden" name="moviePoster" value="<?=$img?>">
+                          <input type="submit" value="예매하기" name="data2" id="ReservationBtn">
+                        </form>
+                      </div>
+
+                      <?php
+
+                       $i++;
+                       if($i > 14) break;
+                  }
+                  
+                } catch (PDOException $e) {
+                  exit($e->getMessage());
+                }
+          
+              ?>
+            </div>
             <div class="scrollRight" id="RatingRight"><strong class="scrollText">></strong></div>
           </div>
         </div>
@@ -183,7 +283,58 @@ curl_close($handle); -->
       <div id="box3" class="box">
       <div id="sort-rating-wrap" class="randomWrapper needsLoad">
           <p class="randomName needsLoad">오늘만 무료</p>
-            <div id="randomMovie" class="movieDiv"></div>
+            <div id="randomMovie" class="movieDiv">
+
+              <?php
+              $rand = 5;
+                  try {
+                    require("db_connect.php");    
+        
+                    $query = $db->query("select * from movie");
+                    
+
+                    if($row[$rand] = $query->fetch(PDO::FETCH_ASSOC)) {
+                        $id = $row[$rand][id];
+                        $title =$row[$rand][title];
+                        $year = $row[$rand][year];
+                        $rating = $row[$rand][rating];
+                        $runningtime = $row[$rand][runningtime];
+                        $country = $row[$rand][country];
+                        $genres = $row[$rand][genres];
+                        $summary = $row[$rand][summary];
+                        $img = $row[$rand][imgsrc];
+                        $uploaded_date = $row[$rand][uploaded_date];
+                        ?>
+                        <div class="sortPartition" id="randomPartition">
+                          <img src="<?=$img?>" alt="">
+                          <p class=movietitle><?=$title?></p>
+                          <p class=movieGenre><?=$genres?></p>
+                          <p class=movieSummary><?=$summary?></p>
+                          <form method="post" action="/CGBee/getMovie.php" name="newForm" target="_blank">
+                            <input type="hidden" name="movieId" value="<?=$id?>">
+                            <input type="hidden" name="movieTitle" value="<?=$title?>">
+                            <input type="hidden" name="movieGenre" value="<?=$genres?>">
+                            <input type="hidden" name="movieSummary" value="<?=$summary?>">
+                            <input type="hidden" name="movieYear" value="<?=$year?>">
+                            <input type="hidden" name="movieRating" value="<?=$rating?>">
+                            <input type="hidden" name="movieRuntime" value="<?=$runningtime?>">
+                            <input type="hidden" name="moviePoster" value="<?=$img?>">
+                            <input type="submit" value="예매하기" name="data2" id="ReservationBtn">
+                          </form>
+                        </div>
+
+                        <?php
+
+                    }
+                    
+                  } catch (PDOException $e) {
+                    exit($e->getMessage());
+                  }
+            
+                ?>
+
+                
+            </div>
 
         </div>
       </div>
@@ -229,7 +380,7 @@ curl_close($handle); -->
                 });
 
             }
-            // setInterval('showboardList()', 1000);
+            // setInterval('showboardList()', 3000);
             showboardList();
           </script>
         </ul>

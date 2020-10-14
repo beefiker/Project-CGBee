@@ -72,36 +72,37 @@ $.ajax({
       },
     }).done((event) => {
       console.log(event.data);
-      const movies = event.data.movies;
+      // const movies = event.data.movies;
 
-      for (i = 0; i < movies.length; i++) {
-        const summary = movies[i].summary.slice(0, 140) + "...";
-        $("#sortByRating").append("<div class=sortPartition id=RatingPartition" + i + "></div>");
+      for (i = 0; i < 15; i++) {
+        // const summary = movies[i].summary.slice(0, 140) + "...";
+        // $("#sortByRating").append("<div class=sortPartition id=RatingPartition" + i + "></div>");
 
-        $("#RatingPartition" + i).append("<img src='" + movies[i].medium_cover_image + "'/>");
-        $("#RatingPartition" + i).append("<p class=movietitle>" + movies[i].title + "</p>");
-        $("#RatingPartition" + i).append(
-          "<p class=movieGenre>" + movies[i].genres[0] + ", " + movies[i].genres[1] + "</p>"
-        );
-        $("#RatingPartition" + i).append("<p class=movieSummary>" + summary + "</p>");
+        // $("#RatingPartition" + i).append("<img src='" + movies[i].medium_cover_image + "'/>");
+        // $("#RatingPartition" + i).append("<p class=movietitle>" + movies[i].title + "</p>");
+        // $("#RatingPartition" + i).append(
+        //   "<p class=movieGenre>" + movies[i].genres[0] + ", " + movies[i].genres[1] + "</p>"
+        // );
+        // $("#RatingPartition" + i).append("<p class=movieSummary>" + summary + "</p>");
 
-        var newForm = $("<form></form>");
+        // var newForm = $("<form></form>");
 
-        newForm.attr("name", "newForm");
-        newForm.attr("method", "post");
-        newForm.attr("action", "/CGBee/getMovie.php");
-        newForm.attr("target", "_blank");
-        newForm.append($("<input/>", { type: "hidden", name: "movieTitle", value: movies[i].title_long }));
-        newForm.append($("<input/>", { type: "hidden", name: "movieGenre", value: movies[i].genres }));
-        newForm.append($("<input/>", { type: "hidden", name: "movieSummary", value: movies[i].summary }));
-        newForm.append($("<input/>", { type: "hidden", name: "movieYear", value: movies[i].year }));
-        newForm.append($("<input/>", { type: "hidden", name: "movieRating", value: movies[i].rating }));
-        newForm.append($("<input/>", { type: "hidden", name: "movieRuntime", value: movies[i].runtime }));
-        newForm.append($("<input/>", { type: "hidden", name: "moviePoster", value: movies[i].medium_cover_image }));
+        // newForm.attr("name", "newForm");
+        // newForm.attr("method", "post");
+        // newForm.attr("action", "/CGBee/getMovie.php");
+        // newForm.attr("target", "_blank");
+        // newForm.append($("<input/>", { type: "hidden", name: "movieId", value: movies[i].id }));
+        // newForm.append($("<input/>", { type: "hidden", name: "movieTitle", value: movies[i].title_long }));
+        // newForm.append($("<input/>", { type: "hidden", name: "movieGenre", value: movies[i].genres }));
+        // newForm.append($("<input/>", { type: "hidden", name: "movieSummary", value: movies[i].summary }));
+        // newForm.append($("<input/>", { type: "hidden", name: "movieYear", value: movies[i].year }));
+        // newForm.append($("<input/>", { type: "hidden", name: "movieRating", value: movies[i].rating }));
+        // newForm.append($("<input/>", { type: "hidden", name: "movieRuntime", value: movies[i].runtime }));
+        // newForm.append($("<input/>", { type: "hidden", name: "moviePoster", value: movies[i].medium_cover_image }));
 
-        newForm.append($("<input/>", { type: "submit", name: "data2", value: "예매하기", id: "ReservationBtn" }));
+        // newForm.append($("<input/>", { type: "submit", name: "data2", value: "예매하기", id: "ReservationBtn" }));
 
-        newForm.appendTo("#RatingPartition" + i);
+        // newForm.appendTo("#RatingPartition" + i);
 
         let thisPartition = $("#RatingPartition" + i);
         thisPartition.hover(
@@ -124,34 +125,34 @@ $.ajax({
     });
   },
 }).done((event) => {
-  const movies = event.data.movies;
-  let rand = Math.floor(Math.random() * 15);
-  const summary = movies[rand].summary.slice(0, 140) + "...";
-  $("#randomMovie").append("<div class=sortPartition id=randomPartition></div>");
-  $("#randomPartition").append("<img src='" + movies[rand].medium_cover_image + "'/>");
-  $("#randomPartition").append("<p class=movietitle>" + movies[rand].title + "</p>");
-  $("#randomPartition").append(
-    "<p class=movieGenre>" + movies[rand].genres[0] + ", " + movies[rand].genres[1] + "</p>"
-  );
-  $("#randomPartition").append("<p class=movieSummary>" + summary + "</p>");
+  // let rand = Math.floor(Math.random() * 15);
+  // const summary = movies[rand].summary.slice(0, 140) + "...";
+  // $("#randomMovie").append("<div class=sortPartition id=randomPartition></div>");
+  // $("#randomPartition").append("<img src='" + movies[rand].medium_cover_image + "'/>");
+  // $("#randomPartition").append("<p class=movietitle>" + movies[rand].title + "</p>");
+  // $("#randomPartition").append(
+  //   "<p class=movieGenre>" + movies[rand].genres[0] + ", " + movies[rand].genres[1] + "</p>"
+  // );
+  // $("#randomPartition").append("<p class=movieSummary>" + summary + "</p>");
 
-  var newForm = $("<form></form>");
+  // var newForm = $("<form></form>");
 
-  newForm.attr("name", "newForm");
-  newForm.attr("method", "post");
-  newForm.attr("action", "/CGBee/getMovie.php");
-  newForm.attr("target", "_blank");
-  newForm.append($("<input/>", { type: "hidden", name: "movieTitle", value: movies[rand].title_long }));
-  newForm.append($("<input/>", { type: "hidden", name: "movieGenre", value: movies[rand].genres }));
-  newForm.append($("<input/>", { type: "hidden", name: "movieSummary", value: movies[rand].summary }));
-  newForm.append($("<input/>", { type: "hidden", name: "movieYear", value: movies[rand].year }));
-  newForm.append($("<input/>", { type: "hidden", name: "movieRating", value: movies[rand].rating }));
-  newForm.append($("<input/>", { type: "hidden", name: "movieRuntime", value: movies[rand].runtime }));
-  newForm.append($("<input/>", { type: "hidden", name: "moviePoster", value: movies[rand].medium_cover_image }));
+  // newForm.attr("name", "newForm");
+  // newForm.attr("method", "post");
+  // newForm.attr("action", "/CGBee/getMovie.php");
+  // newForm.attr("target", "_blank");
+  // newForm.append($("<input/>", { type: "hidden", name: "movieId", value: movies[rand].id }));
+  // newForm.append($("<input/>", { type: "hidden", name: "movieTitle", value: movies[rand].title_long }));
+  // newForm.append($("<input/>", { type: "hidden", name: "movieGenre", value: movies[rand].genres }));
+  // newForm.append($("<input/>", { type: "hidden", name: "movieSummary", value: movies[rand].summary }));
+  // newForm.append($("<input/>", { type: "hidden", name: "movieYear", value: movies[rand].year }));
+  // newForm.append($("<input/>", { type: "hidden", name: "movieRating", value: movies[rand].rating }));
+  // newForm.append($("<input/>", { type: "hidden", name: "movieRuntime", value: movies[rand].runtime }));
+  // newForm.append($("<input/>", { type: "hidden", name: "moviePoster", value: movies[rand].medium_cover_image }));
 
-  newForm.append($("<input/>", { type: "submit", name: "data2", value: "예매하기", id: "ReservationBtn" }));
+  // newForm.append($("<input/>", { type: "submit", name: "data2", value: "예매하기", id: "ReservationBtn" }));
 
-  newForm.appendTo("#randomPartition");
+  // newForm.appendTo("#randomPartition");
 
   let randPartition = $("#randomPartition");
   randPartition.hover(
@@ -171,31 +172,32 @@ $.ajax({
     }
   );
 
-  for (i = 0; i < movies.length; i++) {
-    const summary = movies[i].summary.slice(0, 140) + "...";
-    $("#sortByLike").append("<div class=sortPartition id=LikePartition" + i + "></div>");
-    $("#LikePartition" + i).append("<img src='" + movies[i].medium_cover_image + "'/>");
-    $("#LikePartition" + i).append("<p class=movietitle>" + movies[i].title + "</p>");
-    $("#LikePartition" + i).append("<p class=movieGenre>" + movies[i].genres[0] + ", " + movies[i].genres[1] + "</p>");
-    $("#LikePartition" + i).append("<p class=movieSummary>" + summary + "</p>");
+  for (i = 0; i < 15; i++) {
+    // const summary = movies[i].summary.slice(0, 140) + "...";
+    // $("#sortByLike").append("<div class=sortPartition id=LikePartition" + i + "></div>");
+    // $("#LikePartition" + i).append("<img src='" + movies[i].medium_cover_image + "'/>");
+    // $("#LikePartition" + i).append("<p class=movietitle>" + movies[i].title + "</p>");
+    // $("#LikePartition" + i).append("<p class=movieGenre>" + movies[i].genres[0] + ", " + movies[i].genres[1] + "</p>");
+    // $("#LikePartition" + i).append("<p class=movieSummary>" + summary + "</p>");
 
-    var newForm = $("<form></form>");
+    // var newForm = $("<form></form>");
 
-    newForm.attr("name", "newForm");
-    newForm.attr("method", "post");
-    newForm.attr("action", "/CGBee/getMovie.php");
-    newForm.attr("target", "_blank");
-    newForm.append($("<input/>", { type: "hidden", name: "movieTitle", value: movies[i].title_long }));
-    newForm.append($("<input/>", { type: "hidden", name: "movieGenre", value: movies[i].genres }));
-    newForm.append($("<input/>", { type: "hidden", name: "movieSummary", value: movies[i].summary }));
-    newForm.append($("<input/>", { type: "hidden", name: "movieYear", value: movies[i].year }));
-    newForm.append($("<input/>", { type: "hidden", name: "movieRating", value: movies[i].rating }));
-    newForm.append($("<input/>", { type: "hidden", name: "movieRuntime", value: movies[i].runtime }));
-    newForm.append($("<input/>", { type: "hidden", name: "moviePoster", value: movies[i].medium_cover_image }));
+    // newForm.attr("name", "newForm");
+    // newForm.attr("method", "post");
+    // newForm.attr("action", "/CGBee/getMovie.php");
+    // newForm.attr("target", "_blank");
+    // newForm.append($("<input/>", { type: "hidden", name: "movieId", value: movies[i].id }));
+    // newForm.append($("<input/>", { type: "hidden", name: "movieTitle", value: movies[i].title_long }));
+    // newForm.append($("<input/>", { type: "hidden", name: "movieGenre", value: movies[i].genres }));
+    // newForm.append($("<input/>", { type: "hidden", name: "movieSummary", value: movies[i].summary }));
+    // newForm.append($("<input/>", { type: "hidden", name: "movieYear", value: movies[i].year }));
+    // newForm.append($("<input/>", { type: "hidden", name: "movieRating", value: movies[i].rating }));
+    // newForm.append($("<input/>", { type: "hidden", name: "movieRuntime", value: movies[i].runtime }));
+    // newForm.append($("<input/>", { type: "hidden", name: "moviePoster", value: movies[i].medium_cover_image }));
 
-    newForm.append($("<input/>", { type: "submit", name: "data2", value: "예매하기", id: "ReservationBtn" }));
+    // newForm.append($("<input/>", { type: "submit", name: "data2", value: "예매하기", id: "ReservationBtn" }));
 
-    newForm.appendTo("#LikePartition" + i);
+    // newForm.appendTo("#LikePartition" + i);
 
     let thisPartition = $("#LikePartition" + i);
     thisPartition.hover(
