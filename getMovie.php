@@ -249,7 +249,7 @@
                     try {
                         require("db_connect.php");
                   
-                        $query = $db->query("select * from theater");
+                        $query = $db->query("select th.theater_sn, th.theater_name from theater th, movieList ml, movie mv where th.theater_sn = ml.theater_sn and ml.movie_id = mv.id and $id = ml.movie_id");
                   
                         while($row = $query->fetch(PDO::FETCH_ASSOC)) {    
                             echo "<option value=$row[theater_sn]>",$row[theater_name],"</option>";

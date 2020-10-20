@@ -5,7 +5,6 @@
             
         $db->exec("delete from board where id = $id");
 
-
     } catch (PDOException $e) {
         exit($e->getMessage());
     }

@@ -181,7 +181,7 @@ input {
   margin-bottom: 20px;
 }
 #theaterUL {
-  width: 90%;
+  width: 95%;
   padding: 10px;
 }
 #theaterUL > li {
@@ -194,9 +194,10 @@ input {
 }
 
 .theaterimg {
-  width: 200px;
+  width: 190px;
   height: 150px;
 }
+
 @media (min-width: 1300px) {
   #container {
     position: absolute;

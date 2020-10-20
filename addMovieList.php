@@ -1,11 +1,16 @@
 <?php
 $theater = $_REQUEST["theater"];
+$movie = $_REQUEST["movie"];
+
+
     try {
         require("db_connect.php");
-            
-        $db->exec("delete from theater where theater_sn = $theater");
-        $db->exec("delete from movieList where theater_sn = $theater");
-        
+
+
+        for($i=0; $i<count($movie); $i++){
+            $db->exec("insert into movieList(theater_sn, movie_id) 
+            values($theater,$movie[$i])");
+        }
     } catch (PDOException $e) {
         exit($e->getMessage());
     }

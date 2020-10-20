@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/7637a8f104.js" crossorigin="anonymous"></script>
-    <title>Document</title>
+    <title>Admin</title>
 
 <style>
     @import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
@@ -126,10 +126,56 @@
         color:black;
         text-align:left;
     }
+/* 여기부터 셀렉트박스 */
+.multiselect {
+  width: 200px;
+}
+
+.selectBox {
+  position: relative;
+}
+
+.selectBox select {
+  width: 100%;
+  font-weight: bold;
+}
+
+.overSelect {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+#checkboxes {
+  display: none;
+  border: 1px #dadada solid;
+}
+
+#checkboxes label {
+  display: block;
+}
+
+#checkboxes label:hover {
+  background-color: #1e90ff;
+}
 </style>
 
 </head>
 <body>
+    <script>var expanded = false;
+
+function showCheckboxes() {
+  var checkboxes = document.getElementById("checkboxes");
+  if (!expanded) {
+    checkboxes.style.display = "block";
+    expanded = true;
+  } else {
+    checkboxes.style.display = "none";
+    expanded = false;
+  }
+}</script>
     <div id="container">
         <div>
             <ul>
@@ -165,6 +211,9 @@
             <form mothod="post" action="/CGBee/delTheater.php">
                 <span> 삭제할 극장 </span>
                 <select id="theater" name="theater">
+
+                    // TODO 삭제할때, 테이블도 드랍하는 것 구현필요함
+
                     <?php
                         try {
                             require("db_connect.php");
@@ -179,10 +228,72 @@
                         }
                     ?>
                 </select><br>
+                
+                
                 <br>
                 <input type="submit" value="삭제" id="submitBtn">
             </form>
         </div>
+
+        <div id="addMovieList">
+            <form mothod="post" action="/CGBee/addMovieList.php">
+                <select id="theater" name="theater">
+
+                    <?php
+                        try {
+                            require("db_connect.php");
+                        
+                            $query = $db->query("select * from theater");
+                        
+                            while($row = $query->fetch(PDO::FETCH_ASSOC)) {    
+                                echo "<option value=$row[theater_sn]>",$row[theater_name],"</option>";
+                            }
+                        } catch (PDOException $e) {
+                            exit($e->getMessage());
+                        }
+                    ?>
+                </select>
+                input
+
+                <span> 극장에 영화 추가 </span><br>
+                <form>
+                <div class="multiselect">
+                    <div class="selectBox" onclick="showCheckboxes()">
+                        <select>
+                            <option>영화선택</option>
+                        </select>
+                        <div class="overSelect"></div>
+                        </div>
+                        <div id="checkboxes">
+                            <?php
+                                try {
+                                    require("db_connect.php");
+                                
+                                    $query = $db->query("select * from movie");
+                                
+                                    while($row = $query->fetch(PDO::FETCH_ASSOC)) {    
+                                        echo "<label><input type='checkbox' id='$row' name='movie[]' value='$row[id]'/>$row[title]</label>";
+                                    }
+                                } catch (PDOException $e) {
+                                    exit($e->getMessage());
+                                }
+                            ?>
+<!--                             
+                        <label for="one">
+                            <input type="checkbox" name="movie" value="" />First checkbox</label>
+                        <label for="two">
+                            <input type="checkbox" name="movie" id="two" />Second checkbox</label>
+                        <label for="three">
+                            <input type="checkbox" name="movie" id="three" />Third checkbox</label>
+                             -->
+                    </div>
+                </div>
+
+                        
+                        <input type="submit" value="추가">
+            </form>
+        </div>
+
         <div class="modifyEvent">
 
             <form mothod="post" action="/CGBee/addEvent.php" class="forms">

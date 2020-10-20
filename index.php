@@ -286,14 +286,14 @@ curl_close($handle); -->
             <div id="randomMovie" class="movieDiv">
 
               <?php
-              $rand = 5;
+              // TODO 랜덤으로 안바뀌고 있음. 수정 필요
                   try {
                     require("db_connect.php");    
         
                     $query = $db->query("select * from movie");
                     
-
-                    if($row[$rand] = $query->fetch(PDO::FETCH_ASSOC)) {
+                    $rand = 3;
+                    while ($row[$rand] = $query->fetch(PDO::FETCH_ASSOC)) {
                         $id = $row[$rand][id];
                         $title =$row[$rand][title];
                         $year = $row[$rand][year];
@@ -304,6 +304,7 @@ curl_close($handle); -->
                         $summary = $row[$rand][summary];
                         $img = $row[$rand][imgsrc];
                         $uploaded_date = $row[$rand][uploaded_date];
+                    
                         ?>
                         <div class="sortPartition" id="randomPartition">
                           <img src="<?=$img?>" alt="">
@@ -324,7 +325,7 @@ curl_close($handle); -->
                         </div>
 
                         <?php
-
+                    break;
                     }
                     
                   } catch (PDOException $e) {
