@@ -342,26 +342,29 @@ curl_close($handle); -->
 
 
       <div id="box4" class="box">
-        <ul id="theaterUL">
-        <?php
-            try {
-                require("db_connect.php");
+          <div class="theaterLists">
+              <ul>
+              <?php
+                  try {
+                      require("db_connect.php");
 
-                $query = $db->query("select * from theater");
-                
-                while ($row = $query->fetch(PDO::FETCH_ASSOC)) {    
-                $theaterName = $row["theater_name"];
-                $seatAmount = $row["seat_amount"];
-                $src = $row["img"];
+                      $query = $db->query("select * from theater");
+                      
+                      while ($row = $query->fetch(PDO::FETCH_ASSOC)) {    
+                      $theaterName = $row["theater_name"];
+                      $seatAmount = $row["seat_amount"];
+                      $src = $row["img"];
 
-                echo "<li>","<img class='theaterimg' src=$src>","<br>","<span>" ,$theaterName,"점","</span>","<br><br>", "</li>";
+                      echo "<li>","<img class='theaterimg' src=$src>","<br>","<span>" ,$theaterName,"점","</span>","<br><br>", "</li>";
 
-                }
-            } catch (PDOException $e) {
-                exit($e->getMessage());
-            }
-        ?>
-        <ul>
+                      }
+                  } catch (PDOException $e) {
+                      exit($e->getMessage());
+                  }
+              ?>
+              </ul>
+          </div>
+        
       </div>
 
 

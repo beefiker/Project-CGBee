@@ -125,7 +125,7 @@ input {
 }
 .movieGenre {
   position: absolute;
-  top: 5rem;
+  top: 5.5rem;
   width: 200px;
   color: white;
   font-size: 15px;
@@ -180,17 +180,18 @@ input {
   font-size: 50px;
   margin-bottom: 20px;
 }
-#theaterUL {
-  width: 95%;
+.theaterLists {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 10px;
 }
-#theaterUL > li {
-  display: flex;
-  flex-direction: column;
-  float: left;
-  text-align: center;
-  margin-right: 30px;
+.theaterLists > ul > li {
   color: #636e71;
+  float: left;
+  padding: 10px;
+  text-align: center;
 }
 
 .theaterimg {
