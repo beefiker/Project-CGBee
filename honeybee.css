@@ -32,7 +32,7 @@ body {
 #box2,
 #box3 {
   height: 500px;
-  padding-top: 100px;
+  padding-top: 120px;
   /* overflow:scroll; */
 }
 #box4,
@@ -58,7 +58,7 @@ body {
 .sortName {
   width: 85%;
   color: white;
-  font-size: 50px;
+  font-size: 3rem;
   margin-bottom: 20px;
 }
 .sortWrapper {
@@ -165,7 +165,6 @@ input {
   justify-content: center;
   align-items: center;
   float: left;
-  /* background-color: red; */
 }
 .randomWrapper {
   position: relative;
@@ -174,31 +173,36 @@ input {
   justify-content: center;
   align-items: center;
 }
-.randomName {
+.subtext_align_middle {
   width: 100%;
   color: white;
   font-size: 50px;
   margin-bottom: 20px;
-}
-.theaterLists {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-}
-.theaterLists > ul > li {
-  color: #636e71;
-  float: left;
-  padding: 10px;
   text-align: center;
 }
 
+.theaterLists > ul {
+  width: 100%;
+}
+.theaterItems {
+  color: #636e71;
+  float: left;
+  width: 33%;
+  text-align: center;
+  padding-bottom: 2rem;
+}
 .theaterimg {
   width: 190px;
   height: 150px;
 }
-
+.theaterItems > span {
+  margin-top: 1rem;
+}
+.fa-coins {
+  position: absolute;
+  color: var(--beeYellow);
+  font-size: 1.5rem;
+}
 @media (min-width: 1300px) {
   #container {
     position: absolute;
@@ -209,7 +213,7 @@ input {
   #Topmenu {
     position: fixed;
     width: 100%;
-    height: 5.3rem;
+    height: 4.5rem;
     background-color: var(--littleBlack);
     display: grid;
     grid-template-rows: minmax(1fr, 100%);
@@ -219,7 +223,7 @@ input {
   }
 
   .menuList {
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
 
   #logoImg {
@@ -237,13 +241,13 @@ input {
   }
   #bee {
     position: relative;
-    width: 3.46rem;
-    height: 3.26rem;
+    width: 2.8rem;
+    height: 2.4rem;
     bottom: 5px;
     cursor: pointer;
   }
   #logoText {
-    font-size: 3rem;
+    font-size: 2.5rem;
     margin-left: 1.3rem;
     color: white;
   }
@@ -255,8 +259,8 @@ input {
     display: none;
   }
 }
-/* 중간 버전 */
 
+/* 중간 버전 */
 @media (max-width: 1300px) {
   #container {
     position: absolute;
@@ -266,7 +270,7 @@ input {
   #Topmenu {
     position: fixed;
     width: 100%;
-    height: 6rem;
+    height: 5.5rem;
     background-color: var(--littleBlack);
     display: grid;
     grid-template-rows: repeat(2, minmax(1fr, 100%));
@@ -276,7 +280,7 @@ input {
   }
 
   .menuList {
-    font-size: 1rem;
+    font-size: 0.8rem;
   }
   #logoImg {
     grid-area: logo;
@@ -290,13 +294,14 @@ input {
   }
 
   #bee {
-    width: 2.6rem;
-    height: 2.4rem;
+    width: 2.2rem;
+    height: 2rem;
     margin-right: 10px;
   }
 
   #logoText {
-    font-size: 2.2rem;
+    font-size: 2rem;
+    letter-spacing: 0.5rem;
     color: white;
   }
   #menuWrapper {
@@ -447,5 +452,18 @@ input {
   }
   .change .bar3 {
     transform: rotate(45deg) translate(-8px, -8px);
+  }
+
+  .theaterItems {
+    color: #636e71;
+    float: left;
+    width: 40%;
+    margin-left: 5%;
+    text-align: center;
+    padding-bottom: 2rem;
+  }
+  .theaterimg {
+    width: 150px;
+    height: 120px;
   }
 }

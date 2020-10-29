@@ -130,13 +130,13 @@ curl_close($handle); -->
             <li id="logoTag" class="navilogo">
               <a id="logoText" href="#">CGBee</a>
             </li>
-            <li id="naviA" class="navimenu"><span>최신순</span></li>
-            <li id="naviB" class="navimenu"><span>평점순</span></li>
-            <li id="naviC" class="navimenu"><span>추천영화</span></li>
-            <li id="naviD" class="navimenu"><span>극장</span></li>
-            <li id="naviE" class="navimenu"><span>공지사항</span></li>
+            <li id="naviA" class="navimenu"><span>Now Playing</span></li>
+            <li id="naviB" class="navimenu"><span>Top Rank</span></li>
+            <li id="naviC" class="navimenu"><span>Free Movie</span></li>
+            <li id="naviD" class="navimenu"><span>Theater</span></li>
+            <li id="naviE" class="navimenu"><span>Notice</span></li>
 
-            <li id="naviG" class="navimenu"><span>예매내역</span></li>
+            <li id="naviG" class="navimenu"><span>My Ticket</span></li>
             
           </ul>
         </div>
@@ -148,19 +148,19 @@ curl_close($handle); -->
           <a id="logoText" href="#">CGBee</a>
         </div>
         <ul id="menuWrapper">
-          <li id="gotoA" class="menuList">최신순</li>
-          <li id="gotoB" class="menuList">평점순</li>
-          <li id="gotoC" class="menuList">추천영화</li>
-          <li id="gotoD" class="menuList">극장</li>
-          <li id="gotoE" class="menuList">공지사항</li>
+          <li id="gotoA" class="menuList">Now Playing</li>
+          <li id="gotoB" class="menuList">Top Rank</li>
+          <li id="gotoC" class="menuList">Free Movie</li>
+          <li id="gotoD" class="menuList">Theater</li>
+          <li id="gotoE" class="menuList">Notice</li>
 
-          <li id="ReservationDetails" class="menuList">예매내역</li>
+          <li id="ReservationDetails" class="menuList">My Ticket</li>
         </ul>
       </div>
 
       <div id="box1" class="box">
         <div id="sort-like-wrap" class="sortWrapper needsLoad">
-          <p class="sortName needsLoad">최신 순</p>
+          <p class="sortName needsLoad">Now Playing</p>
           <div class="flexRowContainer">
             <div class="scrollLeft needsLoad" id="LikeLeft"><strong class="scrollText"><</strong></div>
             <div id="sortByLike" class="movieDiv">
@@ -221,7 +221,7 @@ curl_close($handle); -->
 
       <div id="box2" class="box">
         <div id="sort-rating-wrap" class="sortWrapper needsLoad">
-          <p class="sortName needsLoad">평점 순</p>
+          <p class="sortName needsLoad">Top Rank</p>
           <div class="flexRowContainer">
             <div class="scrollLeft" id="RatingLeft"><strong class="scrollText"><</strong></div>
             <div id="sortByRating" class="movieDiv">
@@ -282,7 +282,8 @@ curl_close($handle); -->
 
       <div id="box3" class="box">
       <div id="sort-rating-wrap" class="randomWrapper needsLoad">
-          <p class="randomName needsLoad">오늘만 무료</p>
+      
+          <p class="subtext_align_middle needsLoad">Free Movie<span><i class="fas fa-coins"></i></span></p>
             <div id="randomMovie" class="movieDiv">
 
               <?php
@@ -307,7 +308,7 @@ curl_close($handle); -->
                     
                         ?>
                         <div class="sortPartition" id="randomPartition">
-                          <img src="<?=$img?>" alt="">
+                          <img class="movieImg" src="<?=$img?>" alt="">
                           <p class=movietitle><?=$title?></p>
                           <p class=movieGenre><?=$genres?></p>
                           <p class=movieSummary><?=$summary?></p>
@@ -320,7 +321,7 @@ curl_close($handle); -->
                             <input type="hidden" name="movieRating" value="<?=$rating?>">
                             <input type="hidden" name="movieRuntime" value="<?=$runningtime?>">
                             <input type="hidden" name="moviePoster" value="<?=$img?>">
-                            <input type="submit" value="예매하기" name="data2" id="ReservationBtn">
+                            <input type="submit" value="무료예매" name="data2" id="ReservationBtn">
                           </form>
                         </div>
 
@@ -342,7 +343,9 @@ curl_close($handle); -->
 
 
       <div id="box4" class="box">
-          <div class="theaterLists">
+          <div class="theaterLists needsLoad">
+          <p class="subtext_align_middle needsLoad">Theater</p>
+   
               <ul>
               <?php
                   try {
@@ -355,7 +358,7 @@ curl_close($handle); -->
                       $seatAmount = $row["seat_amount"];
                       $src = $row["img"];
 
-                      echo "<li>","<img class='theaterimg' src=$src>","<br>","<span>" ,$theaterName,"점","</span>","<br><br>", "</li>";
+                      echo "<li class='theaterItems'>","<img class='theaterimg' src=$src>","<br>","<span>" ,$theaterName,"점","</span>","<br><br>", "</li>";
 
                       }
                   } catch (PDOException $e) {
@@ -369,7 +372,8 @@ curl_close($handle); -->
 
 
       <div id="box5" class="box">
-        <ul id="boardlist">
+      <p class="subtext_align_middle needsLoad">Notice</p>
+        <ul id="boardlist" class="needsLoad">
           <script>
             showboardList = () => {
                 $.ajax({

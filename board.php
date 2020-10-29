@@ -6,9 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+    .boardList{
+        position:relative;
+        width:100%;
+        height:100%;
+    }
     .eventItems {
         position: relative;
-        width:500px;
+        width:33%;
         min-height: 100px;
         background-color:#191f26;
         float:left;
@@ -28,29 +33,56 @@
     .a{
         background-color:none;
         border:2px solid white;
-        border-radius:0px 10px 0 0;
+        border-radius:0 0 0 0;
         color:white;
-        width:400px;
+        width:350px;
         height:75px;
         display:flex;
         align-items:center;
     }
     .contents{
         position:relative;
-        width:380px;
+        width:330px;
         min-height:10px;
         border:2px solid white;
         border-radius:0 0 0 10px;
         background-color:white;
         word-break:break-all;
         padding:10px;
-        margin-bottom:100px;
+        margin-bottom:50px;
+    }
+
+    @media (max-width: 1300px) {
+        .eventItems {
+        position: relative;
+        width:50%;
+        min-height: 100px;
+        background-color:#191f26;
+        float:left;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+        }
+    }
+    @media (max-width: 700px) {
+        .eventItems {
+        position: relative;
+        width:100%;
+        min-height: 100px;
+        background-color:#191f26;
+        float:left;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+        }
     }
     </style>
 </head>
 <body>
 
-    <ul>
+    <ul class="boardList">
     <?php
     try {
         require("db_connect.php");
