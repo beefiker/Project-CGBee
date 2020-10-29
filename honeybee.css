@@ -184,25 +184,13 @@ input {
 .theaterLists > ul {
   width: 100%;
 }
-.theaterItems {
-  color: #636e71;
-  float: left;
-  width: 33%;
-  text-align: center;
-  padding-bottom: 2rem;
-}
-.theaterimg {
-  width: 190px;
-  height: 150px;
-}
-.theaterItems > span {
-  margin-top: 1rem;
-}
+
 .fa-coins {
   position: absolute;
   color: var(--beeYellow);
   font-size: 1.5rem;
 }
+/* ! 제일 큰 버전 */
 @media (min-width: 1300px) {
   #container {
     position: absolute;
@@ -247,7 +235,7 @@ input {
     cursor: pointer;
   }
   #logoText {
-    font-size: 2.5rem;
+    font-size: 2rem;
     margin-left: 1.3rem;
     color: white;
   }
@@ -258,9 +246,21 @@ input {
   #navi {
     display: none;
   }
+  .theaterItems {
+    color: #636e71;
+    float: left;
+    width: 20%;
+    text-align: center;
+    padding-bottom: 2rem;
+  }
+  .theaterimg {
+    padding-bottom: 0.5rem;
+    width: 230px;
+    height: 160px;
+  }
 }
 
-/* 중간 버전 */
+/* ! 중간 버전 */
 @media (max-width: 1300px) {
   #container {
     position: absolute;
@@ -312,9 +312,37 @@ input {
   #navi {
     display: none;
   }
+
+  .subtext_align_middle,
+  .sortName {
+    font-size: 2.5rem;
+  }
+  .theaterItems {
+    color: #636e71;
+    float: left;
+    width: 33%;
+    text-align: center;
+    padding-bottom: 2rem;
+  }
+  .theaterimg {
+    width: 190px;
+    height: 150px;
+  }
+  .theaterItems {
+    color: #636e71;
+    float: left;
+    width: 33%;
+    text-align: center;
+    padding-bottom: 2rem;
+  }
+  .theaterimg {
+    padding-bottom: 0.5rem;
+    width: 200px;
+    height: 130px;
+  }
 }
 
-/* 제일 작은 버전 */
+/* ! 제일 작은 버전 */
 @media (max-width: 700px) {
   #container {
     position: absolute;
@@ -377,7 +405,7 @@ input {
   }
 
   .navimenu span {
-    font-size: 1.1rem;
+    font-size: 0.8rem;
     padding: 5px 10px 10px 5px;
     border-bottom: 2px var(--beeYellow) solid;
   }
@@ -454,16 +482,19 @@ input {
     transform: rotate(45deg) translate(-8px, -8px);
   }
 
+  .subtext_align_middle,
+  .sortName {
+    font-size: 2rem;
+  }
   .theaterItems {
     color: #636e71;
     float: left;
-    width: 40%;
-    margin-left: 5%;
+    width: 50%;
     text-align: center;
-    padding-bottom: 2rem;
   }
   .theaterimg {
-    width: 150px;
-    height: 120px;
+    padding-bottom: 0.5rem;
+    width: 160px;
+    height: 90px;
   }
 }
