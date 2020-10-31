@@ -18,174 +18,240 @@
     <title>Admin</title>
     <style>
         
-            @import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
-            :root {
-                --beeDark: #242424;
-                --beeYellow: #ecae01;
-                --littleBlack: #131313;
-            }   
-            *{
-                font-family: "Monsterrat","Jeju Gothic", serif;
-                margin: 0;
-                padding: 0;
-                list-style: none;
-                font-weight: Medium;
-                font-size: 15px;
-                text-decoration: none;
-            }
+        @import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
+        :root {
+            --beeDark: #242424;
+            --beeYellow: #ecae01;
+            --littleBlack: #131313;
+        }   
+        *{
+            font-family: "Monsterrat","Jeju Gothic", serif;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            font-weight: Medium;
+            font-size: 15px;
+            text-decoration: none;
+        }
 
-            body{
-                background-color:#131313;
-            }
-            h1{
-                font-size: 3rem;
-                color : var(--beeYellow);
-            }
-            h2{
-                font-size: 2rem;
-                color : var(--beeYellow);
-            }
-            h2, p{
-                color:white;
-            }
-            span{
-                color:#f9c901;
-            }
-            .bk{
-                color:#131313;
-            }
-            #container{
-                padding-Top:50px;
-                position:absolute;
-                width:100%;
-                display:flex;
-                flex-direction:column;
-                justify-content: center;
-                align-items: center;
-            }
-            #helloDiv{
-                height:100px;
-            }
-            #theaters > ul > li {
-                float: left;
-                padding:10px;
-                text-align:center;
-            }
-            .theaterimg{
-                width:150px;
-                height:100px;
-            }
-            .modifyTheater{
-                width:100%;
-                display:flex;
-                justify-content:center;
-                align-items:center;
-            }
-            .modifyEvent{
-                width:100%;
-                display:flex;
-                /* flex-direction:column; */
-                justify-content:center;
-                align-items:center;
-            }
-            #submitBtn{
-                all:unset;
-                width:80%;
-                height:60px;
-                background-color:white;
-                display:flex;
-                justify-content:center;
-                align-items:center;
-            }
-            .forms{
-                width:40%;
-                padding:5%;
-            }
-            .eventItems {
-                position: relative;
-                width:500px;
-                min-height: 100px;
-                float:left;
-                display:flex;
-                flex-direction:column;
-                justify-content:center;
-                align-items:center;
-            }
-            #boardlist {
-                width: 100%;
-            }
-            .eventImg{
-                width:75px;
-                height:75px;
-                margin-right:30px;
-            }
+        body{
+            background-color:black;
+        }
+        h1{
+            font-size: 3rem;
+            color : var(--beeYellow);
+        }
+        h2{
+            font-size: 2rem;
+            color : var(--beeYellow);
+        }
+        
+        span{
+            color:#f9c901;
+        }
+        .bk{
+            color:#131313;
+        }
+
+        #container{
+            width:1200px;
+            margin: 0 auto;
+            background:#131313;
+            display:block;
             
-            .a{
-                background-color:none;
-                border:2px solid white;
-                border-radius:0px 10px 0 0;
-                color:white;
-                width:300px;
-                height:75px;
-                display:flex;
-                align-items:center;
-            }
+        }
+        #helloDiv{
+            width:100%;
+            height:100px;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background:#214252;
+        }
+        #theaters{
+            display:block;
+            width:60%;
+            float:left;            
+        }
+        #theaters > ul {
+            border-radius: 10px 10px 10px 10px;
+            background:#f05454;
+            width:100%;
+            float:left;
+            text-align:center;
+        }
+        #theaters > ul > li {
+            width:160px;
+            padding:10px;
+            text-align:center;
+        }
+        .theaterimg{
+            width:140px;
+            height:110px;
+        }
+        .theaterItems {
+            color: #636e71;
+            float: left;
+            width: 20%;
+            text-align: center;
+            padding-bottom: 2rem;
+        }
+        .modifyTheater{
+            border-radius: 10px 10px 10px 10px;
+            background:#af2d2d;
+            width:100%;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            
+            
+        }
+        .addTheater{
+            width:60%;
+            height:160px;
+            padding:30px;
+            /* background:red; */
+            display:flex;
+            /* justify-content:center; */
+            align-items:center;
+        }
+        .delTheater{
+            display:flex;
+            /* justify-content:center; 
+            align-items:center; */
+            width:40%;
+            height:160px;
+            padding:10px;
+            /* background:blue; */
+        }
+        .modifyEvent{
+            width:40%;
+            height:400px;
+            display:block;
+            float:right;
+            background:#ce6262;
+            border-radius: 10px 10px 10px 10px;
+            
+        }
+        .addEvent{
+            position:relative;
+            width:90%;
+            height:400px;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+        #addMovieList{
+            width:40%;
+            height:150px;
+            float:right;
+            background:#db6400;
+            border-radius: 10px 10px 10px 10px;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+        .modifyNotice{
+            display:block;
+            float:left;
+            width:100%;
+            padding-top:50px;
+            background:#92817a;
+            border-radius: 10px 10px 10px 10px;
+        }
+        .noticeLists{
 
-            .contents{
-                position:relative;
-                width:280px;
-                min-height:10px;
-                border:2px solid white;
-                background-color:white;
-                word-break:break-all;
-                padding:10px;
-                margin-bottom:50px;
-                color:black;
-                text-align:left;
-            }
+        }
+        #submitBtn{
+            all:unset;
+            width:80%;
+            height:60px;
+            background-color:white;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+        
+        .eventItems {
+            width:50%;
+            min-height: 100px;
+            float:left;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+        }
+        #boardlist {
+            width: 100%;
+        }
+        .eventImg{
+            width:75px;
+            height:75px;
+            margin-right:30px;
+        }
+        
+        .a{
+            background-color:none;
+            border:2px solid white;
+            border-radius:0px 10px 0 0;
+            color:white;
+            width:300px;
+            height:75px;
+            display:flex;
+            align-items:center;
+        }
+
+        .contents{
+            position:relative;
+            width:280px;
+            min-height:10px;
+            border:2px solid white;
+            background-color:white;
+            word-break:break-all;
+            padding:10px;
+            margin-bottom:50px;
+            color:black;
+            text-align:left;
+        }
         /* 여기부터 셀렉트박스 */
         .multiselect {
-        display:flex;
+            display:flex;
         }
 
         .selectBox {
-        position: relative;
-        width:100px;
+            position: relative;
+            width:100px;
         }
 
         .selectBox select {
-        width: 100%;
-        font-weight: bold;
+            width: 100%;
+            font-weight: bold;
         }
 
         .overSelect {
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 0;
-        bottom: 0;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
         }
 
         #checkboxes {
             width:200px;
             height:200px;
             overflow:scroll;
-        display: none;
-        border: 1px #dadada solid;
-        color:white;
+            display: none;
+            border: 1px #dadada solid;
+            color:white;
         }
-
         #checkboxes label {
-        display: block;
+            display: block;
         }
-
         #checkboxes label:hover {
             color:white;
-        background-color: #1e90ff;
+            background-color: #1e90ff;
         }
-        #theaters{
-            display:block;
-        }
+        
     </style>
 
 </head>
@@ -212,7 +278,7 @@
 
         <p id="toggleTheater">Hide Theaters</p>
         <div id="theaters">
-                <ul>
+            <ul class="theaterLists_ul">
                 <?php
                     try {
                         require("db_connect.php");
@@ -224,27 +290,55 @@
                         $seatAmount = $row["seat_amount"];
                         $src = $row["img"];
 
-                        echo "<li>","<img class='theaterimg' src=$src>","<br>","<span>" ,$theaterName,"점","</span>","<br><br>", "</li>";
+                        echo "<li class='theaterItems'>","<img class='theaterimg' src=$src>","<br>","<span>" ,$theaterName,"점","</span>","<br><br>", "</li>";
 
                         }
                     } catch (PDOException $e) {
                         exit($e->getMessage());
                     }
                 ?>
-                </ul>
+            </ul>
             
             <div class="modifyTheater">
-                <form mothod="post" action="/CGBee/admin/addTheater.php" class="forms">
-                    <span> 극장 이름 : </span><input type="text" name="theaterName"> <br><br>
-                    <span> 극장 이미지 : </span> <input type="file" name="theaterImg"> <br><br>
-                    <span> 좌석 수 : </span> <input type="text" name="theaterSeats"> <br><br>
-                    <input type="submit" value="추가" id="submitBtn">
-                </form>
+                <div class="addTheater">
+                    <form mothod="post" action="/CGBee/admin/addTheater.php" class="forms">
+                        <span> 극장 이름 : </span><input type="text" name="theaterName"> <br><br>
+                        <span> 극장 이미지 : </span> <input type="file" name="theaterImg"> <br><br>
+                        <span> 좌석 수 : </span> <input type="text" name="theaterSeats"> <br><br>
+                        <input type="submit" value="추가" id="submitBtn">
+                    </form>
+                </div>
+                <div class="delTheater">
+                    <form mothod="post" action="/CGBee/admin/delTheater.php">
+                        <span> 삭제할 극장 </span>
+                        <select id="theater" name="theater">
 
-                <form mothod="post" action="/CGBee/admin/delTheater.php">
-                    <span> 삭제할 극장 </span>
+                            <?php
+                                try {
+                                    require("db_connect.php");
+                                
+                                    $query = $db->query("select * from theater");
+                                
+                                    while($row = $query->fetch(PDO::FETCH_ASSOC)) {    
+                                        echo "<option value=$row[theater_sn]>",$row[theater_name],"</option>";
+                                    }
+                                } catch (PDOException $e) {
+                                    exit($e->getMessage());
+                                }
+                            ?>
+                        </select><br>
+                        
+                        
+                        <br>
+                        <input type="submit" value="삭제" id="submitBtn">
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div id="addMovieList">
+            
+                <form mothod="post" action="/CGBee/admin/addMovieList.php">
                     <select id="theater" name="theater">
-
                         <?php
                             try {
                                 require("db_connect.php");
@@ -258,34 +352,10 @@
                                 exit($e->getMessage());
                             }
                         ?>
-                    </select><br>
-                    
-                    
-                    <br>
-                    <input type="submit" value="삭제" id="submitBtn">
-                </form>
-            </div>
-        </div>
-        <div id="addMovieList">
-            <form mothod="post" action="/CGBee/admin/addMovieList.php">
-                <select id="theater" name="theater">
-                    <?php
-                        try {
-                            require("db_connect.php");
-                        
-                            $query = $db->query("select * from theater");
-                        
-                            while($row = $query->fetch(PDO::FETCH_ASSOC)) {    
-                                echo "<option value=$row[theater_sn]>",$row[theater_name],"</option>";
-                            }
-                        } catch (PDOException $e) {
-                            exit($e->getMessage());
-                        }
-                    ?>
-                </select>
+                    </select>
 
-                <span> 극장에 영화 추가 </span><br>
-                <form>
+                    <span> 극장에 영화 추가 </span><br>
+                    
                     <div class="multiselect">
 
                         <div class="selectBox" onclick="showCheckboxes()">
@@ -314,26 +384,28 @@
                         <input type="submit" value="추가">
                     </div>
                 </form>
+
+
         </div>
 
         <div class="modifyEvent">
-
-            <form mothod="post" action="/CGBee/admin/addEvent.php" class="forms">
-                <input type="hidden" name="date" value="<?=$today?>">
-                <span> 제목 </span>
-                <input type="text" name="title"><br><br>
-                
-                <p> 내용 </p>
-                <textarea id="textarea" name="contents" rows="5" cols="50">
-                </textarea>
-                <br><br>
-                <span> <img src="../images/addPhoto.png" alt=""> </span><input type="file" name="img"><br><br>
-                    <input type="submit" value="추가" id="submitBtn">
-            </form>
-        
+            <div class="addEvent">
+                <form mothod="post" action="/CGBee/admin/addEvent.php" class="forms">
+                    <input type="hidden" name="date" value="<?=$today?>">
+                    <span> 제목 </span>
+                    <input type="text" name="title"><br><br>
+                    
+                    <p> 내용 </p>
+                    <textarea id="textarea" name="contents" rows="5" cols="50">
+                    </textarea>
+                    <br><br>
+                    <span> <img src="../images/addPhoto.png" alt=""> </span><input type="file" name="img"><br><br>
+                        <input type="submit" value="추가" id="submitBtn">
+                </form>
+            </div>
         </div>
-        <div>
-            <ul>
+        <div class="modifyNotice">
+            <ul class="noticeLists">
             <?php
                 try {
                     require("db_connect.php");
