@@ -17,7 +17,13 @@
     <script src="https://kit.fontawesome.com/7637a8f104.js" crossorigin="anonymous"></script>
     <title>Admin</title>
     <style>
+        
             @import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
+            :root {
+                --beeDark: #242424;
+                --beeYellow: #ecae01;
+                --littleBlack: #131313;
+            }   
             *{
                 font-family: "Monsterrat","Jeju Gothic", serif;
                 margin: 0;
@@ -33,10 +39,11 @@
             }
             h1{
                 font-size: 3rem;
-                color : #faf3dd;
+                color : var(--beeYellow);
             }
             h2{
-                font-size: 1.8rem;
+                font-size: 2rem;
+                color : var(--beeYellow);
             }
             h2, p{
                 color:white;
@@ -56,12 +63,15 @@
                 justify-content: center;
                 align-items: center;
             }
-            ul > li {
+            #helloDiv{
+                height:100px;
+            }
+            #theaters > ul > li {
                 float: left;
                 padding:10px;
                 text-align:center;
             }
-            img{
+            .theaterimg{
                 width:150px;
                 height:100px;
             }
@@ -198,7 +208,9 @@
     </script>
 
     <div id="container">
-        <h1 id="toggleTheater">Hide Theaters</h1>
+        <div id="helloDiv"><h1>Hello, Admin</h1></div>
+
+        <p id="toggleTheater">Hide Theaters</p>
         <div id="theaters">
                 <ul>
                 <?php
@@ -311,11 +323,11 @@
                 <span> 제목 </span>
                 <input type="text" name="title"><br><br>
                 
-                <span> 내용 </span>
+                <p> 내용 </p>
                 <textarea id="textarea" name="contents" rows="5" cols="50">
                 </textarea>
                 <br><br>
-                <span> 이미지 첨부</span><input type="file" name="img"><br><br>
+                <span> <img src="../images/addPhoto.png" alt=""> </span><input type="file" name="img"><br><br>
                     <input type="submit" value="추가" id="submitBtn">
             </form>
         
@@ -356,7 +368,7 @@
         </div>
     </div>
     <script> // TODO 집가서 이 부분 손 보기
-    function toggling(){
+    function togglingTheater(){
         let theaters = $("#theaters");
         if(theaters.css("display") == "none"){
             theaters.css('display','block');
@@ -369,7 +381,7 @@
     }
 
     $("#toggleTheater").click(function(){
-        toggling();
+        togglingTheater();
     });
     </script>
 </body>

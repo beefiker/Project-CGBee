@@ -218,6 +218,7 @@ curl_close($handle); -->
         </div>
       </div>
 
+      <hr color="#495464" size="2px" class="needsLoad">
 
       <div id="box2" class="box">
         <div id="sort-rating-wrap" class="sortWrapper needsLoad">
@@ -279,11 +280,13 @@ curl_close($handle); -->
         </div>
       </div>
 
+      <hr color="#495464" size="2px" class="needsLoad">
 
       <div id="box3" class="box">
+      <p class="subtext_align_middle needsLoad">Free Movie<span><i class="fas fa-coins"></i></span></p>
       <div id="sort-rating-wrap" class="randomWrapper needsLoad">
       
-          <p class="subtext_align_middle needsLoad">Free Movie<span><i class="fas fa-coins"></i></span></p>
+          
             <div id="randomMovie" class="movieDiv">
 
               <?php
@@ -341,12 +344,13 @@ curl_close($handle); -->
         </div>
       </div>
 
+      <hr color="#495464" size="2px" class="needsLoad">
 
       <div id="box4" class="box">
+        <p class="subtext_align_middle needsLoad" id="toggleTheater">Theater <i class='fas fa-caret-down fa-1x'></i></p>
           <div class="theaterLists needsLoad">
-          <p class="subtext_align_middle needsLoad">Theater</p>
    
-              <ul>
+              <ul class="theaterLists_ul">
               <?php
                   try {
                       require("db_connect.php");
@@ -370,10 +374,11 @@ curl_close($handle); -->
         
       </div>
 
+      <hr color="#495464" size="2px" class="needsLoad">
 
       <div id="box5" class="box">
-      <p class="subtext_align_middle needsLoad">Notice</p>
-        <ul id="boardlist" class="needsLoad">
+      <p class="subtext_align_middle needsLoad" id="toggleNotice">Notice <i class='fas fa-caret-down fa-1x'></i></p>
+        <ul id="boardlist" class="needsLoad noticeLists_ul">
           <script>
             showboardList = () => {
                 $.ajax({
@@ -399,6 +404,37 @@ curl_close($handle); -->
 
   </body>
   <script type="text/javascript" src="honeybee.js"></script>
+  <script>
+          
+      togglingNotice = () => {
+        let notices = $(".noticeLists_ul");
+        if(notices.css("display") == "none"){
+          $("#toggleNotice").html("<p class='subtext_align_middle needsLoad' id='toggleNotice'>Notice <i class='fas fa-caret-down fa-1x'></i></p>");
+            notices.fadeIn(500);
+        }else{
+            $("#toggleNotice").html("<p class='subtext_align_middle needsLoad' id='toggleNotice'>Notice <i class='fas fa-caret-up fa-1x'></i></p>");
+            notices.fadeOut(500);
+        }
+      }
+      togglingTheater = () =>{
+        let theaters = $(".theaterLists_ul");
+        if(theaters.css("display") == "none"){
+          $("#toggleTheater").html("<p class='subtext_align_middle needsLoad' id='toggleTheater'>Theater <i class='fas fa-caret-down fa-1x'></i></p>");
+            theaters.fadeIn(500);
+        }else{
+            $("#toggleTheater").html("<p class='subtext_align_middle needsLoad' id='toggleTheater'>Theater <i class='fas fa-caret-up fa-1x'></i></p>");
+            theaters.fadeOut(500);
+        }
+      }
+      
 
+
+      $("#toggleTheater").click(()=>{
+          togglingTheater();
+      });
+      $("#toggleNotice").click(()=>{
+          togglingNotice();
+      });
+  </script>
 
 </html>
