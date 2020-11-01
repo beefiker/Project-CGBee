@@ -1,0 +1,419 @@
+@import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
+:root {
+  --beeDark: #242424;
+  --beeYellow: #ecae01;
+  --littleBlack: #131313;
+  --palette1: #264653;
+  --palette2: #2a9d8f;
+  --palette3: #e9c46a;
+  --palette4: #f4a261;
+  --palette5: #e76f51;
+}
+* {
+  font-family: "Monsterrat", "Jeju Gothic", serif;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-weight: Medium;
+  font-size: 15px;
+  text-decoration: none;
+}
+
+body {
+  background-color: black;
+}
+h2 {
+  font-size: 2rem;
+  color: var(--beeYellow);
+}
+
+span {
+  color: white;
+}
+.bk {
+  color: #131313;
+}
+.theaterimg {
+  border-radius: 10px;
+}
+#helloDiv {
+  width: 100%;
+  height: 5.3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--palette1);
+  border-radius: 10px 10px 10px 10px;
+}
+.blocks {
+  box-shadow: 0 0 0 2px #000 inset;
+}
+
+/* 여기부터 셀렉트박스 */
+.multiselect {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: #101935;
+  border-radius: 10px;
+}
+.multiselect > input[type="submit"] {
+  all: unset;
+  width: 20%;
+  height: 100%;
+  background: #f2fdff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0 10px 10px 0;
+  box-shadow: 0 0 0 1px #000 inset;
+}
+.boxWrapper {
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+  border-radius: 10px 0 0 0;
+  box-shadow: 0 0 0 3px black inset;
+}
+
+.selectBox {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  /* box-shadow: 0 0 0 3px #000 inset; */
+}
+.selectBox select {
+  all: unset;
+}
+.selectBox p {
+  width: 98%;
+  padding: 2%;
+  height: 27px;
+  color: #101935;
+  display: flex;
+  z-index: 1;
+  align-items: center;
+  justify-content: center;
+}
+.overSelect {
+  background-color: #dbcbd8;
+  box-shadow: 0 0 0 1px #564787 inset;
+  border-radius: 10px 0 0 0;
+  color: black;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+#checkboxes {
+  width: 96%;
+  height: 100%;
+  overflow: scroll;
+  display: block;
+  color: white;
+}
+#checkboxes label {
+  display: block;
+}
+#checkboxes label:hover {
+  color: white;
+  background-color: #1e90ff;
+}
+#container {
+  margin: 0 auto;
+  background: #131313;
+  display: block;
+}
+#theaters {
+  display: block;
+  float: left;
+  border-radius: 10px;
+  background: var(--palette2);
+}
+#theaters > ul > li {
+  padding: 10px;
+  text-align: center;
+  float: left;
+  padding-bottom: 0.5rem;
+}
+.modifyTheater {
+  border-radius: 0 0 10px 10px;
+  background: var(--palette3);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 0 3px #000 inset;
+}
+.addTheater {
+  width: 60%;
+  height: 160px;
+  padding: 30px;
+  display: flex;
+  align-items: center;
+}
+.delTheater {
+  display: flex;
+  width: 40%;
+  height: 160px;
+  padding: 10px;
+}
+.modifyEvent {
+  display: block;
+  float: left;
+  background: var(--palette4);
+  border-radius: 10px;
+}
+.addEvent {
+  width: 90%;
+  height: 100%;
+  padding-left: 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.addEvent > form {
+  width: 80%;
+}
+textarea {
+  width: 100%;
+}
+#addMovieList {
+  width: 100%;
+  height: 100%;
+  float: left;
+  background: #564787;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.selectTheater {
+  float: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.selectMovie {
+  float: left;
+  display: flex;
+  flex-direction: column;
+}
+.modifyNotice {
+  display: block;
+  float: left;
+  width: 100%;
+  padding-top: 50px;
+  background: #ffc93c;
+  border-radius: 10px;
+}
+#submitBtn {
+  all: unset;
+  width: 80%;
+  height: 60px;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.eventItems {
+  float: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#boardlist {
+  width: 100%;
+}
+.eventImg {
+  width: 75px;
+  height: 75px;
+  margin-right: 30px;
+}
+
+.itemWrapper {
+  background-color: none;
+  border: 2px solid white;
+  border-radius: 0px 10px 0 0;
+  color: black;
+  display: flex;
+  align-items: center;
+}
+.contents {
+  position: relative;
+  min-height: 20px;
+  border: 2px solid white;
+  background-color: white;
+  word-break: break-all;
+  padding: 10px;
+  margin-bottom: 50px;
+  color: black;
+  text-align: left;
+}
+
+/* ! PC 웹 페이지 크기 */
+@media (min-width: 1100px) {
+  #container {
+    width: 1100px;
+  }
+  #theaters {
+    width: 60%;
+  }
+  #theaters > ul > li {
+    width: 9.6rem;
+  }
+  .theaterimg {
+    width: 9rem;
+    height: 7.3rem;
+  }
+  .modifyEvent {
+    width: 40%;
+    height: 26.6rem;
+  }
+  #addMovieList {
+    width: 40%;
+    height: 13.3rem;
+  }
+  #theater {
+    font-size: 1rem;
+  }
+  .selectTheater {
+    width: 140px;
+    height: 13.3rem;
+  }
+  .selectMovie {
+    width: 300px;
+    height: 13.3rem;
+  }
+  .eventItems {
+    width: 50%;
+    min-height: 6.6rem;
+  }
+
+  .itemWrapper {
+    width: 450px;
+    height: 75px;
+  }
+
+  .contents {
+    width: 430px;
+  }
+}
+
+/* ! 태블릿크기 */
+@media (max-width: 1100px) {
+  #container {
+    width: 800px;
+  }
+  #theaters {
+    width: 100%;
+  }
+  #theaters > ul > li {
+    width: 7.5rem;
+  }
+  .theaterimg {
+    width: 6.8rem;
+    height: 4.6rem;
+  }
+  .delTheater > form {
+    width: 90%;
+    height: 100%;
+  }
+  .modifyEvent {
+    width: 50%;
+    height: 400px;
+  }
+  #addMovieList {
+    width: 50%;
+    height: 400px;
+  }
+  #theater {
+    font-size: 1rem;
+  }
+  .selectTheater {
+    width: 150px;
+    height: 400px;
+  }
+  .selectMovie {
+    width: 250px;
+    height: 400px;
+  }
+  .eventItems {
+    width: 50%;
+    min-height: 100px;
+  }
+
+  .itemWrapper {
+    width: 350px;
+    height: 75px;
+  }
+
+  .contents {
+    width: 330px;
+  }
+}
+
+/* ! 휴대폰 크기 */
+@media (max-width: 800px) {
+  #container {
+    width: 650px;
+  }
+  #theaters {
+    width: 100%;
+  }
+  #theaters > ul > li {
+    width: 100px;
+    padding-left: 18px;
+  }
+  .theaterimg {
+    width: 90px;
+    height: 60px;
+  }
+  .delTheater > form {
+    width: 90%;
+    height: 100%;
+  }
+  .modifyEvent {
+    width: 100%;
+    height: 400px;
+  }
+  #addMovieList {
+    display: flex;
+    width: 100%;
+    height: 300px;
+  }
+  #theater {
+    font-size: 0.8rem;
+  }
+  .selectTheater {
+    width: 150px;
+    height: 300px;
+  }
+  .selectMovie {
+    width: 500px;
+    height: 300px;
+  }
+  .eventItems {
+    width: 100%;
+    min-height: 100px;
+  }
+
+  .itemWrapper {
+    width: 500px;
+    height: 75px;
+  }
+
+  .contents {
+    width: 480px;
+  }
+}
