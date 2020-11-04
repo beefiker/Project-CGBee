@@ -3,11 +3,18 @@
   --beeDark: #242424;
   --beeYellow: #ecae01;
   --littleBlack: #131313;
-  --palette1: #264653;
-  --palette2: #2a9d8f;
-  --palette3: #e9c46a;
-  --palette4: #f4a261;
-  --palette5: #e76f51;
+  --MainPreset1: #63232d;
+  --MainPreset2: #7a4044;
+  --MainPreset3: #dca578;
+  --MainPreset4: #f3d29c;
+  --MainPreset5: #fdeeb0;
+  --MainPreset6: #fef8d1;
+  --MainPreset7: #d1ea9d;
+  --MainPreset8: #afe29d;
+  --MainPreset9: #74adaf;
+  --MainPreset10: #c1b9ad;
+  --MainPreset11: #766664;
+  --LightBeige: #c7b385;
 }
 * {
   font-family: "Monsterrat", "Jeju Gothic", serif;
@@ -20,21 +27,19 @@
 }
 
 body {
-  background-color: black;
+  background-color: var(--LightBeige);
 }
 h2 {
   font-size: 2rem;
-  color: var(--beeYellow);
+  color: var(--beeDark);
 }
 
 span {
   color: white;
 }
-.bk {
-  color: #131313;
-}
+
 .theaterimg {
-  border-radius: 10px;
+  border-radius: 7px;
 }
 #helloDiv {
   width: 100%;
@@ -42,11 +47,11 @@ span {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: var(--palette1);
-  border-radius: 10px 10px 10px 10px;
+  border-radius: 10px;
+  background: var(--MainPreset10);
 }
 .blocks {
-  box-shadow: 0 0 0 2px #000 inset;
+  margin-bottom: 2px;
 }
 
 /* 여기부터 셀렉트박스 */
@@ -59,34 +64,31 @@ span {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  background-color: #101935;
+  background-color: #454361;
   border-radius: 10px;
 }
 .multiselect > input[type="submit"] {
   all: unset;
   width: 20%;
   height: 100%;
-  background: #f2fdff;
+  background: #373a54;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 0 10px 10px 0;
-  box-shadow: 0 0 0 1px #000 inset;
+  color: white;
 }
 .boxWrapper {
   width: 100%;
   height: 100%;
   overflow: scroll;
   border-radius: 10px 0 0 0;
-  box-shadow: 0 0 0 3px black inset;
 }
-
 .selectBox {
   position: relative;
   width: 100%;
   display: flex;
   flex-direction: column;
-  /* box-shadow: 0 0 0 3px #000 inset; */
 }
 .selectBox select {
   all: unset;
@@ -95,17 +97,15 @@ span {
   width: 98%;
   padding: 2%;
   height: 27px;
-  color: #101935;
+  color: white;
   display: flex;
   z-index: 1;
   align-items: center;
   justify-content: center;
 }
 .overSelect {
-  background-color: #dbcbd8;
-  box-shadow: 0 0 0 1px #564787 inset;
+  background-color: #6c4289;
   border-radius: 10px 0 0 0;
-  color: black;
   position: absolute;
   left: 0;
   right: 0;
@@ -115,7 +115,7 @@ span {
 
 #checkboxes {
   width: 96%;
-  height: 100%;
+
   overflow: scroll;
   display: block;
   color: white;
@@ -129,14 +129,13 @@ span {
 }
 #container {
   margin: 0 auto;
-  background: #131313;
   display: block;
 }
 #theaters {
   display: block;
   float: left;
   border-radius: 10px;
-  background: var(--palette2);
+  background: var(--MainPreset11);
 }
 #theaters > ul > li {
   padding: 10px;
@@ -144,39 +143,118 @@ span {
   float: left;
   padding-bottom: 0.5rem;
 }
-.modifyTheater {
-  border-radius: 0 0 10px 10px;
-  background: var(--palette3);
+#theaters > ul > li > span {
+  color: var(--littleBlack);
+}
+.addImg {
+  width: 90px;
+}
+.modTitle {
   width: 100%;
+  height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 0 0 3px #000 inset;
 }
-.addTheater {
-  width: 60%;
-  height: 160px;
-  padding: 30px;
+.eventTitle {
+  width: 120%;
+  height: 50px;
   display: flex;
+  color: var(--MainPreset5);
+  background-color: #495634;
+  justify-content: center;
   align-items: center;
 }
-.delTheater {
+.addTitle {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+  height: 100%;
+  color: var(--MainPreset10);
+  background-color: #261c23;
+  /* box-shadow: 0 0 0 1px #000 inset; */
+}
+.delTitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 40%;
-  height: 160px;
-  padding: 10px;
+  height: 100%;
+  color: var(--MainPreset10);
+  background-color: #30212a;
+}
+.modifyTheater {
+  border-radius: 0 0 10px 10px;
+  width: 100%;
+  height: 350px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.modTheaterWrapper {
+  width: 100%;
+  height: 300px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.addTheater {
+  width: 50%;
+  height: 100%;
+  background-color: #372f2f;
+  padding-left: 5%;
+  padding-right: 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 0 0 0 10px;
+}
+.textWrapper {
+  width: 100%;
+  height: 85%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btnWrapper {
+  position: relative;
+  width: 135%;
+  height: 15%;
+  bottom: 0;
+}
+.delTheater {
+  width: 30%;
+  height: 100%;
+  padding-left: 5%;
+  padding-right: 5%;
+  background-color: #402b37;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 0 0 10px 0;
 }
 .modifyEvent {
   display: block;
+  height: 400px;
   float: left;
-  background: var(--palette4);
+  background: #8e8d4d;
   border-radius: 10px;
+  overflow: hidden;
 }
 .addEvent {
   width: 90%;
   height: 100%;
   padding-left: 5%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -190,7 +268,7 @@ textarea {
   width: 100%;
   height: 100%;
   float: left;
-  background: #564787;
+  background: #521f52;
   border-radius: 10px;
   display: flex;
   justify-content: center;
@@ -213,15 +291,36 @@ textarea {
   float: left;
   width: 100%;
   padding-top: 50px;
-  background: #ffc93c;
+  background: #314c5e;
   border-radius: 10px;
 }
-#submitBtn {
+#submitBtn_addTheater {
   all: unset;
-  width: 80%;
-  height: 60px;
-  background: white;
+  width: 100%;
+  height: 100%;
+  background: #493e3f;
+  color: var(--MainPreset10);
   display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#submitBtn_delTheater {
+  all: unset;
+  width: 100%;
+  height: 100%;
+  background: #4d3645;
+  color: var(--MainPreset10);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#submitBtn_addEvent {
+  all: unset;
+  width: 100%;
+  height: 100%;
+  background: #ab8f60;
+  display: flex;
+  color: var(--MainPreset6);
   justify-content: center;
   align-items: center;
 }
@@ -244,8 +343,7 @@ textarea {
 .itemWrapper {
   background-color: none;
   border: 2px solid white;
-  border-radius: 0px 10px 0 0;
-  color: black;
+  color: white;
   display: flex;
   align-items: center;
 }
@@ -261,6 +359,14 @@ textarea {
   text-align: left;
 }
 
+.modTheaterName {
+  width: 100%;
+  padding-left: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
 /* ! PC 웹 페이지 크기 */
 @media (min-width: 1100px) {
   #container {
@@ -282,18 +388,21 @@ textarea {
   }
   #addMovieList {
     width: 40%;
-    height: 13.3rem;
+    height: 20rem;
   }
   #theater {
     font-size: 1rem;
   }
+  #checkboxes {
+    height: 260px;
+  }
   .selectTheater {
     width: 140px;
-    height: 13.3rem;
+    height: 20rem;
   }
   .selectMovie {
     width: 300px;
-    height: 13.3rem;
+    height: 20rem;
   }
   .eventItems {
     width: 50%;
@@ -339,6 +448,9 @@ textarea {
   }
   #theater {
     font-size: 1rem;
+  }
+  #checkboxes {
+    height: 360px;
   }
   .selectTheater {
     width: 150px;
@@ -395,6 +507,9 @@ textarea {
   #theater {
     font-size: 0.8rem;
   }
+  #checkboxes {
+    height: 255px;
+  }
   .selectTheater {
     width: 150px;
     height: 300px;
@@ -407,12 +522,10 @@ textarea {
     width: 100%;
     min-height: 100px;
   }
-
   .itemWrapper {
     width: 500px;
     height: 75px;
   }
-
   .contents {
     width: 480px;
   }

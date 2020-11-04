@@ -33,7 +33,6 @@
     .a{
         background-color:none;
         border:2px solid white;
-        border-radius:0 0 0 0;
         color:white;
         width:350px;
         height:75px;
@@ -45,7 +44,6 @@
         width:330px;
         min-height:10px;
         border:2px solid white;
-        border-radius:0 0 0 10px;
         background-color:white;
         word-break:break-all;
         padding:10px;
