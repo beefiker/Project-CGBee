@@ -81,31 +81,31 @@
 <body>
 
     <ul class="boardList">
-    <?php
-    try {
-        require("db_connect.php");
+        <?php
+            try {
+                require("db_connect.php");
 
-        $query = $db->query("select * from board");
-        
-        while ($row = $query->fetch(PDO::FETCH_ASSOC)) {    
-        $id = $row["id"];
-        $title = $row["title"];
-        $contents = $row["contents"];
-        $write_date = $row["write_date"];
-        $eventImg = $row["eventImg"];
+                $query = $db->query("select * from board");
+                
+                while ($row = $query->fetch(PDO::FETCH_ASSOC)) {    
+                $id = $row["id"];
+                $title = $row["title"];
+                $contents = $row["contents"];
+                $write_date = $row["write_date"];
+                $eventImg = $row["eventImg"];
 
-        echo    "<li class='eventItems'>",
-                    "<div class='a'>",
-                        "<img class='eventImg' src='$eventImg'>",$title,
-                    "</div>",
-                    "<p class='contents'>", $contents ,"</p>",
-                "</li>";
+                echo    "<li class='eventItems'>",
+                            "<div class='a'>",
+                                "<img class='eventImg' src='$eventImg'>",$title,
+                            "</div>",
+                            "<p class='contents'>", $contents ,"</p>",
+                        "</li>";
 
-        }
-    } catch (PDOException $e) {
-        exit($e->getMessage());
-    }
-?>
+                }
+            } catch (PDOException $e) {
+                exit($e->getMessage());
+            }
+        ?>
     </ul>
 
 </body>

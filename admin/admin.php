@@ -40,19 +40,22 @@
       <div id="theaters" class="blocks">
         <ul class="theaterLists_ul">
           <?php
-                    try {
-                        require("db_connect.php");
+            try {
+                require("db_connect.php");
 
-                        $query = $db->query("select * from theater");
-                        while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
-                        $theaterName = $row["theater_name"];
-                        $seatAmount = $row["seat_amount"];
-                        $src = $row["img"];
-                        echo "<li>","<img class='theaterimg' src='$src'/>",
-                        "<br />","<span>" ,$theaterName,"점","</span>","<br /><br />", "</li>"; }
-                    } catch (PDOException $e) {
-                      exit($e->getMessage());
-                    } ?>
+                $query = $db->query("select * from theater");
+                while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
+                  $theaterName = $row["theater_name"];
+                  $seatAmount = $row["seat_amount"];
+                  $src = $row["img"];
+                  echo "<li>",
+                          "<img class='theaterimg' src='$src'/>","<br />",
+                          "<span class='theaterName'>" ,$theaterName,"점","</span>","<br /><br />",
+                        "</li>";
+                }
+            } catch (PDOException $e) {
+              exit($e->getMessage());
+            } ?>
         </ul>
 
         <div class="modifyTheater">
@@ -66,7 +69,7 @@
                     <form mothod="post" action="/CGBee/admin/addTheater.php">
                     <span> 극장 명 : </span><input type="text" name="theaterName" /><br /><br />
                     <span> 좌석 수 : </span> <input type="text" name="theaterSeats" /> <br /><br />
-                    <p> <img src="../images/addPhoto.png" alt="" /> </p><input type="file" name="theaterImg" /> <br /><br />
+                    <p> <img src="../images/addPhoto.png" alt="" /> </p><input type="file" name="theaterImg" style="color:white;"/> <br /><br />
                     
                 </div>
                 <div class="btnWrapper">
@@ -77,7 +80,7 @@
             <div class="delTheater">
                 <div class="textWrapper">
                 <form mothod="post" action="/CGBee/admin/delTheater.php">
-                  <p style="text-align: center;"> <i class="fas fa-theater-masks fa-3x"></i></p><br><br>
+                  <p style="text-align: center; color:white;"> <i class="fas fa-theater-masks fa-3x"></i></p><br><br>
                   <select id="theater" name="theater">
                     <?php
                         try {
@@ -106,17 +109,17 @@
         
         <div class="addEvent">
             <div class="eventTitle"> 
-                    공지사항 등록
-              </div>
+                   <span> 공지사항 등록 </span>
+            </div>
             <div class="textWrapper">
           <form mothod="post" action="/CGBee/admin/addEvent.php" class="forms">
             <input type="hidden" name="date" value="<?=$today?>" />
             <span> 제목 </span>
             <input type="text" name="title" /><br /><br />
-            <p>내용</p>
+            <span>내용</span>
             <textarea id="textarea" name="contents" rows="5" cols="50"></textarea>
             <br />
-            <p> <img class="addImg" src="../images/addPhoto.png" alt="" /> </p><input type="file" name="img" /><br /><br />
+            <p> <img class="addImg" src="../images/addPhoto.png" alt="" /> </p><input type="file" name="img" style="color:white;"/><br /><br />
         </div>
             <div class="btnWrapper">
                 <input type="submit" value="추가" id="submitBtn_addEvent" />
@@ -130,16 +133,17 @@
             <span> <i class="fas fa-theater-masks fa-3x"></i><br /><br /> </span>
             <select id="theater" name="theater">
               <?php
-                                try {
-                                    require("db_connect.php");
-                                
-                                    $query = $db->query("select * from theater");
-                                    while($row = $query->fetch(PDO::FETCH_ASSOC)) { 
-                                      echo "<option value='$row[theater_sn]'>",$row[theater_name],
-                                      "</option>"; }
-                                } catch (PDOException $e) { 
-                                  exit($e->getMessage()); 
-                                } ?>
+                try {
+                    require("db_connect.php");
+                
+                    $query = $db->query("select * from theater");
+                    while($row = $query->fetch(PDO::FETCH_ASSOC)) { 
+                      echo "<option value='$row[theater_sn]'>",
+                              $row[theater_name],
+                            "</option>"; }
+                } catch (PDOException $e) { 
+                  exit($e->getMessage()); 
+                } ?>
             </select>
           </div>
           <div class="selectMovie">
@@ -156,13 +160,18 @@
 
                 <div id="checkboxes">
                   <?php
-                                            try {
-                                                require("db_connect.php");
-                                            
-                                                $query = $db->query("select * from movie"); 
-                                                while($row = $query->fetch(PDO::FETCH_ASSOC)) { echo "<label
-                    ><input type='checkbox' id='movieList' name='movie[]' value='$row[id]' /> $row[title]</label
-                  >"; } } catch (PDOException $e) { exit($e->getMessage()); } ?>
+                    try {
+                      require("db_connect.php");
+                  
+                      $query = $db->query("select * from movie"); 
+                      while($row = $query->fetch(PDO::FETCH_ASSOC)) {
+                        echo "<label><input type='checkbox' id='movieList' name='movie[]' value='$row[id]' />
+                              $row[title]
+                              </label>";
+                          }
+                    } catch (PDOException $e) { 
+                      exit($e->getMessage()); 
+                    } ?>
                 </div>
               </div>
               <input type="submit" value="추가" />
@@ -173,32 +182,30 @@
       <div class="modifyNotice blocks">
         <ul class="noticeLists">
           <?php
-                try {
-                    require("db_connect.php");
+            try {
+                require("db_connect.php");
 
-                    $query = $db->query("select * from board"); while ($row = $query->fetch(PDO::FETCH_ASSOC)) { $id =
-          $row["id"]; $title = $row["title"]; $contents = $row["contents"]; $write_date = $row["write_date"]; $eventImg
-          = $row["eventImg"]; echo "
-          <li class='eventItems'>
-            ", "
-            <div class='itemWrapper'>
-              ", "<img class='eventImg' src='$eventImg' />","
-              <p>$title</p>
-              ", "
-              <form mothod='post' action='/CGBee/admin/delEvent.php'>
-                ", "<input type='hidden' name='eventId' value='$id' />", "<input
-                type='submit'
-                  style='all: unset; cursor: pointer; font-size: 30px;'
-                  value='❌'
-                />", "
-              </form>
-              ", "
-            </div>
-            ", "
-            <p class='contents'>", $contents ,"</p>
-            ", "
-          </li>
-          "; } } catch (PDOException $e) { exit($e->getMessage()); } ?>
+                $query = $db->query("select * from board");
+                while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
+                  $id = $row["id"];
+                  $title = $row["title"];
+                  $contents = $row["contents"];
+                  $write_date = $row["write_date"];
+                  $eventImg = $row["eventImg"];
+                  echo "<li class='eventItems'>",
+                        "<div class='itemWrapper'>",
+                          "<img class='eventImg' src='$eventImg' />","<p>$title</p>",
+                          "<form mothod='post' action='/CGBee/admin/delEvent.php'>",
+                            "<input type='hidden' name='eventId' value='$id' />",
+                            "<input type='submit' style='all: unset; cursor: pointer; font-size: 30px;' value='❌'/>",
+                          "</form>",
+                        "</div>",
+                        "<p class='contents'>", $contents ,"</p>", "</li>"; 
+                }
+            } catch (PDOException $e) { 
+              exit($e->getMessage()); 
+            }
+          ?>
         </ul>
       </div>
     </div>
