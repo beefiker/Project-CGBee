@@ -28,7 +28,7 @@
 }
 
 body {
-  background-color: #a2a2de;
+  background-color: #a19f9a;
 }
 #helloDiv > h2 {
   font-size: 2rem;
@@ -44,8 +44,9 @@ span {
 }
 #helloDiv {
   margin-top: 10px;
-  width: 100%;
+  width: 98%;
   height: 5.3rem;
+  margin: 1%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -53,7 +54,7 @@ span {
   background: #1f3c59;
 }
 .blocks {
-  /* margin-bottom: 1px; */
+  box-shadow: 5px 5px 10px 1px #504d49;
 }
 
 /* 여기부터 셀렉트박스 */
@@ -116,7 +117,8 @@ span {
 }
 
 #checkboxes {
-  width: 96%;
+  width: 98%;
+  padding-left: 2%;
   overflow: scroll;
   display: block;
   color: white;
@@ -264,6 +266,7 @@ span {
 }
 textarea {
   width: 100%;
+  resize: none;
 }
 #addMovieList {
   width: 100%;
@@ -379,11 +382,11 @@ textarea {
     margin: 1%;
   }
   #theaters > ul > li {
-    width: 9.6rem;
+    width: 9.3rem;
   }
   .theaterimg {
-    width: 9rem;
-    height: 7.3rem;
+    width: 8.7rem;
+    height: 7rem;
   }
   .modifyEvent {
     width: 38%;
@@ -434,10 +437,10 @@ textarea {
     margin: 1%;
   }
   #theaters > ul > li {
-    width: 7.5rem;
+    width: 136px;
   }
   .theaterimg {
-    width: 6.8rem;
+    width: 7rem;
     height: 4.6rem;
   }
   .delTheater > form {
@@ -493,7 +496,7 @@ textarea {
     margin: 1%;
   }
   #theaters > ul > li {
-    width: 100px;
+    width: 99px;
     padding-left: 18px;
   }
   .theaterimg {

@@ -165,6 +165,7 @@
         justify-content: center;
         align-items: center;
         color:white;
+        z-index:1;
     }
     img{
         position: relative;
@@ -199,14 +200,27 @@
 </style>
 
 <script>
+function telValidator(args) {
+    if (/^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}/.test(args)) {
+        return true;
+    }
+    alert("올바른 휴대전화를 입력해주세요. "+"\n"+"\n"+"예시"+"\n"+"010-1234-5678"+"\n"+"010-123-4567"+"\n"+"02-1234-5678"+"\n"+"02-123-4567");
+    return false;
+}
     reservation = () =>{
     let reservForm = document.reservForm;
     let phNum = reservForm.ph.value;
-    if(phNum){
+    let checkResult = telValidator(phNum);
+    let pw = reservForm.pw.value;
+    if(pw){
+        if(checkResult){
         reservForm.submit();
+        }
     }else{
-        alert("휴대전화는 필수항목");
+        alert("비밀번호는 필수입니다.");
     }
+    
+
 }
 </script>
 </head>
@@ -278,8 +292,10 @@
                 <br>
 
                 <br>
-                <span>휴대전화</span> 
-                <input type="text" name="ph" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" placeholder="Enter Your Mobile"> <br><br>
+                <span>휴대전화</span>
+                <input type="text" name="ph" placeholder="010-0000-0000"> <br><br>
+                <span>비밀번호</span> 
+                <input type="text" name="pw" placeholder="Set Your Password"> <br><br>
                 <input id="ReservationBtn" type="button" onclick="reservation()" value="좌석 선택">
             </form>
         </div>

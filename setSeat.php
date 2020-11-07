@@ -7,6 +7,9 @@
 
     $ph = $_REQUEST["ph"];
     $_SESSION['ph'] = $ph;
+
+    $pw = $_REQUEST["pw"];
+    $_SESSION['pw'] = $pw;
     
     $theater = $_REQUEST["theater"];
     $_SESSION['theater'] = $theater;
@@ -154,6 +157,7 @@
         justify-content: center;
         align-items: center;
         color:white;
+        z-index:1;
     }
     
     img{
@@ -220,7 +224,7 @@
     ischecked = () =>{    checkedCnt++;    }
 </script>
 <div id="container">
-<ul class="progress">
+    <ul class="progress">
        <li class="li_info">
            <span>
            <p><i class="fas fa-keyboard fa-2x"></i></p>

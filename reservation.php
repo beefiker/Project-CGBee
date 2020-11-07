@@ -152,14 +152,15 @@
 </head>
 <body>
 <?php
-
-    $ph = $_SESSION['ph'];
+    $ph = (string)$_SESSION['ph'];
+    $pw = $_SESSION['pw'];
     $theater = $_SESSION["theater"];
 
     $date = $_SESSION['date'];
     $hour = $_SESSION['hour'];
 
     $seat = $_REQUEST['seat'];
+    $seats = "";
     $headcount = count($seat);
 
     $r_sn = $_SESSION['r_sn'];
@@ -169,20 +170,21 @@
     $title = isset($_SESSION['title']) ? $_SESSION['title'] : "";
 
     try {
+        
         require("db_connect.php");
             
         // TODO :: 밑에 주석 코드들 구현하기 
             
         // ! 예매 테이블에 레코드 추가
-        $db->exec("insert into reservation (phone, title, theater, reservation_date, reservation_hour, seats)
-        values ('$ph','$title', '$theater', '$date','$hour','$seat')");
+        $db->exec("insert into reservation (phone, title, theater, reservation_date, reservation_hour, seats, reservation_pw)
+        values ('$ph','$title', '$theater', '$date','$hour','$seat','$pw')");
 
         // ? 가장 최근에 insert한 예매 레코드의 auto_increment 값
         $_SESSION['r_sn'] = $db->lastInsertId();
 
         // ! 상영일자 테이블에 레코드 추가
-        $db->exec("insert into screening (theater_sn, screening_date, reservation_hour)
-        values ('$theater', '$date','$hour')");
+        $db->exec("insert into screening (reservation_sn, theater_sn, screening_date, reservation_hour)
+        values ('$_SESSION[r_sn]', '$theater', '$date','$hour')");
 
         // ? 가장 최근에 insert한 상영일자 레코드의 auto_increment 값
         $_SESSION['sc_sn'] = $db->lastInsertId();
@@ -245,6 +247,7 @@
         <p>
         <?php 
             foreach($seat as $val){
+                $seats.=$val." ";
                 echo "$val ";
             }
         ?>/
@@ -252,19 +255,32 @@
         </p>
         </div>
         </div>
-        <?php
-$url = "https://yts-proxy.now.sh/list_movies.json";
-$ch = curl_init();
-
-curl_setopt($ch, CURLOPT_URL, $url);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-$response = curl_exec($ch);
-if(!$response){
-  exit(curl_errno($ch) + " : " + curl_error($ch));
-}
-echo $response;
-curl_close($ch)
-?>
+        
 </body>
+<script>
+        alert("<?=$ph?>"+" 번으로 예매 정보를 전송하였습니다.");
+        </script>
+    <?php
+        $ph_cutDash = str_replace("-","",$ph);
+        $messageContent = '영화제목 : '.$title ."\n".'예매조회번호 : '.$pw."\n".'날짜 : '.$date."\n".'좌석 : '.$seats;
+        // Include the bundled autoload from the Twilio PHP Helper Library
+        require __DIR__ . '/twilio-php-main/src/Twilio/autoload.php';
+        use Twilio\Rest\Client;
+        // Your Account SID and Auth Token from twilio.com/console
+        $account_sid = 'AC823cb9423e8369d7ec82a20443d31168';
+        $auth_token = 'a4073276d7ad537cb62e547d6dae42f2';
+        // In production, these should be environment variables. E.g.:
+        // $auth_token = $_ENV["TWILIO_ACCOUNT_SID"]
+        // A Twilio number you own with SMS capabilities
+        $twilio_number = "+12058758417";
+        $client = new Client($account_sid, $auth_token);
+        $client->messages->create(
+            // Where to send a text message (your cell phone?)
+            '+82'.$ph_cutDash,
+            array(
+                'from' => $twilio_number,
+                'body' =>  $messageContent
+            )
+        );
+    ?>
 </html>
