@@ -218,7 +218,7 @@ curl_close($handle); -->
         </div>
       </div>
 
-      <hr color="#495464" size="2px" class="needsLoad">
+      <hr color="#131313" size="3px" class="needsLoad">
 
       <div id="box2" class="box">
         <div id="sort-rating-wrap" class="sortWrapper needsLoad">
@@ -280,7 +280,7 @@ curl_close($handle); -->
         </div>
       </div>
 
-      <hr color="#495464" size="2px" class="needsLoad">
+      <hr color="#131313" size="3px" class="needsLoad">
 
       <div id="box3" class="box">
       <p class="subtext_align_middle needsLoad">Free Movie<span><i class="fas fa-coins"></i></span></p>
@@ -296,7 +296,7 @@ curl_close($handle); -->
         
                     $query = $db->query("select * from movie");
                     
-                    $rand = 3;
+                    $rand = 1;
                     while ($row[$rand] = $query->fetch(PDO::FETCH_ASSOC)) {
                         $id = $row[$rand][id];
                         $title =$row[$rand][title];
@@ -344,7 +344,7 @@ curl_close($handle); -->
         </div>
       </div>
 
-      <hr color="#495464" size="2px" class="needsLoad">
+      <hr color="#131313" size="3px" class="needsLoad">
 
       <div id="box4" class="box">
         <p class="subtext_align_middle needsLoad" id="toggleTheater">Theater <i class='fas fa-caret-down fa-1x'></i></p>
@@ -374,7 +374,7 @@ curl_close($handle); -->
         
       </div>
 
-      <hr color="#495464" size="2px" class="needsLoad">
+      <hr color="#131313" size="3px" class="needsLoad">
 
       <div id="box5" class="box">
       <p class="subtext_align_middle needsLoad" id="toggleNotice">Notice <i class='fas fa-caret-down fa-1x'></i></p>
@@ -405,7 +405,6 @@ curl_close($handle); -->
   </body>
   <script type="text/javascript" src="honeybee.js"></script>
   <script>
-          
       togglingNotice = () => {
         let notices = $(".noticeLists_ul");
         if(notices.css("display") == "none"){
@@ -427,8 +426,6 @@ curl_close($handle); -->
         }
       }
       
-
-
       $("#toggleTheater").click(()=>{
           togglingTheater();
       });

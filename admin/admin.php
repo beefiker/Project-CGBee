@@ -60,8 +60,8 @@
 
         <div class="modifyTheater">
           <div class="modTitle"> 
-            <div class="addTitle">극장 추가</div>
-            <div class="delTitle">극장 삭제</div>
+            <div class="addTitle">add Theater</div>
+            <div class="delTitle">delete Theater</div>
           </div>
           <div class="modTheaterWrapper">
             <div class="addTheater">
@@ -73,7 +73,7 @@
                     
                 </div>
                 <div class="btnWrapper">
-                    <input type="submit" value="추가" id="submitBtn_addTheater" />
+                    <input type="submit" value="+" id="submitBtn_addTheater" />
                     </form>
                 </div>
             </div>
@@ -97,7 +97,7 @@
                   <br />
                     </div>
                   <div class="btnWrapper">
-                    <input type="submit" value="삭제" id="submitBtn_delTheater" />
+                    <input type="submit" value="-" id="submitBtn_delTheater" />
                     </form>
               </div>
             </div>
@@ -109,7 +109,7 @@
         
         <div class="addEvent">
             <div class="eventTitle"> 
-                   <span> 공지사항 등록 </span>
+                   <span> add Notice </span>
             </div>
             <div class="textWrapper">
           <form mothod="post" action="/CGBee/admin/addEvent.php" class="forms">
@@ -122,7 +122,7 @@
             <p> <img class="addImg" src="../images/addPhoto.png" alt="" /> </p><input type="file" name="img" style="color:white;"/><br /><br />
         </div>
             <div class="btnWrapper">
-                <input type="submit" value="추가" id="submitBtn_addEvent" />
+                <input type="submit" value="+" id="submitBtn_addEvent" />
                 </form>
             </div>
         </div>
@@ -174,7 +174,7 @@
                     } ?>
                 </div>
               </div>
-              <input type="submit" value="추가" />
+              <input type="submit" value="Add" />
             </div>
           </div>
         </form>

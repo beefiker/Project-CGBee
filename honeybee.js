@@ -369,7 +369,7 @@ $("#menuBtn").click(() => {
 });
 
 openHistory = () => {
-  let details = window.open("/CGBee/history.php", "PopupWin", "width=1000,height=600");
+  let details = window.open("/CGBee/history.php", "PopupWin", "width=1100,height=600");
 };
 $("#ReservationDetails, #naviG").click(() => {
   openHistory();
