@@ -58,7 +58,8 @@ body {
 .sortName {
   width: 85%;
   color: white;
-  font-size: 3rem;
+  font-size: 2rem;
+  letter-spacing: 0.3rem;
   margin-bottom: 20px;
 }
 .sortWrapper {
@@ -156,8 +157,15 @@ input {
 #sortByLike {
   overflow-x: scroll;
 }
+#sortByLike::-webkit-scrollbar {
+  display: none;
+}
+
 #sortByRating {
   overflow-x: scroll;
+}
+#sortByRating::-webkit-scrollbar {
+  display: none;
 }
 #boardlist {
   width: 100%;
@@ -196,11 +204,9 @@ input {
   position: relative;
   color: var(--beeYellow);
 }
-
-.testLine {
-  width: 500px;
+#logoText {
+  color: var(--beeYellow);
 }
-
 /* ! 제일 큰 버전 */
 @media (min-width: 1300px) {
   #container {
@@ -248,7 +254,6 @@ input {
   #logoText {
     font-size: 2rem;
     margin-left: 1.3rem;
-    color: white;
   }
   #menuWrapper {
     grid-area: menu;
@@ -313,7 +318,6 @@ input {
   #logoText {
     font-size: 2rem;
     letter-spacing: 0.5rem;
-    color: white;
   }
   #menuWrapper {
     grid-area: menu;
@@ -326,7 +330,7 @@ input {
 
   .subtext_align_middle,
   .sortName {
-    font-size: 2rem;
+    font-size: 1.7rem;
     letter-spacing: 0.3rem;
   }
   .theaterItems {
@@ -456,7 +460,6 @@ input {
 
   #logoText {
     font-size: 1.7rem;
-    color: white;
   }
 
   #menuWrapper {
@@ -479,7 +482,7 @@ input {
   .bar3 {
     width: 2.33rem;
     height: 0.33rem;
-    background-color: var(--beeYellow);
+    background-color: white;
     margin: 6px 0;
     transition: 0.2s;
   }

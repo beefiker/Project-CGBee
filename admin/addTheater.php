@@ -1,3 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
 <?php
     $name = $_REQUEST["theaterName"];
     $img =  isset($_REQUEST['theaterImg']) ? $_REQUEST['theaterImg'] : "https://placeimg.com/100/100/any";
@@ -5,15 +13,18 @@
     
     try {
         require("db_connect.php");
+        $query = $db->query("select * from theater where theater_name = '$name'");
             
-        $db->exec("insert into theater (theater_name, seat_amount, img)
-        values ('$name','$amount','$img')");
-        
+        if (!($row = $query->fetch(PDO::FETCH_ASSOC))) {
+            $db->exec("insert into theater (theater_name, seat_amount, img)
+            values ('$name','$amount','$img')");
+        }
 
     } catch (PDOException $e) {
-        echo "값을 제대로 입력해주세요", "<br>";
         exit($e->getMessage());
     }
     header("Location:admin.php");
     exit();
 ?>
+</body>
+</html>

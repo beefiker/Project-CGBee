@@ -208,20 +208,16 @@ function telValidator(args) {
     return false;
 }
     reservation = () =>{
-    let reservForm = document.reservForm;
-    let phNum = reservForm.ph.value;
-    let checkResult = telValidator(phNum);
-    let pw = reservForm.pw.value;
-    if(pw){
-        if(checkResult){
-        reservForm.submit();
+        let reservForm = document.reservForm;
+        let phNum = reservForm.ph.value;
+        let checkResult = telValidator(phNum);
+        let pw = reservForm.pw.value;
+        if(pw){
+            if(checkResult) reservForm.submit();
+        }else{
+            alert("비밀번호는 필수입니다.");
         }
-    }else{
-        alert("비밀번호는 필수입니다.");
     }
-    
-
-}
 </script>
 </head>
 <body>
