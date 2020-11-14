@@ -65,7 +65,7 @@
                   <p> <img src="../images/addPhoto.png" alt="" /> </p><input type="file" name="theaterImg" style="color:white;"/> <br /><br />
               </div>
               <div class="btnWrapper">
-                  <input type="submit" value="+" id="submitBtn_addTheater" />
+                  <input type="submit" value="Submit" id="submitBtn_addTheater" />
                 </form>
               </div>
             </div>
@@ -87,7 +87,7 @@
                   </select><br /><br />
               </div>
               <div class="btnWrapper">
-                  <input type="button" value="-" id="submitBtn_delTheater" onclick="deleteItems(delTheaterForm)" />
+                  <input type="button" value="Submit" id="submitBtn_delTheater" onclick="deleteItems(delTheaterForm)" />
                 </form>
               </div>
             </div>
@@ -112,7 +112,7 @@
                 <p> <img class="addImg" src="../images/addPhoto.png" alt="" /> </p><input type="file" name="img" style="color:white;"/><br /><br />
             </div>
             <div class="btnWrapper">
-                <input type="submit" value="+" id="submitBtn_addEvent" />
+                <input type="submit" value="Submit" id="submitBtn_addEvent" />
               </form>
             </div>
           </div>
@@ -184,15 +184,31 @@
                   $contents = $row["contents"];
                   $write_date = $row["write_date"];
                   $eventImg = $row["eventImg"];
+                  if($eventImg){
                   echo "<li class='eventItems'>",
                         "<div class='itemWrapper'>",
-                          "<img class='eventImg' src='$eventImg' />","<p>$title</p>",
-                          "<form name='delNoticeForm' mothod='post' action='/CGBee/admin/delEvent.php'>",
-                            "<input type='hidden' name='eventId' value='$id' />",
-                            "<input type='button' onclick='deleteItems(delNoticeForm)' style='all: unset; cursor: pointer; font-size: 30px;' value='❌'/>",
-                          "</form>",
+                          "<p class='title_itemWrapper'>$title</p>",
+                          "<div class='delBtn_itemWrapper'>",
+                            "<form name='delNoticeForm' mothod='post' action='/CGBee/admin/delEvent.php'>",
+                              "<input type='hidden' name='eventId' value='$id' />",
+                              "<input type='button' onclick='deleteItems(delNoticeForm)' style='all: unset; cursor: pointer; font-size: 30px;' value='❌'/>",
+                            "</form>",
+                          "</div>",
+                        "</div>",
+                        "<p class='contents'>","<img class='eventImg' src='$eventImg' />", $contents ,"</p>", "</li>"; 
+                  }else{
+                    echo "<li class='eventItems'>",
+                        "<div class='itemWrapper'>",
+                          "<p class='title_itemWrapper'>$title</p>",
+                          "<div class='delBtn_itemWrapper'>",
+                            "<form name='delNoticeForm' mothod='post' action='/CGBee/admin/delEvent.php'>",
+                              "<input type='hidden' name='eventId' value='$id' />",
+                              "<input type='button' onclick='deleteItems(delNoticeForm)' style='all: unset; cursor: pointer; font-size: 30px;' value='❌'/>",
+                            "</form>",
+                          "</div>",
                         "</div>",
                         "<p class='contents'>", $contents ,"</p>", "</li>"; 
+                  }
                 }
             } catch (PDOException $e) { 
               exit($e->getMessage()); 

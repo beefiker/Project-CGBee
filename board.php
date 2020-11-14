@@ -6,74 +6,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+
     .boardList{
-        position:relative;
         width:100%;
         height:100%;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
     }
     .eventItems {
         position: relative;
-        width:33%;
-        min-height: 100px;
-        background-color:#191f26;
+        width:80%;
+        min-height: 50px;
+        background-color:#f8f9fa;
         float:left;
         display:flex;
         flex-direction:column;
         justify-content:center;
         align-items:center;
+        box-shadow: 10px 5px 5px black;
+        margin-bottom:25px;
     }
     #boardlist {
         width: 100%;
     }
     .eventImg{
-        width:75px;
-        height:75px;
+        width:120px;
+        height:175px;
         margin-right:30px;
     }
     .a{
-        background-color:none;
-        border:2px solid white;
-        color:white;
-        width:350px;
-        height:75px;
+        background-color:#e9ecef;
+        color:#242424;
+        width:95%;
+        padding-left:5%;
+        height:60px;
         display:flex;
         align-items:center;
+        font-size: 17px;
     }
     .contents{
         position:relative;
-        width:330px;
-        min-height:10px;
-        border:2px solid white;
-        background-color:white;
+        width:95%;
+        color:#495057;
         word-break:break-all;
-        padding:10px;
+        padding:2.5%;
         margin-bottom:50px;
+        font-size: 15px;
     }
 
     @media (max-width: 1300px) {
-        .eventItems {
-        position: relative;
-        width:50%;
-        min-height: 100px;
-        background-color:#191f26;
-        float:left;
-        display:flex;
-        flex-direction:column;
-        justify-content:center;
-        align-items:center;
+        .a{
+           font-size:16px; 
+        }
+        .contents{
+            font-size:14px;
         }
     }
     @media (max-width: 700px) {
-        .eventItems {
-        position: relative;
-        width:100%;
-        min-height: 100px;
-        background-color:#191f26;
-        float:left;
-        display:flex;
-        flex-direction:column;
-        justify-content:center;
-        align-items:center;
+        .a{
+           font-size:15px; 
+        }
+        .contents{
+            font-size:13px;
         }
     }
     </style>
@@ -94,13 +90,21 @@
                 $write_date = $row["write_date"];
                 $eventImg = $row["eventImg"];
 
-                echo    "<li class='eventItems'>",
-                            "<div class='a'>",
-                                "<img class='eventImg' src='$eventImg'>",$title,
-                            "</div>",
-                            "<p class='contents'>", $contents ,"</p>",
-                        "</li>";
-
+                    if($eventImg){
+                    echo    "<li class='eventItems'>",
+                                "<div class='a'>",
+                                    $title,
+                                "</div>",
+                                "<p class='contents'>","<img class='eventImg' src='$eventImg'>", $contents ,"</p>",
+                            "</li>";
+                    }else{
+                        echo    "<li class='eventItems'>",
+                        "<div class='a'>",
+                            $title,
+                        "</div>",
+                        "<p class='contents'>", $contents ,"</p>",
+                    "</li>";
+                    }
                 }
             } catch (PDOException $e) {
                 exit($e->getMessage());

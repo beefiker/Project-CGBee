@@ -1,7 +1,7 @@
 <?php
     $date = $_REQUEST["date"];
     $title = $_REQUEST["title"];
-    $img =  isset($_REQUEST['img']) ? $_REQUEST['img'] : "https://placeimg.com/100/100/any";
+    $img =  isset($_REQUEST['img']) ? $_REQUEST['img'] : "";
     $contents = $_REQUEST["contents"];
     
     try {
