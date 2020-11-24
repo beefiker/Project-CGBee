@@ -1,8 +1,7 @@
-<!--
-php
+<!--php
 //db에 영화정보 넣기
-$url_rating = "https://yts-proxy.now.sh/list_movies.json?sort_by=rating&limit=15";
-$url_like = "https://yts-proxy.now.sh/list_movies.json?sort_by=like_count&limit=15";
+$url_rating = "https://yts-proxy.now.sh/list_movies.json?sort_by=rating&limit=50";
+$url_like = "https://yts-proxy.now.sh/list_movies.json?sort_by=like_count&limit=50";
 //  Initiate curl session
 $handle = curl_init();
 // Will return the response, if false it prints the response
@@ -130,12 +129,12 @@ curl_close($handle); -->
             <li id="logoTag" class="navilogo">
               <a id="logoText" href="#">CGBee</a>
             </li>
-            <li id="naviA" class="navimenu"><span>Now Playing</span></li>
-            <li id="naviB" class="navimenu"><span>Top Rank</span></li>
-            <li id="naviC" class="navimenu"><span>Free Movie</span></li>
-            <li id="naviD" class="navimenu"><span>Theater</span></li>
-            <li id="naviE" class="navimenu"><span>Notice</span></li>
-
+            <li id="naviA" class="navimenu"><span>Trending</span></li>
+            <li id="naviB" class="navimenu"><span>Action</span></li>
+            <li id="naviC" class="navimenu"><span>Adventure</span></li>
+            <li id="naviD" class="navimenu"><span>Drama</span></li>
+            <li id="naviE" class="navimenu"><span>Musical</span></li>
+            <li id="naviF" class="navimenu"><span>Notice</span></li>
             <li id="naviG" class="navimenu"><span>My Ticket</span></li>
             
           </ul>
@@ -148,30 +147,31 @@ curl_close($handle); -->
           <a id="logoText" href="#">CGBee</a>
         </div>
         <ul id="menuWrapper">
-          <li id="gotoA" class="menuList">Now Playing</li>
-          <li id="gotoB" class="menuList">Top Rank</li>
-          <li id="gotoC" class="menuList">Free Movie</li>
-          <li id="gotoD" class="menuList">Theater</li>
-          <li id="gotoE" class="menuList">Notice</li>
+          <li id="gotoA" class="menuList">Trending</li>
+          <li id="gotoB" class="menuList">Action</li>
+          <li id="gotoC" class="menuList">Adventure</li>
+          <li id="gotoD" class="menuList">Drama</li>
+          <li id="gotoE" class="menuList">Musical</li>
+          <li id="gotoF" class="menuList">Notice</li>
 
           <li id="ReservationDetails" class="menuList">My Ticket</li>
         </ul>
       </div>
 
       <div id="box1" class="box">
-        <div id="sort-like-wrap" class="sortWrapper needsLoad">
-          <p class="sortName needsLoad">Now Playing</p>
+        <div class="sortWrapper needsLoad">
+          <p class="sortName needsLoad">Trending now</p>
           <div class="flexRowContainer">
-            <div class="scrollLeft needsLoad" id="LikeLeft"><strong class="scrollText"><</strong></div>
-            <div id="sortByLike" class="movieDiv">
+            <div class="scrollLeft needsLoad" id="movieList_slideLeft"><strong class="scrollText"><</strong></div>
+            <div id="movieListWrapper" class="movieDiv">
             <?php
                 try {
                   require("db_connect.php");    
       
-                  $query = $db->query("select * from movie order by year desc");
+                  $query = $db->query("select * from movie order by rating desc, year desc limit 15");
                   $i = 0;
                   while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
-                       $partition = "LikePartition". "$i";
+                       $partition = "trendingPartition". "$i";
                        $id = "$row[id]";
                        $title = $row[title];
                        $year = $row[year];
@@ -204,7 +204,6 @@ curl_close($handle); -->
                       <?php
 
                        $i++;
-                       if($i > 14) break;
                   }
                   
                 } catch (PDOException $e) {
@@ -213,7 +212,7 @@ curl_close($handle); -->
           
               ?>
             </div>
-            <div class="scrollRight needsLoad" id="LikeRight"><strong class="scrollText">></strong></div>
+            <div class="scrollRight needsLoad" id="movieList_slideRight"><strong class="scrollText">></strong></div>
           </div>
         </div>
       </div>
@@ -221,19 +220,19 @@ curl_close($handle); -->
       <hr color="#131313" size="3px" class="needsLoad">
 
       <div id="box2" class="box">
-        <div id="sort-rating-wrap" class="sortWrapper needsLoad">
-          <p class="sortName needsLoad">Top Rank</p>
+        <div class="sortWrapper needsLoad">
+          <p class="sortName needsLoad">Action</p>
           <div class="flexRowContainer">
-            <div class="scrollLeft" id="RatingLeft"><strong class="scrollText"><</strong></div>
-            <div id="sortByRating" class="movieDiv">
+          <div class="scrollLeft needsLoad" id="movieList_slideLeft"><strong class="scrollText"><</strong></div>
+            <div id="movieListWrapper" class="movieDiv">
             <?php
                 try {
                   require("db_connect.php");    
       
-                  $query = $db->query("select * from movie order by rating desc");
+                  $query = $db->query("select * from movie where genres like '%action%' order by year desc,rating desc limit 15");
                   $i = 0;
                   while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
-                       $partition = "RatingPartition". "$i";
+                       $partition = "actionPartition". "$i";
                        $id = "$row[id]";
                        $title = $row[title];
                        $year = $row[year];
@@ -266,7 +265,6 @@ curl_close($handle); -->
                       <?php
 
                        $i++;
-                       if($i > 14) break;
                   }
                   
                 } catch (PDOException $e) {
@@ -275,7 +273,7 @@ curl_close($handle); -->
           
               ?>
             </div>
-            <div class="scrollRight" id="RatingRight"><strong class="scrollText">></strong></div>
+            <div class="scrollRight needsLoad" id="movieList_slideRight"><strong class="scrollText">></strong></div>
           </div>
         </div>
       </div>
@@ -283,100 +281,183 @@ curl_close($handle); -->
       <hr color="#131313" size="3px" class="needsLoad">
 
       <div id="box3" class="box">
-      <p class="subtext_align_middle needsLoad">Free Movie<span><i class="fas fa-coins"></i></span></p>
-      <div id="sort-rating-wrap" class="randomWrapper needsLoad">
+        <div class="sortWrapper needsLoad">
+          <p class="sortName needsLoad">Adventure</p>
+          <div class="flexRowContainer">
+          <div class="scrollLeft needsLoad" id="movieList_slideLeft"><strong class="scrollText"><</strong></div>
+            <div id="movieListWrapper" class="movieDiv">
+            <?php
+                try {
+                  require("db_connect.php");    
       
-          
-            <div id="randomMovie" class="movieDiv">
+                  $query = $db->query("select * from movie where genres like '%adven%' order by year desc,rating desc limit 15");
+                  $i = 0;
+                  while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
+                       $partition = "adventurePartition". "$i";
+                       $id = "$row[id]";
+                       $title = $row[title];
+                       $year = $row[year];
+                       $rating = $row[rating];
+                       $runningtime = $row[runningtime];
+                       $country = $row[country];
+                       $genres = $row[genres];
+                       $summary = $row[summary];
+                       $img = $row[imgsrc];
+                       $uploaded_date = $row[uploaded_date];
+                      ?>
+                      <div class="sortPartition" id="<?=$partition?>">
+                        <img src="<?=$img?>" alt="">
+                        <p class=movietitle><?=$title?></p>
+                        <p class=movieGenre><?=$genres?></p>
+                        <p class=movieSummary><?=$summary?></p>
+                        <form method="post" action="/CGBee/getMovie.php" name="newForm" target="_blank">
+                          <input type="hidden" name="movieId" value="<?=$id?>">
+                          <input type="hidden" name="movieTitle" value="<?=$title?>">
+                          <input type="hidden" name="movieGenre" value="<?=$genres?>">
+                          <input type="hidden" name="movieSummary" value="<?=$summary?>">
+                          <input type="hidden" name="movieYear" value="<?=$year?>">
+                          <input type="hidden" name="movieRating" value="<?=$rating?>">
+                          <input type="hidden" name="movieRuntime" value="<?=$runningtime?>">
+                          <input type="hidden" name="moviePoster" value="<?=$img?>">
+                          <input type="submit" value="예매하기" name="data2" id="ReservationBtn">
+                        </form>
+                      </div>
 
-              <?php
-              // TODO 랜덤으로 안바뀌고 있음. 수정 필요
-                  try {
-                    require("db_connect.php");    
-        
-                    $query = $db->query("select * from movie");
-                    
-                    $rand = 1;
-                    while ($row[$rand] = $query->fetch(PDO::FETCH_ASSOC)) {
-                        $id = $row[$rand][id];
-                        $title =$row[$rand][title];
-                        $year = $row[$rand][year];
-                        $rating = $row[$rand][rating];
-                        $runningtime = $row[$rand][runningtime];
-                        $country = $row[$rand][country];
-                        $genres = $row[$rand][genres];
-                        $summary = $row[$rand][summary];
-                        $img = $row[$rand][imgsrc];
-                        $uploaded_date = $row[$rand][uploaded_date];
-                    
-                        ?>
-                        <div class="sortPartition" id="randomPartition">
-                          <img class="movieImg" src="<?=$img?>" alt="">
-                          <p class=movietitle><?=$title?></p>
-                          <p class=movieGenre><?=$genres?></p>
-                          <p class=movieSummary><?=$summary?></p>
-                          <form method="post" action="/CGBee/getMovie.php" name="newForm" target="_blank">
-                            <input type="hidden" name="movieId" value="<?=$id?>">
-                            <input type="hidden" name="movieTitle" value="<?=$title?>">
-                            <input type="hidden" name="movieGenre" value="<?=$genres?>">
-                            <input type="hidden" name="movieSummary" value="<?=$summary?>">
-                            <input type="hidden" name="movieYear" value="<?=$year?>">
-                            <input type="hidden" name="movieRating" value="<?=$rating?>">
-                            <input type="hidden" name="movieRuntime" value="<?=$runningtime?>">
-                            <input type="hidden" name="moviePoster" value="<?=$img?>">
-                            <input type="submit" value="무료예매" name="data2" id="ReservationBtn">
-                          </form>
-                        </div>
+                      <?php
 
-                        <?php
-                    break;
-                    }
-                    
-                  } catch (PDOException $e) {
-                    exit($e->getMessage());
+                       $i++;
                   }
-            
-                ?>
-
-                
+                  
+                } catch (PDOException $e) {
+                  exit($e->getMessage());
+                }
+          
+              ?>
             </div>
-
+            <div class="scrollRight needsLoad" id="movieList_slideRight"><strong class="scrollText">></strong></div>
+          </div>
         </div>
       </div>
 
       <hr color="#131313" size="3px" class="needsLoad">
 
       <div id="box4" class="box">
-        <p class="subtext_align_middle needsLoad" id="toggleTheater">Theater <i class='fas fa-caret-down fa-1x'></i></p>
-          <div class="theaterLists needsLoad">
-   
-              <ul class="theaterLists_ul">
-              <?php
-                  try {
-                      require("db_connect.php");
+        <div class="sortWrapper needsLoad">
+          <p class="sortName needsLoad">Drama</p>
+          <div class="flexRowContainer">
+          <div class="scrollLeft needsLoad" id="movieList_slideLeft"><strong class="scrollText"><</strong></div>
+            <div id="movieListWrapper" class="movieDiv">
+            <?php
+                try {
+                  require("db_connect.php");    
+      
+                  $query = $db->query("select * from movie where genres like '%drama%' order by year desc,rating desc limit 15");
+                  $i = 0;
+                  while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
+                       $partition = "dramaPartition". "$i";
+                       $id = "$row[id]";
+                       $title = $row[title];
+                       $year = $row[year];
+                       $rating = $row[rating];
+                       $runningtime = $row[runningtime];
+                       $country = $row[country];
+                       $genres = $row[genres];
+                       $summary = $row[summary];
+                       $img = $row[imgsrc];
+                       $uploaded_date = $row[uploaded_date];
+                      ?>
+                      <div class="sortPartition" id="<?=$partition?>">
+                        <img src="<?=$img?>" alt="">
+                        <p class=movietitle><?=$title?></p>
+                        <p class=movieGenre><?=$genres?></p>
+                        <p class=movieSummary><?=$summary?></p>
+                        <form method="post" action="/CGBee/getMovie.php" name="newForm" target="_blank">
+                          <input type="hidden" name="movieId" value="<?=$id?>">
+                          <input type="hidden" name="movieTitle" value="<?=$title?>">
+                          <input type="hidden" name="movieGenre" value="<?=$genres?>">
+                          <input type="hidden" name="movieSummary" value="<?=$summary?>">
+                          <input type="hidden" name="movieYear" value="<?=$year?>">
+                          <input type="hidden" name="movieRating" value="<?=$rating?>">
+                          <input type="hidden" name="movieRuntime" value="<?=$runningtime?>">
+                          <input type="hidden" name="moviePoster" value="<?=$img?>">
+                          <input type="submit" value="예매하기" name="data2" id="ReservationBtn">
+                        </form>
+                      </div>
 
-                      $query = $db->query("select * from theater");
-                      
-                      while ($row = $query->fetch(PDO::FETCH_ASSOC)) {    
-                      $theaterName = $row["theater_name"];
-                      $seatAmount = $row["seat_amount"];
-                      $src = $row["img"];
-
-                      echo "<li class='theaterItems'>","<img class='theaterimg' src=$src>","<br>","<span>" ,$theaterName,"점","</span>","<br><br>", "</li>";
-
-                      }
-                  } catch (PDOException $e) {
-                      exit($e->getMessage());
+                      <?php
+                       $i++;
                   }
+                } catch (PDOException $e) {
+                  exit($e->getMessage());
+                }
               ?>
-              </ul>
+            </div>
+            <div class="scrollRight needsLoad" id="movieList_slideRight"><strong class="scrollText">></strong></div>
           </div>
-        
+        </div>
       </div>
 
       <hr color="#131313" size="3px" class="needsLoad">
 
       <div id="box5" class="box">
+        <div class="sortWrapper needsLoad">
+          <p class="sortName needsLoad">Musical</p>
+          <div class="flexRowContainer">
+          <div class="scrollLeft needsLoad" id="movieList_slideLeft"><strong class="scrollText"><</strong></div>
+            <div id="movieListWrapper" class="movieDiv">
+            <?php
+                try {
+                  require("db_connect.php");    
+      
+                  $query = $db->query("select * from movie where genres like '%music%' order by year,rating desc limit 15");
+                  $i = 0;
+                  while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
+                       $partition = "musicPartition". "$i";
+                       $id = "$row[id]";
+                       $title = $row[title];
+                       $year = $row[year];
+                       $rating = $row[rating];
+                       $runningtime = $row[runningtime];
+                       $country = $row[country];
+                       $genres = $row[genres];
+                       $summary = $row[summary];
+                       $img = $row[imgsrc];
+                       $uploaded_date = $row[uploaded_date];
+                      ?>
+                      <div class="sortPartition" id="<?=$partition?>">
+                        <img src="<?=$img?>" alt="">
+                        <p class=movietitle><?=$title?></p>
+                        <p class=movieGenre><?=$genres?></p>
+                        <p class=movieSummary><?=$summary?></p>
+                        <form method="post" action="/CGBee/getMovie.php" name="newForm" target="_blank">
+                          <input type="hidden" name="movieId" value="<?=$id?>">
+                          <input type="hidden" name="movieTitle" value="<?=$title?>">
+                          <input type="hidden" name="movieGenre" value="<?=$genres?>">
+                          <input type="hidden" name="movieSummary" value="<?=$summary?>">
+                          <input type="hidden" name="movieYear" value="<?=$year?>">
+                          <input type="hidden" name="movieRating" value="<?=$rating?>">
+                          <input type="hidden" name="movieRuntime" value="<?=$runningtime?>">
+                          <input type="hidden" name="moviePoster" value="<?=$img?>">
+                          <input type="submit" value="예매하기" name="data2" id="ReservationBtn">
+                        </form>
+                      </div>
+
+                      <?php
+                       $i++;
+                  }
+                } catch (PDOException $e) {
+                  exit($e->getMessage());
+                }
+              ?>
+            </div>
+            <div class="scrollRight needsLoad" id="movieList_slideRight"><strong class="scrollText">></strong></div>
+          </div>
+        </div>
+      </div>
+
+      <hr color="#131313" size="3px" class="needsLoad">
+
+      <div id="NoticeBox" class="box">
       <p class="subtext_align_middle needsLoad" id="toggleNotice">Notice <i class='fas fa-caret-down fa-1x'></i></p>
         <ul id="boardlist" class="needsLoad noticeLists_ul">
           <script>
@@ -404,34 +485,5 @@ curl_close($handle); -->
 
   </body>
   <script type="text/javascript" src="honeybee.js"></script>
-  <script>
-      togglingNotice = () => {
-        let notices = $(".noticeLists_ul");
-        if(notices.css("display") == "none"){
-          $("#toggleNotice").html("<p class='subtext_align_middle needsLoad' id='toggleNotice'>Notice <i class='fas fa-caret-down fa-1x'></i></p>");
-            notices.fadeIn(500);
-        }else{
-            $("#toggleNotice").html("<p class='subtext_align_middle needsLoad' id='toggleNotice'>Notice <i class='fas fa-caret-up fa-1x'></i></p>");
-            notices.fadeOut(500);
-        }
-      }
-      togglingTheater = () =>{
-        let theaters = $(".theaterLists_ul");
-        if(theaters.css("display") == "none"){
-          $("#toggleTheater").html("<p class='subtext_align_middle needsLoad' id='toggleTheater'>Theater <i class='fas fa-caret-down fa-1x'></i></p>");
-            theaters.fadeIn(500);
-        }else{
-            $("#toggleTheater").html("<p class='subtext_align_middle needsLoad' id='toggleTheater'>Theater <i class='fas fa-caret-up fa-1x'></i></p>");
-            theaters.fadeOut(500);
-        }
-      }
-      
-      $("#toggleTheater").click(()=>{
-          togglingTheater();
-      });
-      $("#toggleNotice").click(()=>{
-          togglingNotice();
-      });
-  </script>
 
 </html>

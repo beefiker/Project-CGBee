@@ -30,13 +30,15 @@ body {
 
 #box1,
 #box2,
-#box3 {
+#box3,
+#box4,
+#box5,
+#box6 {
   height: 500px;
   padding-top: 120px;
   /* overflow:scroll; */
 }
-#box4,
-#box5 {
+#NoticeBox {
   padding-top: 70px;
   min-height: 100px;
 }
@@ -154,19 +156,13 @@ input {
   align-items: center;
   color: white;
 }
-#sortByLike {
+#movieListWrapper {
   overflow-x: scroll;
 }
-#sortByLike::-webkit-scrollbar {
+#movieListWrapper::-webkit-scrollbar {
   display: none;
 }
 
-#sortByRating {
-  overflow-x: scroll;
-}
-#sortByRating::-webkit-scrollbar {
-  display: none;
-}
 #boardlist {
   width: 100%;
   display: flex;
@@ -184,8 +180,9 @@ input {
 .subtext_align_middle {
   width: 100%;
   color: white;
-  font-size: 2.5rem;
+  font-size: 1.5rem;
   margin-bottom: 20px;
+  font-weight: normal;
   text-align: center;
   cursor: pointer;
 }
@@ -330,7 +327,7 @@ input {
 
   .subtext_align_middle,
   .sortName {
-    font-size: 1.7rem;
+    font-size: 1.4rem;
     letter-spacing: 0.3rem;
   }
   .theaterItems {
@@ -499,7 +496,7 @@ input {
 
   .subtext_align_middle,
   .sortName {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
   .theaterItems {
     color: #636e71;

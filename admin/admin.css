@@ -386,6 +386,9 @@ textarea {
   align-items: center;
   background-color: #ced4da;
 }
+.delBtn_itemWrapper:hover {
+  background-color: grey;
+}
 .modTheaterName {
   width: 100%;
   padding-left: 30px;
@@ -394,6 +397,7 @@ textarea {
   justify-content: center;
   align-items: flex-start;
 }
+
 /* ! PC 웹 페이지 크기 */
 @media (min-width: 1100px) {
   #container {
