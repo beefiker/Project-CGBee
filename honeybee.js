@@ -4,7 +4,7 @@ const beeDark = "#242424";
 $.ajax({
   method: "GET",
   url: "https://yts-proxy.now.sh/list_movies.json",
-  data: { limit: 15 },
+  data: { limit: 50 },
   beforeSend: () => {
     $(".needsLoad").hide();
 
@@ -147,17 +147,14 @@ $(window).resize(() => {
   }
 });
 
-// * Click animating code starts from here.
-
 const page = $("html, body");
-
 const logo = document.querySelector("#logoImg");
+
 logo.addEventListener("click", () => {
   window.scrollTo({ top: document.querySelector("#box1").offsetTop, behavior: "smooth" });
 });
-
 animateToBox = (box) => {
-  const CurrentBoxTop = $(box).offset().top;
+  const CurrentBoxTop = $(box).offset().top - 100;
   page.stop().animate({ scrollTop: CurrentBoxTop }, 800, "easeInExpo");
 };
 

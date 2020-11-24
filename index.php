@@ -157,6 +157,11 @@ curl_close($handle); -->
           <li id="ReservationDetails" class="menuList">My Ticket</li>
         </ul>
       </div>
+      <div class="search">
+        <form action="/CGBee/search.php" target="_blank">
+          <input type="text" name="title" placeholder="S e a r c h"> <input type="submit" id="searchBtn" value=" ">
+        </form>
+      </div>
 
       <div id="box1" class="box">
         <div class="sortWrapper needsLoad">
@@ -217,7 +222,7 @@ curl_close($handle); -->
         </div>
       </div>
 
-      <hr color="#131313" size="3px" class="needsLoad">
+      <!-- <hr color="#131313" size="3px" class="needsLoad"> -->
 
       <div id="box2" class="box">
         <div class="sortWrapper needsLoad">
@@ -278,7 +283,7 @@ curl_close($handle); -->
         </div>
       </div>
 
-      <hr color="#131313" size="3px" class="needsLoad">
+      <!-- <hr color="#131313" size="3px" class="needsLoad"> -->
 
       <div id="box3" class="box">
         <div class="sortWrapper needsLoad">
@@ -339,7 +344,7 @@ curl_close($handle); -->
         </div>
       </div>
 
-      <hr color="#131313" size="3px" class="needsLoad">
+      <!-- <hr color="#131313" size="3px" class="needsLoad"> -->
 
       <div id="box4" class="box">
         <div class="sortWrapper needsLoad">
@@ -397,7 +402,7 @@ curl_close($handle); -->
         </div>
       </div>
 
-      <hr color="#131313" size="3px" class="needsLoad">
+      <!-- <hr color="#131313" size="3px" class="needsLoad"> -->
 
       <div id="box5" class="box">
         <div class="sortWrapper needsLoad">
