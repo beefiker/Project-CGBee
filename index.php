@@ -480,7 +480,6 @@ curl_close($handle); -->
 
             }
             setInterval('showboardList()', 3000);
-            // showboardList();
           </script>
         </ul>
 
