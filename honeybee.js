@@ -82,6 +82,7 @@ sliderLeft = (prop) => {
     scrollLeft: i,
   });
 };
+
 sliderRight = (prop) => {
   let currentX = $(prop).scrollLeft();
   let val = 500;

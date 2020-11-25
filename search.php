@@ -99,7 +99,7 @@
             align-items: center;
             color: white;
         }
-        
+
         .result{
             z-index:1;
             position:fixed;
@@ -126,12 +126,12 @@
         }
         $resultCount = $titleCount;
 
-        if($titleCount <= 0){
+        if(!$titleCount){
             $query = $db->query("select * from movie where genres like '%$title%'");
             while ($row = $query->fetch(PDO::FETCH_ASSOC)) { 
                 $genreCount++;
             } 
-        $resultCount=$genreCount;  
+        $resultCount = $genreCount;  
         }
     } catch (PDOException $e) {
         exit($e->getMessage());
@@ -182,7 +182,7 @@
                 $i++;
             }
             
-            if($i <= 0){
+            if(!$i){
                 $query = $db->query("select * from movie where genres like '%$title%'");
                 $i = 0;
                 while ($row = $query->fetch(PDO::FETCH_ASSOC)) { 
@@ -249,26 +249,8 @@
             }
             );
         }
-        for (let i = 0; i < <?=$genreCount?>; i++) {
-            let thisPartition = $(prop + i);
-            thisPartition.hover(
-            () => {
-                thisPartition.children(".movietitle").css({ visibility: "visible" });
-                thisPartition.children(".movieGenre").css({ visibility: "visible" });
-                thisPartition.children(".movieSummary").css({ visibility: "visible" });
-                thisPartition.children("form").find("input").css({ visibility: "visible" });
-                thisPartition.children("img").animate({ opacity: "0.5" }, 100);
-            },
-            () => {
-                thisPartition.children("img").animate({ opacity: "1" }, 100);
-                thisPartition.children(".movietitle").css({ visibility: "hidden" });
-                thisPartition.children(".movieGenre").css({ visibility: "hidden" });
-                thisPartition.children(".movieSummary").css({ visibility: "hidden" });
-                thisPartition.children("form").find("input").css({ visibility: "hidden" });
-            }
-            );
-        }
-        };
+    }
+    
         hoverMovies("#searchPartition", 15);
     </script>
 </body>
