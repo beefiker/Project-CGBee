@@ -210,3 +210,8 @@ openHistory = () => {
 $("#ReservationDetails, #naviG").click(() => {
   openHistory();
 });
+
+$("#searchBtn").on("click", function () {
+  window.open("", "popup_window", "width=800, height=365 scrollbars=yes");
+  $("#searchForm").submit();
+});

@@ -158,7 +158,7 @@ curl_close($handle); -->
         </ul>
       </div>
       <div class="search">
-        <form action="/CGBee/search.php" target="_blank">
+        <form id="searchForm" action="/CGBee/search.php" target="popup_window">
           <input type="text" name="title" placeholder="S e a r c h"> <input type="submit" id="searchBtn" value=" ">
         </form>
       </div>
