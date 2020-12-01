@@ -178,20 +178,22 @@
                 require("db_connect.php");
 
                 $query = $db->query("select * from board");
+                $i = 0;
                 while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
                   $id = $row["id"];
                   $title = $row["title"];
                   $contents = $row["contents"];
                   $write_date = $row["write_date"];
                   $eventImg = $row["eventImg"];
+                  
                   if($eventImg){
                   echo "<li class='eventItems'>",
                         "<div class='itemWrapper'>",
                           "<p class='title_itemWrapper'>$title</p>",
                           "<div class='delBtn_itemWrapper'>",
-                            "<form name='delNoticeForm' mothod='post' action='/CGBee/admin/delEvent.php'>",
+                            "<form name='delNoticeForm$i' mothod='post' action='/CGBee/admin/delEvent.php'>",
                               "<input type='hidden' name='eventId' value='$id' />",
-                              "<input type='button' onclick='deleteItems(delNoticeForm)' style='all: unset; cursor: pointer; font-size: 30px;' value='❌'/>",
+                              "<input type='button' onclick='deleteItems(delNoticeForm$i)' style='all: unset; cursor: pointer; font-size: 30px;' value='❌'/>",
                             "</form>",
                           "</div>",
                         "</div>",
@@ -201,14 +203,15 @@
                         "<div class='itemWrapper'>",
                           "<p class='title_itemWrapper'>$title</p>",
                           "<div class='delBtn_itemWrapper'>",
-                            "<form name='delNoticeForm' mothod='post' action='/CGBee/admin/delEvent.php'>",
+                            "<form name='delNoticeForm$i' mothod='post' action='/CGBee/admin/delEvent.php'>",
                               "<input type='hidden' name='eventId' value='$id' />",
-                              "<input type='button' onclick='deleteItems(delNoticeForm)' style='all: unset; cursor: pointer; font-size: 30px;' value='❌'/>",
+                              "<input type='button' onclick='deleteItems(delNoticeForm$i)' style='all: unset; cursor: pointer; font-size: 30px;' value='❌'/>",
                             "</form>",
                           "</div>",
                         "</div>",
                         "<p class='contents'>", $contents ,"</p>", "</li>"; 
                   }
+                  $i++;
                 }
             } catch (PDOException $e) { 
               exit($e->getMessage()); 
