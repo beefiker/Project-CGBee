@@ -262,20 +262,20 @@
         alert("<?=$ph?>"+" 번으로 예매 정보를 전송하였습니다."+"\n"+"\n"+"영화제목 : "+"<?=$title?>"+"\n"+"예매비밀번호 : "+"<?=$pw?>"+"\n"+"날짜 : "+"<?=$date?>"+"\n"+"좌석 : "+"<?=$seats?>");
         </script>
     <?php
-        // $ph_cutDash = str_replace("-","",$ph);
-        // $messageContent = '영화제목 : '.$title ."\n".'예매비밀번호 : '.$pw."\n".'날짜 : '.$date."\n".'좌석 : '.$seats;
-        // require __DIR__ . '/twilio-php-main/src/Twilio/autoload.php';
-        // use Twilio\Rest\Client;
-        // $account_sid = 'AC823cb9423e8369d7ec82a20443d31168';
-        // $auth_token = 'a4073276d7ad537cb62e547d6dae42f2';
-        // $twilio_number = "+12058758417";
-        // $client = new Client($account_sid, $auth_token);
-        // $client->messages->create(
-        //     '+82'.$ph_cutDash,
-        //     array(
-        //         'from' => $twilio_number,
-        //         'body' =>  $messageContent
-        //     )
-        // );
+        $ph_cutDash = str_replace("-","",$ph);
+        $messageContent = '영화제목 : '.$title ."\n".'예매비밀번호 : '.$pw."\n".'날짜 : '.$date."\n".'좌석 : '.$seats;
+        require __DIR__ . '/twilio-php-main/src/Twilio/autoload.php';
+        use Twilio\Rest\Client;
+        $account_sid = 'AC823cb9423e8369d7ec82a20443d31168';
+        $auth_token = 'a4073276d7ad537cb62e547d6dae42f2';
+        $twilio_number = "+12058758417";
+        $client = new Client($account_sid, $auth_token);
+        $client->messages->create(
+            '+82'.$ph_cutDash,
+            array(
+                'from' => $twilio_number,
+                'body' =>  $messageContent
+            )
+        );
     ?>
 </html>
