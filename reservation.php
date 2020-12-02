@@ -267,7 +267,7 @@
         require __DIR__ . '/twilio-php-main/src/Twilio/autoload.php';
         use Twilio\Rest\Client;
         $account_sid = 'AC823cb9423e8369d7ec82a20443d31168';
-        $auth_token = 'a4073276d7ad537cb62e547d6dae42f2';
+        $auth_token = '3823bd9fd1915c0fbfc825ac5c62b133';
         $twilio_number = "+12058758417";
         $client = new Client($account_sid, $auth_token);
         $client->messages->create(

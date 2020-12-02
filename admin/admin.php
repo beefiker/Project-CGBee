@@ -154,7 +154,7 @@
                       try {
                         require("db_connect.php");
                     
-                        $query = $db->query("select * from movie"); 
+                        $query = $db->query("select * from movie order by title"); 
                         while($row = $query->fetch(PDO::FETCH_ASSOC)) {
                           echo "<label><input type='checkbox' id='movieList' name='movie[]' value='$row[id]' />
                                 $row[title]
