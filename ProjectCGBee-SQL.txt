@@ -1,0 +1,613 @@
+-- phpMyAdmin SQL Dump
+-- version 4.9.3
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost:8889
+-- Generation Time: Mar 02, 2021 at 07:54 AM
+-- Server version: 5.7.26
+-- PHP Version: 7.4.2
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- Database: `phpdb`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `board`
+--
+
+CREATE TABLE `board` (
+  `id` int(11) NOT NULL,
+  `title` varchar(100) DEFAULT NULL,
+  `contents` text,
+  `write_date` date DEFAULT NULL,
+  `eventImg` varchar(100) DEFAULT 'https://placeimg.com/75/75/any'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `board`
+--
+
+INSERT INTO `board` (`id`, `title`, `contents`, `write_date`, `eventImg`) VALUES
+(16, '[COVID-19] 수도권 운영중단', '수도권 2.5단계 격상으로 12월 한 달간 집합금지에 따라 운영이 중단되오니 양해 부탁드립니다. 2021년 1월 1일부터 정상적으로 운영합니다.', '2020-12-08', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `movie`
+--
+
+CREATE TABLE `movie` (
+  `id` int(11) NOT NULL,
+  `title` varchar(100) DEFAULT NULL,
+  `year` varchar(10) DEFAULT NULL,
+  `rating` varchar(10) DEFAULT NULL,
+  `runningtime` int(11) DEFAULT NULL,
+  `genres` varchar(300) NOT NULL,
+  `country` varchar(10) DEFAULT NULL,
+  `summary` varchar(500) NOT NULL,
+  `imgsrc` varchar(500) DEFAULT NULL,
+  `uploaded_date` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `movie`
+--
+
+INSERT INTO `movie` (`id`, `title`, `year`, `rating`, `runningtime`, `genres`, `country`, `summary`, `imgsrc`, `uploaded_date`) VALUES
+(9, '12 Years a Slave', '2013', '8.1', 134, 'Action, Biography', 'en', 'Based on an incredible true story of one mans fight for survival and freedom. In the pre-Civil War United States, Solomon Northup, a free b...', 'https://yts.mx/assets/images/movies/12_Years_a_Slave_2013/medium-cover.jpg', '2015-10-31'),
+(45, '300: Rise of an Empire', '2014', '6.2', 102, 'Action, Drama', 'en', 'After its victory over Leonidas 300, the Persian Army under the command of Xerxes marches towards the major Greek city-states. The Democrat...', 'https://yts.mx/assets/images/movies/300_Rise_of_an_Empire_2014/medium-cover.jpg', '2015-10-31'),
+(342, 'Avatar', '2009', '7.8', 162, 'Action, Adventure', 'en', 'When his brother is killed in a robbery, paraplegic Marine Jake Sully decides to take his place in a mission on the distant world of Pandora...', 'https://yts.mx/assets/images/movies/Avatar_2009/medium-cover.jpg', '2015-10-31'),
+(847, 'Dawn of the Planet of the Apes', '2014', '7.6', 130, 'Action, Adventure', 'en', 'A growing nation of genetically evolved apes led by Caesar is threatened by a band of human survivors of the devastating virus unleashed a d...', 'https://yts.mx/assets/images/movies/Dawn_of_the_Planet_of_the_Apes_2014/medium-cover.jpg', '2015-10-31'),
+(1077, 'Escape Plan', '2013', '6.7', 115, 'Action, Crime', 'en', 'Ray Breslin is a man who has devoted his life to making prisons inescapable by going into a prison as an inmate and trying to see if he can ...', 'https://yts.mx/assets/images/movies/Escape_Plan_2013/medium-cover.jpg', '2015-10-31'),
+(1098, 'Ex Machina', '2014', '7.7', 108, 'Action, Drama', 'en', 'Caleb, a 26 year old programmer at the worlds largest internet company, wins a competition to spend a week at a private mountain retreat be...', 'https://yts.mx/assets/images/movies/ex_machina_2015/medium-cover.jpg', '2015-10-31'),
+(1151, 'Fight Club', '1999', '8.8', 139, 'Action, Drama', 'en', 'A young man named Gary \"Eggsy\" Unwin (Taron Egerton), whose father died when he was a young boy, is dealing with living with the creep his m...', 'https://yts.mx/assets/images/movies/Fight_Club_1999/medium-cover.jpg', '2015-10-31'),
+(1208, 'Forrest Gump', '1994', '8.8', 0, 'Action, Comedy', 'en', 'With many people fearing the actions of super heroes, the government decides to push for the Hero Registration Act, a law that limits a hero...', 'https://yts.mx/assets/images/movies/Forrest_Gump_1994/medium-cover.jpg', '2015-10-31'),
+(1267, 'Furious 7', '2015', '7.1', 137, 'Action, Adventure', 'en', 'Dominic and his crew thought theyd left the criminal mercenary life behind. Theyd defeated international terrorist Owen Shaw and went thei...', 'https://yts.mx/assets/images/movies/furious_seven_2015/medium-cover.jpg', '2015-10-31'),
+(1309, 'G.I. Joe: Retaliation', '2013', '5.8', 110, 'Action, Adventure', 'en', 'The Joes re-team to prevent Cobra from achieving total world domination in this sequel that picks up shortly after the events of G.I. Joe: T...', 'https://yts.mx/assets/images/movies/G_I_Joe_Retaliation_2013/medium-cover.jpg', '2015-10-31'),
+(1344, 'Goodfellas', '1990', '8.7', 146, 'Action, Biography', 'en', 'Caleb, a 26 year old programmer at the worlds largest internet company, wins a competition to spend a week at a private mountain retreat be...', 'https://yts.mx/assets/images/movies/Goodfellas_1990/medium-cover.jpg', '2015-10-31'),
+(1540, 'How to Train Your Dragon 2', '2014', '7.8', 0, 'Action, Adventure', 'en', '...', 'https://yts.mx/assets/images/movies/How_to_Train_Your_Dragon_2_2014/medium-cover.jpg', '2015-11-01'),
+(1606, 'Inception', '2010', '8.8', 148, 'Action, Adventure', 'en', 'Dom Cobb is a skilled thief, the absolute best in the dangerous art of extraction, stealing valuable secrets from deep within the subconscio...', 'https://yts.mx/assets/images/movies/Inception_2010/medium-cover.jpg', '2015-11-01'),
+(1632, 'Interstellar', '2014', '8.6', 169, 'Action, Adventure', 'en', 'NIGHTCRAWLER is a thriller set in the nocturnal underbelly of contemporary Los Angeles. Jake Gyllenhaal stars as Lou Bloom, a driven young m...', 'https://yts.mx/assets/images/movies/interstellar_2014/medium-cover.jpg', '2015-11-01'),
+(1659, 'It s a Wonderful Life', '1946', '8.6', 130, 'Action, Drama', 'en', '\"In the beginning, there was nothing.\" So starts this version of the story centered on Noah (Russell Crowe), the man entrusted by God to sav...', 'https://yts.mx/assets/images/movies/Its_a_Wonderful_Life_1946/medium-cover.jpg', '2015-11-01'),
+(1781, 'Kingsman: The Secret Service', '2014', '7.7', 129, 'Action, Adventure', 'en', 'A young man named Gary \"Eggsy\" Unwin (Taron Egerton), whose father died when he was a young boy, is dealing with living with the creep his m...', 'https://yts.mx/assets/images/movies/kingsman_the_secret_service_2014/medium-cover.jpg', '2015-11-01'),
+(1940, 'Lucy', '2014', '6.4', 89, 'Action, Adventure', 'en', 'It was supposed to be a simple job. All Lucy had to do was deliver a mysterious briefcase to Mr. Jang. But immediately Lucy is caught up in ...', 'https://yts.mx/assets/images/movies/Lucy_2014/medium-cover.jpg', '2015-11-01'),
+(1967, 'Maleficent', '2014', '7', 0, 'Action, Adventure', 'en', '...', 'https://yts.mx/assets/images/movies/Maleficent_2014/medium-cover.jpg', '2015-11-01'),
+(2080, 'Monsters University', '2013', '7.3', 104, 'Action, Adventure', 'en', 'Mike Wazowski (Billy Crystal) and James P. \"Sully\" Sullivan (John Goodman) are an inseparable pair, but that wasnt always the case. From th...', 'https://yts.mx/assets/images/movies/Monsters_University_2013/medium-cover.jpg', '2015-11-01'),
+(2183, 'Nightcrawler', '2014', '7.9', 117, 'Action, Crime', 'en', 'NIGHTCRAWLER is a thriller set in the nocturnal underbelly of contemporary Los Angeles. Jake Gyllenhaal stars as Lou Bloom, a driven young m...', 'https://yts.mx/assets/images/movies/Nightcrawler_2014/medium-cover.jpg', '2015-11-01'),
+(2190, 'Noah', '2014', '5.7', 138, 'Action, Adventure', 'en', '\"In the beginning, there was nothing.\" So starts this version of the story centered on Noah (Russell Crowe), the man entrusted by God to sav...', 'https://yts.mx/assets/images/movies/Noah_2014/medium-cover.jpg', '2015-11-01'),
+(2223, 'Olympus Has Fallen', '2013', '6.5', 119, 'Action, Adventure', 'en', 'When the White House (Secret Service Code: \"Olympus\") is captured by a terrorist mastermind and the President is kidnapped, former President...', 'https://yts.mx/assets/images/movies/Olympus_Has_Fallen_2013/medium-cover.jpg', '2015-11-01'),
+(2241, 'One Flew Over the Cuckoo s Nest', '1975', '8.7', 133, 'Action, Drama', 'en', 'When the USS Enterprise crew is called back home, they find an unstoppable force of terror from within their own organization has detonated ...', 'https://yts.mx/assets/images/movies/One_Flew_Over_the_Cuckoos_Nest_1975/medium-cover.jpg', '2015-11-01'),
+(2393, 'Predestination', '2014', '7.5', 97, 'Action, Adventure', 'en', 'PREDESTINATION chronicles the life of a Temporal Agent sent on an intricate series of time-travel journeys designed to ensure the continuati...', 'https://yts.mx/assets/images/movies/Predestination_2014/medium-cover.jpg', '2015-11-01'),
+(2407, 'Prisoners', '2013', '8.1', 153, 'Action, Crime', 'en', 'How far would you go to protect your family? Keller Dover is facing every parents worst nightmare. His six-year-old daughter, Anna, is miss...', 'https://yts.mx/assets/images/movies/Prisoners_2013/medium-cover.jpg', '2015-11-01'),
+(2429, 'Pulp Fiction', '1994', '8.9', 154, 'Action, Crime', 'en', 'This is the origin story of former Special Forces operative turned mercenary Wade Wilson, who after being subjected to a rogue experiment th...', 'https://yts.mx/assets/images/movies/Pulp_Fiction_1994/medium-cover.jpg', '2015-11-01'),
+(2626, 'Saving Private Ryan', '1998', '8.6', 169, 'Action, Drama', 'en', 'Ray Breslin is a man who has devoted his life to making prisons inescapable by going into a prison as an inmate and trying to see if he can ...', 'https://yts.mx/assets/images/movies/Saving_Private_Ryan_1998/medium-cover.jpg', '2015-11-01'),
+(2640, 'Schindler s List', '1993', '8.9', 195, 'Action, Biography', 'en', 'Thor (Chris Hemsworth) is imprisoned on the other side of the universe and finds himself in a race against time to get back to Asgard to sto...', 'https://yts.mx/assets/images/movies/Schindlers_List_1993/medium-cover.jpg', '2015-11-01'),
+(2652, 'Se7en', '1995', '8.6', 127, 'Action, Crime', 'en', 'The Joes re-team to prevent Cobra from achieving total world domination in this sequel that picks up shortly after the events of G.I. Joe: T...', 'https://yts.mx/assets/images/movies/Se7en_1995/medium-cover.jpg', '2015-11-01'),
+(2852, 'Star Trek Into Darkness', '2013', '7.7', 132, 'Action, Adventure', 'en', 'When the USS Enterprise crew is called back home, they find an unstoppable force of terror from within their own organization has detonated ...', 'https://yts.mx/assets/images/movies/Star_Trek_Into_Darkness_2013/medium-cover.jpg', '2015-11-01'),
+(2858, 'Star Wars: Episode IV - A New Hope', '1977', '8.6', 121, 'Action, Adventure', 'en', 'It feels good to be bad...Assemble a team of the worlds most dangerous, incarcerated Super Villains, provide them with the most powerful ar...', 'https://yts.mx/assets/images/movies/Star_Wars_Episode_IV_A_New_Hope_1977/medium-cover.jpg', '2017-10-27'),
+(2862, 'Star Wars: Episode V - The Empire Strikes Back', '1980', '8.7', 124, 'Action, Adventure', 'en', 'After its victory over Leonidas 300, the Persian Army under the command of Xerxes marches towards the major Greek city-states. The Democrat...', 'https://yts.mx/assets/images/movies/Star_Wars_Episode_V_The_Empire_Strikes_Back_1980/medium-cover.jpg', '2018-04-26'),
+(3045, 'The Avengers', '2012', '8', 143, 'Action, Adventure', 'en', 'Nick Fury is the director of S.H.I.E.L.D., an international peace-keeping agency. The agency is a whos who of Marvel Super Heroes, with Iro...', 'https://yts.mx/assets/images/movies/The_Avengers_2012/medium-cover.jpg', '2015-11-01'),
+(3154, 'The Conjuring', '2013', '7.5', 112, 'Action, Horror', 'en', 'In 1971, Carolyn and Roger Perron move their family into a dilapidated Rhode Island farm house and soon strange things start happening aroun...', 'https://yts.mx/assets/images/movies/The_Conjuring_2013/medium-cover.jpg', '2015-11-01'),
+(3175, 'The Dark Knight', '2008', '9', 152, 'Action, Adventure', 'en', 'How far would you go to protect your family? Keller Dover is facing every parents worst nightmare. His six-year-old daughter, Anna, is miss...', 'https://yts.mx/assets/images/movies/The_Dark_Knight_2008/medium-cover.jpg', '2015-11-01'),
+(3304, 'The Godfather', '1972', '9.2', 175, 'Action, Crime', 'en', 'Chronicles the experiences of a formerly successful banker as a prisoner in the gloomy jailhouse of Shawshank after being found guilty of a ...', 'https://yts.mx/assets/images/movies/The_Godfather_1972/medium-cover.jpg', '2015-11-01'),
+(3305, 'The Godfather: Part II', '1974', '9', 202, 'Action, Crime', 'en', 'Dominic and his crew thought theyd left the criminal mercenary life behind. Theyd defeated international terrorist Owen Shaw and went thei...', 'https://yts.mx/assets/images/movies/The_Godfather_Part_II_1974/medium-cover.jpg', '2015-11-01'),
+(3313, 'The Good, the Bad and the Ugly', '1966', '8.8', 161, 'Action, Western', 'it', '...', 'https://yts.mx/assets/images/movies/The_Good_The_Bad_and_the_Ugly_1966/medium-cover.jpg', '2015-11-01'),
+(3391, 'The Imitation Game', '2014', '8', 114, 'Action, Biography', 'en', 'Based on the real life story of legendary cryptanalyst Alan Turing, the film portrays the nail-biting race against time by Turing and his br...', 'https://yts.mx/assets/images/movies/the_imitation_game_2014/medium-cover.jpg', '2015-11-01'),
+(3488, 'The Lord of the Rings: The Fellowship of the Ring', '2001', '8.8', 178, 'Action, Adventure', 'en', '...', 'https://yts.mx/assets/images/movies/The_Lord_of_the_Rings_The_Fellowship_of_the_Ring_EXTENDED_2001/medium-cover.jpg', '2015-11-01'),
+(3489, 'The Lord of the Rings: The Return of the King', '2003', '8.9', 201, 'Action, Adventure', 'en', 'Bound by an inescapable blood debt to the Italian crime lord, Santino DAntonio, and with his precious 1969 Mustang still stolen, John Wick-...', 'https://yts.mx/assets/images/movies/The_Lord_of_the_Rings_The_Return_of_the_King_EXTENDED_2003/medium-cover.jpg', '2015-11-01'),
+(3490, 'The Lord of the Rings: The Two Towers', '2002', '8.7', 0, 'Action, Adventure', 'en', 'When the White House (Secret Service Code: \"Olympus\") is captured by a terrorist mastermind and the President is kidnapped, former President...', 'https://yts.mx/assets/images/movies/The_Lord_of_the_Rings_The_Two_Towers_EXTENDED_2002/medium-cover.jpg', '2015-11-01'),
+(3525, 'The Matrix', '1999', '8.7', 136, 'Action, Sci-Fi', 'en', 'A growing nation of genetically evolved apes led by Caesar is threatened by a band of human survivors of the devastating virus unleashed a d...', 'https://yts.mx/assets/images/movies/The_Matrix_1999/medium-cover.jpg', '2015-11-01'),
+(3709, 'The Shawshank Redemption', '1994', '9.3', 142, 'Action, Crime', 'en', 'Dom Cobb is a skilled thief, the absolute best in the dangerous art of extraction, stealing valuable secrets from deep within the subconscio...', 'https://yts.mx/assets/images/movies/The_Shawshank_Redemption_1994/medium-cover.jpg', '2015-11-01'),
+(3868, 'This Is the End', '2013', '6.6', 107, 'Action, Comedy', 'en', 'All Jay Baruchel expected coming to LA was a fun time with Seth Rogen with all the wild partying to have both by themselves and at James Fra...', 'https://yts.mx/assets/images/movies/This_Is_the_End_2013/medium-cover.jpg', '2015-11-01'),
+(3897, 'Titanic', '1997', '7.8', 194, 'Action, Drama', 'en', '84 years later, a 100 year-old woman named Rose DeWitt Bukater tells the story to her granddaughter Lizzy Calvert, Brock Lovett, Lewis Bodin...', 'https://yts.mx/assets/images/movies/Titanic_1997/medium-cover.jpg', '2017-08-11'),
+(4112, 'We re the Millers', '2013', '7', 110, 'Action, Adventure', 'en', 'After being robbed of a weeks take, small-time pot dealer David is forced by his boss to go to Mexico to pick up a load of marijuana. In or...', 'https://yts.mx/assets/images/movies/Were_the_Millers_2013_EXTENDED/medium-cover.jpg', '2015-11-01'),
+(4253, '12 Angry Men', '1957', '8.9', 96, 'Action, Crime', 'en', 'In 2029 the mutant population has shrunken significantly due to genetically modified plants designed to reduce mutant powers and the X-Men h...', 'https://yts.mx/assets/images/movies/12_Angry_Men_1957/medium-cover.jpg', '2015-10-31'),
+(5023, 'Porcupine Tree: Anesthetize', '2010', '8.8', 130, 'Action, Documentary', 'en', 'After saving Xandar from Ronans wrath, the Guardians are now recognized as heroes. Now the team must help their leader Star Lord (Chris Pra...', 'https://yts.mx/assets/images/movies/porcupine_tree_anesthetize_2010/medium-cover.jpg', '2016-01-30'),
+(5512, 'Deadpool', '2016', '8', 108, 'Action, Adventure', 'en', 'This is the origin story of former Special Forces operative turned mercenary Wade Wilson, who after being subjected to a rogue experiment th...', 'https://yts.mx/assets/images/movies/deadpool_2016/medium-cover.jpg', '2016-04-27'),
+(6011, 'Captain America: Civil War', '2016', '7.8', 147, 'Action, Adventure', 'en', 'With many people fearing the actions of super heroes, the government decides to push for the Hero Registration Act, a law that limits a hero...', 'https://yts.mx/assets/images/movies/captain_america_civil_war_2016/medium-cover.jpg', '2016-08-29'),
+(6200, 'Suicide Squad', '2016', '6', 123, 'Action, Adventure', 'en', 'It feels good to be bad...Assemble a team of the worlds most dangerous, incarcerated Super Villains, provide them with the most powerful ar...', 'https://yts.mx/assets/images/movies/suicide_squad_2016/medium-cover.jpg', '2016-11-29'),
+(6336, 'Doctor Strange', '2016', '7.5', 115, 'Action, Adventure', 'en', 'Marvels \"Doctor Strange\" follows the story of the talented neurosurgeon Doctor Stephen Strange who, after a tragic car accident, must put e...', 'https://yts.mx/assets/images/movies/doctor_strange_2016/medium-cover.jpg', '2017-02-15'),
+(6507, 'Logan', '2017', '8.1', 137, 'Action, Drama', 'en', 'In 2029 the mutant population has shrunken significantly due to genetically modified plants designed to reduce mutant powers and the X-Men h...', 'https://yts.mx/assets/images/movies/logan_2017/medium-cover.jpg', '2017-05-22'),
+(6532, 'Queen Rock Montreal & Live Aid', '2007', '8.7', 138, 'Action, Documentary', 'en', 'Mike Wazowski (Billy Crystal) and James P. \"Sully\" Sullivan (John Goodman) are an inseparable pair, but that wasnt always the case. From th...', 'https://yts.mx/assets/images/movies/queen_rock_montreal_live_aid_2007/medium-cover.jpg', '2017-05-30'),
+(6538, 'John Wick: Chapter 2', '2017', '7.5', 122, 'Action, Crime', 'en', 'Bound by an inescapable blood debt to the Italian crime lord, Santino DAntonio, and with his precious 1969 Mustang still stolen, John Wick-...', 'https://yts.mx/assets/images/movies/john_wick_chapter_2_2017/medium-cover.jpg', '2017-06-01'),
+(6618, 'The Phantom of the Opera at the Royal Albert Hall', '2011', '8.8', 137, 'Action, Drama', 'en', 'Our friendly neighborhood Super Hero decides to join his best friends Ned, MJ, and the rest of the gang on a European vacation. However, Pet...', 'https://yts.mx/assets/images/movies/the_phantom_of_the_opera_at_the_royal_albert_hall_2011/medium-cover.jpg', '2017-07-08'),
+(6668, 'Guardians of the Galaxy Vol. 2', '2017', '7.6', 136, 'Action, Adventure', 'en', 'After saving Xandar from Ronans wrath, the Guardians are now recognized as heroes. Now the team must help their leader Star Lord (Chris Pra...', 'https://yts.mx/assets/images/movies/guardians_of_the_galaxy_vol_2_2017/medium-cover.jpg', '2017-08-08'),
+(6723, 'Wonder Woman', '2017', '7.4', 141, 'Action, Adventure', 'en', 'Diana, princess of the Amazons, trained to be an unconquerable warrior. Raised on a sheltered island paradise, when a pilot crashes on their...', 'https://yts.mx/assets/images/movies/wonder_woman_2017/medium-cover.jpg', '2017-09-05'),
+(6792, 'Spider-Man: Homecoming', '2017', '7.4', 133, 'Action, Adventure', 'en', 'Thrilled by his experience with the Avengers, Peter returns home, where he lives with his Aunt May, under the watchful eye of his new mentor...', 'https://yts.mx/assets/images/movies/spider_man_homecoming_2017/medium-cover.jpg', '2017-10-03'),
+(7025, 'Thor: Ragnarok', '2017', '7.9', 130, 'Action, Adventure', 'en', 'Thor (Chris Hemsworth) is imprisoned on the other side of the universe and finds himself in a race against time to get back to Asgard to sto...', 'https://yts.mx/assets/images/movies/thor_ragnarok_2017/medium-cover.jpg', '2018-01-23'),
+(7548, 'Den of Thieves', '2018', '7', 148, 'Action, Crime', 'en', 'A gritty L.A crime saga which follows the intersecting and often personally connected lives of an elite unit of the LA County Sheriffs Dept...', 'https://yts.mx/assets/images/movies/den_of_thieves_2018/medium-cover.jpg', '2018-04-10'),
+(7662, 'Life Is Beautiful', '1997', '8.6', 116, 'Comedy, Drama', 'it', 'A nameless first person narrator (Edward Norton) attends support groups in attempt to subdue his emotional state and relieve his insomniac s...', 'https://yts.mx/assets/images/movies/life_is_beautiful_1997/medium-cover.jpg', '2018-04-26'),
+(7709, 'Black Panther', '2018', '7.3', 134, 'Action, Adventure', 'en', 'After the events of Captain America: Civil War, Prince TChalla returns home to the reclusive, technologically advanced African nation of Wa...', 'https://yts.mx/assets/images/movies/black_panther_2018/medium-cover.jpg', '2018-05-02'),
+(7893, 'The Mountain II', '2016', '8.8', 135, 'Action, Drama', 'tr', 'An ancient Ring thought lost for centuries has been found, and through a strange twist of fate has been given to a small Hobbit named Frodo....', 'https://yts.mx/assets/images/movies/the_mountain_ii_2016/medium-cover.jpg', '2018-05-28'),
+(8131, 'Human', '2015', '8.7', 190, 'Documentary', 'fr', 'Based on an incredible true story of one mans fight for survival and freedom. In the pre-Civil War United States, Solomon Northup, a free b...', 'https://yts.mx/assets/images/movies/human_2015/medium-cover.jpg', '2018-06-27'),
+(8462, 'Avengers: Infinity War', '2018', '8.4', 149, 'Action, Adventure', 'en', 'As the Avengers and their allies have continued to protect the world from threats too large for any one hero to handle, a new danger has eme...', 'https://yts.mx/assets/images/movies/avengers_infinity_war_2018/medium-cover.jpg', '2018-07-30'),
+(9717, 'Natsamrat', '2016', '9', 0, 'Action, Drama', 'mr', 'In this third installment of the adrenaline-fueled action franchise, skilled assassin John Wick (Keanu Reeves) returns with a $14 million pr...', 'https://yts.mx/assets/images/movies/natsamrat_2016/medium-cover.jpg', '2018-11-12'),
+(9745, 'Requiem for a Fighter', '2018', '8.8', 87, 'Drama', 'en', '84 years later, a 100 year-old woman named Rose DeWitt Bukater tells the story to her granddaughter Lizzy Calvert, Brock Lovett, Lewis Bodin...', 'https://yts.mx/assets/images/movies/requiem_for_a_fighter_2018/medium-cover.jpg', '2018-11-14'),
+(13106, 'Avengers: Endgame', '2019', '8.4', 181, 'Action, Adventure', 'en', 'After the devastating events of Avengers: Infinity War (2018), the universe is in ruins due to the efforts of the Mad Titan, Thanos. With th...', 'https://yts.mx/assets/images/movies/avengers_endgame_2019/medium-cover.jpg', '2019-07-29'),
+(13408, 'John Wick: Chapter 3 - Parabellum', '2019', '7.4', 130, 'Action, Crime', 'en', 'In this third installment of the adrenaline-fueled action franchise, skilled assassin John Wick (Keanu Reeves) returns with a $14 million pr...', 'https://yts.mx/assets/images/movies/john_wick_chapter_3_parabellum_2019/medium-cover.jpg', '2019-08-26'),
+(13596, 'Spider-Man: Far from Home', '2019', '7.5', 129, 'Action, Adventure', 'en', 'Our friendly neighborhood Super Hero decides to join his best friends Ned, MJ, and the rest of the gang on a European vacation. However, Pet...', 'https://yts.mx/assets/images/movies/spider_man_far_from_home_2019/medium-cover.jpg', '2019-09-12'),
+(13729, 'Fast & Furious Presents: Hobbs & Shaw', '2019', '6.4', 137, 'Action, Adventure', 'en', 'Lawman Luke Hobbs (Dwayne \"The Rock\" Johnson) and outcast Deckard Shaw (Jason Statham) form an unlikely alliance when a cyber-genetically en...', 'https://yts.mx/assets/images/movies/fast_furious_presents_hobbs_shaw_2019/medium-cover.jpg', '2019-09-27'),
+(14660, 'Joker', '2019', '8.5', 0, 'Action, Crime', 'en', '...', 'https://yts.mx/assets/images/movies/joker_2019/medium-cover.jpg', '2019-12-17'),
+(15527, 'Top Gear Africa Special, Part 1', '2013', '9.2', 59, 'Adventure, Comedy', 'en', 'A gritty L.A crime saga which follows the intersecting and often personally connected lives of an elite unit of the LA County Sheriffs Dept...', 'https://yts.mx/assets/images/movies/top_gear_africa_special_part_1_2013/medium-cover.jpg', '2020-02-23'),
+(15553, 'Doctor Who The Day of the Doctor', '2013', '9.4', 77, 'Adventure, Drama', 'en', 'As the Avengers and their allies have continued to protect the world from threats too large for any one hero to handle, a new danger has eme...', 'https://yts.mx/assets/images/movies/doctor_who_the_day_of_the_doctor_2013/medium-cover.jpg', '2020-02-24'),
+(15646, 'Deported', '2021', '9.9', 90, 'Comedy', 'en', 'After the devastating events of Avengers: Infinity War (2018), the universe is in ruins due to the efforts of the Mad Titan, Thanos. With th...', 'https://yts.mx/assets/images/movies/deported_2020/medium-cover.jpg', '2020-02-28'),
+(16047, 'Led Zeppelin: Celebration Day', '2012', '8.8', 124, 'Documentary, Music', 'en', '...', 'https://yts.mx/assets/images/movies/led_zeppelin_celebration_day_2012/medium-cover.jpg', '2020-03-19'),
+(16091, 'The Human Condition III: A Soldier s Prayer', '1961', '8.8', 190, 'Drama, History', 'ja', 'The Godfather \"Don\" Vito Corleone is the head of the Corleone mafia family in New York. He is at the event of his daughters wedding. Michae...', 'https://yts.mx/assets/images/movies/the_human_condition_iii_a_soldiers_prayer_1961/medium-cover.jpg', '2020-03-21'),
+(16194, 'Top Gear', '2002', '8.7', 60, 'Adventure, Comedy', 'en', 'All Jay Baruchel expected coming to LA was a fun time with Seth Rogen with all the wild partying to have both by themselves and at James Fra...', 'https://yts.mx/assets/images/movies/top_gear_2002/medium-cover.jpg', '2020-03-24'),
+(16668, 'Wheels', '2014', '8.7', 115, 'Drama', 'en', 'Lawman Luke Hobbs (Dwayne \"The Rock\" Johnson) and outcast Deckard Shaw (Jason Statham) form an unlikely alliance when a cyber-genetically en...', 'https://yts.mx/assets/images/movies/wheels_2014/medium-cover.jpg', '2020-04-13'),
+(20382, 'She Loves Me', '2016', '8.7', 133, 'Comedy, Musical', 'en', 'Set within a year after the events of Batman Begins (2005), Batman, Lieutenant James Gordon, and new District Attorney Harvey Dent successfu...', 'https://yts.mx/assets/images/movies/she_loves_me_2016/medium-cover.jpg', '2020-08-22'),
+(21405, 'Iceland is Best', '2020', '9.9', 90, 'Action, Drama', 'en', 'Dom Cobb is a skilled thief, the absolute best in the dangerous art of extraction, stealing valuable secrets from deep within the subconscio...', 'https://yts.mx/assets/images/movies/iceland_is_best_2020/medium-cover.jpg', '2020-09-22'),
+(21870, 'David Attenborough: A Life on Our Planet', '2020', '9.2', 83, 'Biography, Documentary', 'en', 'Nick Fury is the director of S.H.I.E.L.D., an international peace-keeping agency. The agency is a whos who of Marvel Super Heroes, with Iro...', 'https://yts.mx/assets/images/movies/david_attenborough_a_life_on_our_planet_2020/medium-cover.jpg', '2020-10-04'),
+(22032, 'Holbrook/Twain: An American Odyssey', '2014', '9.1', 93, 'Documentary', 'en', 'Thrilled by his experience with the Avengers, Peter returns home, where he lives with his Aunt May, under the watchful eye of his new mentor...', 'https://yts.mx/assets/images/movies/holbrooktwain_an_american_odyssey_2014/medium-cover.jpg', '2020-10-10'),
+(22687, 'Uncle Tom', '2020', '9.1', 106, 'Documentary', 'en', 'Imprisoned on the other side of the universe, the mighty Thor (Chris Hemsworth) finds himself in a deadly gladiatorial contest that pits him...', 'https://yts.mx/assets/images/movies/uncle_tom_2020/medium-cover.jpg', '2020-10-21'),
+(23436, 'After the Wave', '2014', '9', 81, 'Documentary', 'en', 'Diana, princess of the Amazons, trained to be an unconquerable warrior. Raised on a sheltered island paradise, when a pilot crashes on their...', 'https://yts.mx/assets/images/movies/after_the_wave_2014/medium-cover.jpg', '2020-11-10'),
+(23519, 'Rom Boys: 40 Years of Rad', '2020', '8.9', 79, 'Action, Documentary', 'en', 'Based on the real life story of legendary cryptanalyst Alan Turing, the film portrays the nail-biting race against time by Turing and his br...', 'https://yts.mx/assets/images/movies/rom_boys_40_years_of_rad_2020/medium-cover.jpg', '2020-11-10'),
+(23741, 'Man in Camo', '2018', '8.7', 85, 'Animation, Biography', 'en', 'After being robbed of a weeks take, small-time pot dealer David is forced by his boss to go to Mexico to pick up a load of marijuana. In or...', 'https://yts.mx/assets/images/movies/man_in_camo_2018/medium-cover.jpg', '2020-11-19'),
+(23864, 'Hooked', '2015', '9.9', 94, 'Adventure, Documentary', 'en', 'Chronicles the experiences of a formerly successful banker as a prisoner in the gloomy jailhouse of Shawshank after being found guilty of a ...', 'https://yts.mx/assets/images/movies/hooked_2015/medium-cover.jpg', '2020-11-21'),
+(23907, 'Oceans Apart: Greed, Betrayal and Pacific Island Rugby', '2020', '9.2', 59, 'Documentary', 'en', 'Dominic and his crew thought theyd left the criminal mercenary life behind. Theyd defeated international terrorist Owen Shaw and went thei...', 'https://yts.mx/assets/images/movies/oceans_apart_greed_betrayal_and_pacific_island_rugby_2020/medium-cover.jpg', '2020-11-20'),
+(23942, 'The Fresh Prince of Bel-Air Reunion', '2020', '8.9', 0, 'Action, Documentary', 'en', 'After the events of Captain America: Civil War, Prince TChalla returns home to the reclusive, technologically advanced African nation of Wa...', 'https://yts.mx/assets/images/movies/the_fresh_prince_of_bel_air_reunion_2020/medium-cover.jpg', '2020-11-21'),
+(24003, 'Shawn Mendes: In Wonder', '2020', '9.9', 83, 'Documentary, Music', 'en', 'After the devastating events of Avengers: Infinity War (2018), the universe is in ruins due to the efforts of the Mad Titan, Thanos. With th...', 'https://yts.mx/assets/images/movies/shawn_mendes_in_wonder_2020/medium-cover.jpg', '2020-11-23');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `movieList`
+--
+
+CREATE TABLE `movieList` (
+  `theater_sn` int(11) NOT NULL,
+  `movie_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `movieList`
+--
+
+INSERT INTO `movieList` (`theater_sn`, `movie_id`) VALUES
+(3, 9),
+(3, 45),
+(3, 342),
+(3, 847),
+(3, 1077),
+(3, 1151),
+(3, 1267),
+(3, 1309),
+(3, 1606),
+(3, 1632),
+(3, 1781),
+(3, 2080),
+(3, 2183),
+(3, 2190),
+(3, 2241),
+(3, 2407),
+(3, 2429),
+(3, 2640),
+(3, 2862),
+(3, 3154),
+(3, 3304),
+(3, 3868),
+(3, 4112),
+(3, 5023),
+(3, 6336),
+(3, 6618),
+(3, 6723),
+(3, 7662),
+(3, 7893),
+(3, 8131),
+(3, 8462),
+(3, 13106),
+(3, 13408),
+(3, 13596),
+(3, 13729),
+(3, 14660),
+(3, 15553),
+(3, 15646),
+(3, 21405),
+(3, 21870),
+(4, 9),
+(4, 45),
+(4, 342),
+(4, 847),
+(4, 1077),
+(4, 1098),
+(4, 1151),
+(4, 1208),
+(4, 1267),
+(4, 1540),
+(4, 1606),
+(4, 1632),
+(4, 1659),
+(4, 1781),
+(4, 1940),
+(4, 4253),
+(4, 5512),
+(4, 6011),
+(4, 6336),
+(4, 6507),
+(4, 6538),
+(4, 7548),
+(4, 7662),
+(4, 7709),
+(4, 8131),
+(4, 8462),
+(4, 13106),
+(4, 13408),
+(4, 13729),
+(4, 14660),
+(4, 15553),
+(4, 15646),
+(4, 16047),
+(4, 21405),
+(4, 21870),
+(4, 22032),
+(4, 23436),
+(4, 23864),
+(5, 6336),
+(5, 15553),
+(8, 1098),
+(8, 1309),
+(8, 1540),
+(8, 1606),
+(8, 1632),
+(8, 6668),
+(8, 13729),
+(8, 21405),
+(10, 9),
+(10, 45),
+(10, 342),
+(10, 847),
+(10, 1077),
+(10, 1098),
+(10, 1151),
+(10, 1208),
+(10, 1267),
+(10, 1309),
+(10, 1344),
+(10, 1540),
+(10, 1606),
+(10, 1632),
+(10, 1659),
+(10, 1781),
+(10, 1940),
+(10, 1967),
+(10, 2080),
+(10, 2183),
+(10, 2190),
+(10, 2223),
+(10, 2241),
+(10, 2393),
+(10, 2407),
+(10, 2429),
+(10, 2626),
+(10, 2640),
+(10, 2652),
+(10, 2852),
+(10, 2858),
+(10, 2862),
+(10, 3045),
+(10, 3154),
+(10, 3175),
+(10, 3304),
+(10, 3305),
+(10, 3313),
+(10, 3391),
+(10, 3488),
+(10, 3489),
+(10, 3490),
+(10, 3525),
+(10, 3709),
+(10, 3868),
+(10, 3897),
+(10, 4112),
+(10, 4253),
+(10, 5023),
+(10, 5512),
+(10, 6011),
+(10, 6200),
+(10, 6336),
+(10, 6507),
+(10, 6532),
+(10, 6538),
+(10, 6618),
+(10, 6668),
+(10, 6723),
+(10, 6792),
+(10, 7025),
+(10, 7548),
+(10, 7662),
+(10, 7709),
+(10, 7893),
+(10, 8131),
+(10, 8462),
+(10, 9717),
+(10, 9745),
+(10, 13106),
+(10, 13408),
+(10, 13596),
+(10, 13729),
+(10, 14660),
+(10, 15527),
+(10, 15553),
+(10, 15646),
+(10, 16047),
+(10, 16091),
+(10, 16194),
+(10, 16668),
+(10, 20382),
+(10, 21405),
+(10, 21870),
+(10, 22032),
+(10, 22687),
+(10, 23436),
+(10, 23519),
+(10, 23741),
+(10, 23864),
+(10, 23907),
+(10, 23942),
+(10, 24003);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reservation`
+--
+
+CREATE TABLE `reservation` (
+  `reservation_sn` int(11) NOT NULL,
+  `phone` varchar(50) NOT NULL,
+  `title` varchar(200) NOT NULL,
+  `theater` varchar(100) NOT NULL,
+  `reservation_date` date NOT NULL,
+  `reservation_hour` varchar(50) NOT NULL,
+  `seats` varchar(100) NOT NULL,
+  `reservation_pw` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `reservation`
+--
+
+INSERT INTO `reservation` (`reservation_sn`, `phone`, `title`, `theater`, `reservation_date`, `reservation_hour`, `seats`, `reservation_pw`) VALUES
+(1, '010-8559-2680', 'Deported', '3', '2021-03-02', '03:00', 'Array', '1234');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `schedule`
+--
+
+CREATE TABLE `schedule` (
+  `schedule_sn` int(11) NOT NULL,
+  `timezone` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `schedule`
+--
+
+INSERT INTO `schedule` (`schedule_sn`, `timezone`) VALUES
+(1, '03:00'),
+(2, '06:00'),
+(3, '09:00'),
+(4, '12:00'),
+(5, '15:00'),
+(6, '18:00'),
+(7, '21:00'),
+(8, '24:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `screening`
+--
+
+CREATE TABLE `screening` (
+  `screening_sn` int(11) NOT NULL,
+  `reservation_sn` int(11) NOT NULL,
+  `theater_sn` int(11) DEFAULT NULL,
+  `screening_date` date DEFAULT NULL,
+  `reservation_hour` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `screening`
+--
+
+INSERT INTO `screening` (`screening_sn`, `reservation_sn`, `theater_sn`, `screening_date`, `reservation_hour`) VALUES
+(122, 113, 3, '2020-11-10', '03:00'),
+(123, 114, 3, '2020-11-10', '03:00'),
+(124, 115, 3, '2020-11-25', '03:00'),
+(125, 116, 3, '2020-12-01', '03:00'),
+(126, 117, 3, '2020-12-01', '03:00'),
+(127, 118, 3, '2020-12-01', '03:00'),
+(128, 119, 3, '2020-12-01', '03:00'),
+(129, 120, 3, '2020-12-01', '03:00'),
+(130, 121, 3, '2020-12-01', '03:00'),
+(131, 122, 3, '2020-12-02', '03:00'),
+(132, 123, 3, '2020-12-08', '03:00'),
+(133, 124, 3, '2020-12-08', '03:00'),
+(134, 1, 3, '2021-03-02', '03:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `seat`
+--
+
+CREATE TABLE `seat` (
+  `screening_sn` int(11) NOT NULL,
+  `seat_sn` varchar(100) NOT NULL,
+  `reservation_sn` int(11) NOT NULL,
+  `theater_sn` int(10) NOT NULL,
+  `title` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `seat`
+--
+
+INSERT INTO `seat` (`screening_sn`, `seat_sn`, `reservation_sn`, `theater_sn`, `title`) VALUES
+(122, 'A62', 113, 3, 'Deported'),
+(122, 'A63', 113, 3, 'Deported'),
+(122, 'A64', 113, 3, 'Deported'),
+(122, 'A65', 113, 3, 'Deported'),
+(122, 'A66', 113, 3, 'Deported'),
+(123, 'A71', 114, 3, 'Deported'),
+(123, 'A72', 114, 3, 'Deported'),
+(124, 'A33', 115, 3, '300: Rise of an Empire'),
+(124, 'A34', 115, 3, '300: Rise of an Empire'),
+(124, 'A55', 115, 3, '300: Rise of an Empire'),
+(125, 'A52', 116, 3, '300: Rise of an Empire'),
+(125, 'A53', 116, 3, '300: Rise of an Empire'),
+(126, 'A21', 117, 3, '300: Rise of an Empire'),
+(127, 'A34', 118, 3, '300: Rise of an Empire'),
+(127, 'A35', 118, 3, '300: Rise of an Empire'),
+(127, 'A36', 118, 3, '300: Rise of an Empire'),
+(127, 'A46', 118, 3, '300: Rise of an Empire'),
+(127, 'A54', 118, 3, '300: Rise of an Empire'),
+(127, 'A56', 118, 3, '300: Rise of an Empire'),
+(128, 'A63', 119, 3, '300: Rise of an Empire'),
+(129, 'A63', 120, 3, '300: Rise of an Empire'),
+(130, 'A66', 121, 3, '300: Rise of an Empire'),
+(131, 'A14', 122, 3, 'Deported'),
+(131, 'A15', 122, 3, 'Deported'),
+(131, 'A16', 122, 3, 'Deported'),
+(131, 'A17', 122, 3, 'Deported'),
+(131, 'A18', 122, 3, 'Deported'),
+(131, 'A19', 122, 3, 'Deported'),
+(131, 'A42', 122, 3, 'Deported'),
+(131, 'A43', 122, 3, 'Deported'),
+(131, 'A44', 122, 3, 'Deported'),
+(131, 'A45', 122, 3, 'Deported'),
+(131, 'A66', 122, 3, 'Deported'),
+(131, 'A67', 122, 3, 'Deported'),
+(131, 'A68', 122, 3, 'Deported'),
+(132, 'A54', 123, 3, 'Iceland is Best'),
+(132, 'A55', 123, 3, 'Iceland is Best'),
+(133, 'A53', 124, 3, 'Iceland is Best'),
+(134, 'A34', 1, 3, 'Deported'),
+(134, 'A35', 1, 3, 'Deported'),
+(134, 'A36', 1, 3, 'Deported'),
+(134, 'A37', 1, 3, 'Deported');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `theater`
+--
+
+CREATE TABLE `theater` (
+  `theater_sn` int(11) NOT NULL,
+  `theater_name` varchar(100) NOT NULL,
+  `seat_amount` int(11) NOT NULL,
+  `img` varchar(500) DEFAULT 'https://placeimg.com/100/100/any'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `theater`
+--
+
+INSERT INTO `theater` (`theater_sn`, `theater_name`, `seat_amount`, `img`) VALUES
+(3, '용산', 83, '/CGBee/images/yongsan.jpeg'),
+(4, '송파', 74, '/CGBee/images/songpa.jpg'),
+(5, '성남', 62, '/CGBee/images/seongnam.jpg'),
+(8, '판교', 32, '/CGBee/images/pangyo.jpg'),
+(10, '강남', 90, '/CGBee/images/gangnam.jpg'),
+(20, '잠실', 9, 'https://placeimg.com/70/70/any');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `board`
+--
+ALTER TABLE `board`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `movie`
+--
+ALTER TABLE `movie`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `movieList`
+--
+ALTER TABLE `movieList`
+  ADD PRIMARY KEY (`theater_sn`,`movie_id`);
+
+--
+-- Indexes for table `reservation`
+--
+ALTER TABLE `reservation`
+  ADD PRIMARY KEY (`reservation_sn`);
+
+--
+-- Indexes for table `schedule`
+--
+ALTER TABLE `schedule`
+  ADD PRIMARY KEY (`schedule_sn`);
+
+--
+-- Indexes for table `screening`
+--
+ALTER TABLE `screening`
+  ADD PRIMARY KEY (`screening_sn`);
+
+--
+-- Indexes for table `seat`
+--
+ALTER TABLE `seat`
+  ADD PRIMARY KEY (`screening_sn`,`seat_sn`);
+
+--
+-- Indexes for table `theater`
+--
+ALTER TABLE `theater`
+  ADD PRIMARY KEY (`theater_sn`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `board`
+--
+ALTER TABLE `board`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `reservation`
+--
+ALTER TABLE `reservation`
+  MODIFY `reservation_sn` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `schedule`
+--
+ALTER TABLE `schedule`
+  MODIFY `schedule_sn` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `screening`
+--
+ALTER TABLE `screening`
+  MODIFY `screening_sn` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=135;
+
+--
+-- AUTO_INCREMENT for table `seat`
+--
+ALTER TABLE `seat`
+  MODIFY `screening_sn` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=135;
+
+--
+-- AUTO_INCREMENT for table `theater`
+--
+ALTER TABLE `theater`
+  MODIFY `theater_sn` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
