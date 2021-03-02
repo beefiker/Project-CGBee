@@ -18,3 +18,5 @@
 ![예매완료](images/screenshot-done.png)
 
 
+- 데이터베이스 입력
+![DB](images/screenshot-database-reservation.png)
