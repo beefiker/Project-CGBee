@@ -18,9 +18,13 @@
 ![예매완료](images/screenshot-done.png)
 
 
+- 관리자 페이지
+![Admin](images/screenshot-admin.png)
+
+
 - 데이터베이스 입력
 ![DB Insert](images/screenshot-database-reservation.png)
 
 
-- 데이터베이스 조회 및 삭제
+- 예매내역 조회 및 삭제
 ![DB Control](images/screenshot-history.png)
